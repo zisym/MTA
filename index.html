@@ -15,17 +15,20 @@
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to MTA</p>
                 <p class="event received">MTA is Ready</p>
+                
+                <div>
+		<p id="testingDisplay"></p>
+		<button type="button" value="" onclick="myFunction()">Click Here</button>
+		<script>
+		function myFunction()
+		{
+			document.getElementById("testingDisplay").innerHTML = Date();
+		}
+		</script>
+		</div>
+		
             </div>
-			<div>
-			<p id="testingDisplay"></p>
-			<button type="button" value="" onclick="myFunction()">Click Here</button>
-			<script>
-			function myFunction()
-			{
-				document.getElementById("testingDisplay").innerHTML = Date();
-			}
-			</script>
-			</div>
+		
         </div>
     </body>
 </html>
