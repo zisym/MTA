@@ -10,10 +10,10 @@
         <title>MTA User Setting</title>
     </head>
     <body>
-		<div id="div_header">
-			<center><br /><img title="" alt="" src="" width="100" height="50" /><br />
-			<h1>MTA</h1></center>
-		</div>
+	<div id="div_header">
+		<center><br /><img title="" alt="" src="" width="100" height="50" /><br />
+		<h1>MTA</h1></center>
+	</div>
         <div class="app">
 		<h1>Detail</h1>
 		<hr />
@@ -26,35 +26,36 @@
 		<hr />
 		<form id="formChangePassword">
 			<label id="msgPwd" /></label>
-			<input type="password" placeholder="Password" name="pwd"><br />
-			<input type="password" placeholder="Re-type Password" name="retypePwd"><br />
+			<input id="pwd" type="password" placeholder="Password" onfocus="clearThis(this)"><br />
+			<input id="retypePwd" type="password" placeholder="Re-type Password" onfocus="clearThis(this)"><br />
 			<input onclick="btnChangePassword()" type="submit" />
 		</form>
 		<script>
 		  document.getElementById('lblUsername').innerHTML = 'UsernameNumber1224';
 		  document.getElementById('lblEmail').innerHTML = 'test@email.com';
 		  document.getElementById('lblAge').innerHTML = '203 Years Old';
-		  
-		  var form = document.getElementById("formChangePassword");
-		  var pwd = form.elements[0].value;
-		  var retypePwd = form.elements[1].value;
 		  function btnChangePassword()
 		  {
-		    var form = document.getElementById("formChangePassword");
-		    var pwd = form.elements[0].value;
-		    var retypePwd = form.elements[1].value;
-			
+		  	var form = document.getElementById("formChangePassword");
+		  	var pwd = form.elements[0].value;
+		  	var retypePwd = form.elements[1].value;
   			switch(pwd)
   			{
+			case "":
+  				document.getElementById('msgPwd').innerHTML = "Empty Value! <br />";
+  				break;
   			case retypePwd:
   				document.getElementById('msgPwd').innerHTML = "Password Changed! <br />";
   				break;
   			default:
-  				document.getElementById('msgPwd').innerHTML = "Fail <br />";
+  				document.getElementById('msgPwd').innerHTML = "Does not match! <br />";
   			}
-		  }
-		  
+		}
+		function clearThis(target)
+		{
+			target.value= "";
+          	}
 		</script>
-		</div>
+	</div>
     </body>
 </html>
