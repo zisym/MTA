@@ -3,12 +3,18 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>jQuery Mobile: Theme Download</title>
+		<title>Trailer Collection</title>
 		<link rel="stylesheet" href="CSS/theme1.min.css" />
 		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        
+        <script>
+        function goTo(url){
+            window.location.href=url+".html";
+        }
+        </script>
 	</head>
 	<body>
 		<div data-role="page" data-theme="a">
@@ -19,10 +25,10 @@
                 <!--
 				<p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
 				<pre>
-<strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/theme1.min.css&quot; /&gt;</strong>
-&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css&quot; /&gt;
-&lt;script src=&quot;http://code.jquery.com/jquery-1.10.2.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js&quot;&gt;&lt;/script&gt;
+                    <strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/theme1.min.css&quot; /&gt;</strong>
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css&quot; /&gt;
+                    &lt;script src=&quot;http://code.jquery.com/jquery-1.10.2.min.js&quot;&gt;&lt;/script&gt;
+                    &lt;script src=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js&quot;&gt;&lt;/script&gt;
 				</pre>
 				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 				<label for="slider1">Input slider:</label>
@@ -34,10 +40,16 @@
 				<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
 				<label for="radio-choice-b1">Off</label>
 				</fieldset> -->
-                <form action="demo_form.asp">
+                <form action="home.php">
                     Username or email address: <input type="text" name="fname"><br>
                     Password: <input type="text" name="lname"><br>
-                    <input type="submit" value="Submit" ><a href="index.html" data-role="button">Guest</a>
+                    <input type="submit" value="Login" >
+                    
+                    <!--check DB  -->
+                    <!-- for more than 2nd attempt, display "forgot your password?" message -->
+                    
+                    <input type="button" value="Guest" onClick="goTo('home')">
+                    <input type="button" value="Register" onClick="goTo('register')">
                 </form>
 			</div>
 		</div>
