@@ -15,7 +15,7 @@
             //require_once('includes.php');
 
             //Connect to server
-            $link = mysql_connect(http://remoteriver.eicp.net/, root, root, trailer_collection) or die(mysql_error());
+            $link = mysql_connect("http://remoteriver.eicp.net/", "root", "root", "trailer_collection") or die(mysql_error());
 
             //Select the database
             mysql_select_db ($db);
