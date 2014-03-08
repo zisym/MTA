@@ -10,11 +10,55 @@
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         
+<<<<<<< HEAD
         <script>
         function goTo(url){
             window.location.href=url+".html";
         }
         </script>
+=======
+        <script LANGUAGE="JavaScript">
+ Begin
+var background = "black";
+var text = "white";
+var URL = "http://mistonline.in/wp/";
+var speed = 4000; // time in milliseconds (4000 = 4 secs)
+var msgcount = 5;
+var i = 1;
+var blank = " ";
+function StringArray (n) {
+this.length = n;
+for (var x = 1; x <= n; x++) {
+this[x] = ' ';
+   }
+}
+message = new StringArray(msgcount);
+message[1] = "Check out this JavaScript SplashPage!!";
+message[2] = "Yet another cool effect using javascript...";
+message[3] = "you can easily add this to your web pages.";
+message[4] = "Why don't you put it on your site?";
+message[5] = "Don't forget, there are still<br>lots more scripts to check out!";
+  
+function SplashPage() {
+SplashPagepage = '<body bgcolor='+background+'>'
++ '<center><table border=0 '
++ 'height=100%><tr><td><center><b><font '
++ 'color='+text+' size=6>'+message[i]+'</font></b>'
++ '</center></td></tr></table></center><font size=1 color="white">'
++  '<div style="position: absolute; right: 10px; bottom: 10px;" id=copy>Script From Mistonline.in</div></font></body>';
+  
+if (i == message.length + 1) parent.location = URL;
+  
+if (i < message.length + 1) {
+frames['SplashPageshow'].location = "javascript:parent.SplashPagepage";
+i++;
+setTimeout("SplashPage()",speed);
+   }
+}
+
+</script>
+        
+>>>>>>> FETCH_HEAD
 	</head>
 	<body>
 		<div data-role="page" data-theme="a">
@@ -40,7 +84,16 @@
 				<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
 				<label for="radio-choice-b1">Off</label>
 				</fieldset> -->
+<<<<<<< HEAD
                 <form action="home.php">
+=======
+                <iframe width="100%" height="96%" name="SplashPageshow" src="javascript:parent.blank"></iframe>
+<!-- Script Size:  1.68 KB -->
+<input type="button" value="Start Splash Page" onclick="SplashPage()"/>
+                
+                
+                <form action="demo_form.asp">
+>>>>>>> FETCH_HEAD
                     Username or email address: <input type="text" name="fname"><br>
                     Password: <input type="text" name="lname"><br>
                     <input type="submit" value="Login" >
