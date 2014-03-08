@@ -13,39 +13,39 @@
 				width: 100%;
 			}
 			.vendor {
-				padding: 2%;
+				padding: 1%;
 				background: #d1eed1;
-				margin-bottom: 2em;
+				margin-bottom: 1em;
 			}
-			.container p {
-				color: #FFF;
+			.inputComments {
+				width: 100%; !important
 			}
         </style>
 	</head>
 	<body>
-	<h1>this is a test</h1>
+	<h1 align="center">Video Page</h1>
 	 	<div class="container">
         	<div class="vendor">
         		<iframe title="Video Title" height="349" width="100%" src="//www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
-            	allowfullscreen=""></iframe>
+            	allowfullscreen=""></iframe><br />
+            	<p>this is the description<p>
             </div>
-		  	<p>this is the description<p>
     	</div>
-	    <script type="text/javascript">
-	   	  var newtext = "";
-	      function addtext()
-	      {
-	         newtext = newtext + "Tashana:<hr /><div>" + document.myform.inputbox.value + "</div><hr /><br />";
-	         document.getElementById('returnValue').innerHTML = newtext;
-	      }
+		<script type="text/javascript">
+		   	var newtext = "";
+		    function addtext()
+		    {
+		    	newtext = newtext + "<div class='vendor'><span style='color:purple;'>Tashana:</span><hr />" + document.myform.inputbox.value + "<hr /></div>";
+		    	document.getElementById('returnValue').innerHTML = newtext;
+	    	}
 	    </script>
 	    
-	    <form NAME="myform">Enter something in the box: <BR>
-	      <textarea name="inputbox"></textarea>
+	    <form name="myform">Comment: <br />
+	      <textarea class="inputComments" name="inputbox"></textarea>
 	      <input TYPE="button" NAME="button" Value="Check" onClick="addtext()">
 	    </form>
 		<div class="container">
-	        <div class="vendor">
+	        <div>
 	        	<div id=returnValue>
 		    	</div>
 			</div>
