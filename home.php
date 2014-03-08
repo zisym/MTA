@@ -12,24 +12,20 @@
         
         <?php
             session_start();
-            require_once('includes.php');
+            //require_once('includes.php');
 
             //Connect to server
-            $link = mysql_connect($host, $user, $pw) or die(mysql_error());
+            $link = mysql_connect(http://remoteriver.eicp.net/, root, root, trailer_collection) or die(mysql_error());
 
             //Select the database
             mysql_select_db ($db);
-
-            // Get the login credentials from user
-            $username = $_POST['username'];
-            $userpassword = $_POST['password'];
 
             // Secure the credentials
             $username = mysql_real_escape_string($_POST['username']);
             $userpassword = mysql_real_escape_string($_POST['password']);
 
             // Check the users input against the DB.
-            $query = "SELECT * FROM user WHERE username = '$username' AND password = '$userpassword'";
+            $query = "SELECT * FROM users WHERE id = '$username' AND password = '$userpassword' OR email = '$username' AND password = '$userpassword'";
             $result = mysql_query($query) or die ("Unable to verify user because " . mysql_error());
             $count = mysql_num_rows($result);
             if ($count == 1)
@@ -42,8 +38,6 @@
                 $_SESSION['loggedIn'] = "false";
                 echo "<p>Login failed, username or password incorrect.</p>";
             }
-
-        
         ?>
 
 	</head>
