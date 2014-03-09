@@ -8,26 +8,28 @@
 		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-          <script type="text/javascript">
-            var dd = $.Deferred();
-            var jqd = $.Deferred();
-            $.when(dd, jqd).done(doInit);
+        <script type="text/javascript">
+           var deviceReadyDeferred = $.Deferred();
+var jqmReadyDeferred = $.Deferred();
 
-            $(document).bind('mobileinit', function () {
-                jqd.resolve();
-            });
+document.addEventListener("deviceReady", deviceReady, false);
+
+function deviceReady() {
+  deviceReadyDeferred.resolve();
+}
+
+$(document).one("mobileinit", function () {
+  jqmReadyDeferred.resolve();
+});
+
+$.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
+
+function doWhenBothFrameworksLoaded() {
+  // TBD
+}
         </script>
 		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-          <script type="text/javascript">
-            document.addEventListener('deviceready', deviceReady, false);
-            function deviceReady() {
-                dd.resolve();
-            }
-
-            function doInit() {
-                alert('Ready');
-            }
-        </script>
+          
         <script>
         function goTo(url){
             window.location.href=url+"";
