@@ -1,3 +1,7 @@
+<?php
+    ob_start(); 
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,35 +14,9 @@
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         
-        <?php
-            session_start();
-            //require_once('includes.php');
-
-            //Connect to server
-            $link = mysql_connect("http://remoteriver.eicp.net/", "root", "root", "trailer_collection") or die(mysql_error());
-
-            //Select the database
-            mysql_select_db ($db);
-
-            // Secure the credentials
-            $username = mysql_real_escape_string($_POST['username']);
-            $userpassword = mysql_real_escape_string($_POST['password']);
-
-            // Check the users input against the DB.
-            $query = "SELECT * FROM users WHERE id = '$username' AND password = '$userpassword' OR email = '$username' AND password = '$userpassword'";
-            $result = mysql_query($query) or die ("Unable to verify user because " . mysql_error());
-            $count = mysql_num_rows($result);
-            if ($count == 1)
-            {
-                $_SESSION['loggedIn'] = "true";
-                header("Location: menu.html");
-            // I also tried the whole URL here, but same result.
-            }
-            else{
-                $_SESSION['loggedIn'] = "false";
-                echo "<p>Login failed, username or password incorrect.</p>";
-            }
-        ?>
+         
+        
+        
 
 	</head>
 	<body>
@@ -48,6 +26,31 @@
 			</div>
 			<div data-role="content" data-theme="a">
                 Welcome to Trailer Collection!
+                <?php
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
+
+                   $connection = mysqli_connect('remoteriver.eicp.net', 'guest', 'guest', 'trailer_collection');
+                    
+
+                    $sql = "SELECT * FROM users where (id='".$_REQUEST['username']."' or email = '".$_REQUEST['username']."') and password='".$_REQUEST['password']."'" ;
+                   $result = mysqli_query($connection, $sql);
+                    
+                    if (mysqli_num_rows ($result)){
+                        while($row = mysqli_fetch_array($result))
+                        {
+                            $id = $row['id'];
+                            $_SESSION['id']=$id;
+                        }
+                    }else{
+                        header ("location: index.html");
+                    }
+                   mysqli_close($connection) or die (mysql_error());
+
+                  ?>
+                <!-- <?php var_dump($result); ?> -->
+                
+                <a href="home2.php">Go TO NEXT</a>
 			</div>
 		</div>
 	</body>
