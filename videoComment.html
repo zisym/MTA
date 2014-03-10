@@ -20,6 +20,16 @@
 			.inputComments {
 				width: 100%; !important
 			}
+			.btnRate {
+				width: 50px;
+				height: 25px;
+			}
+			.div_rating {
+				margin-top: -15px;
+				padding: 10px;
+				background-color: #000000;
+				
+			}
         </style>
 	</head>
 	<body>
@@ -43,22 +53,20 @@
             	<p>baby jesus is born. Tashana William's video choice of the month!<p>
             </div>
     	</div>
-		<script type="text/javascript">
-		   	var newtext = "";
-		   	
-		    function addtext()
-		    {
-		    	newtext = newtext + "<div class='vendor'><span style='color:purple;'>Tashana:</span><hr />" + document.myform.inputbox.value + "<hr /></div>";
-		    	document.getElementById('returnValue').innerHTML = newtext;
-	    	}
-	    
-	    	
-	    </script>
-	    
-	    <form name="myform">Comment: <br />
+    	
+    	<div class="div_rating" align="center">
+	    	<input class="btnRate" id="rateUp" type="button" value="Up" onClick="rateUp()">
+		    <input class="btnRate" id="rateDown" type="button" value="Down" onClick="rateDown()">
+		  	<label id="rating"></label><br />
+	  	</div>
+	  	
+	  	
+    	<form name="myform">Comment: <br />
 	      <textarea class="inputComments" name="inputbox"></textarea>
-	      <input type="button" name="button" Value="Check" onClick="addtext()">
+	      <input type="button" name="button" value="Check" onClick="addtext()">
 	    </form>
+	    
+
 	    
 		<div class="container">
 	        <div>
@@ -66,5 +74,70 @@
 		    	</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+		   	var newtext = "";
+		   	var num = 43;
+		   	var vote = false;
+		   	
+		   	
+		   	document.getElementById('rating').innerHTML = num;
+	  	
+		    function addtext()
+		    {
+		    	newtext = newtext + "<div class='vendor'><span style='color:purple;'>Tashana:</span><hr />" + 
+		    	document.myform.inputbox.value + "<hr /></div>";
+		    	
+		    	document.getElementById('returnValue').innerHTML = newtext;
+	    	}
+	    	
+
+		    function rateUp()
+	    	{
+	    		if(vote == false)
+	    		{
+		    		num = num + 1;
+		    		document.getElementById('rating').innerHTML = num;
+		    		changeRatingColor();
+		    		document.getElementById('rateUp').style.background = "Green";
+		    		vote = true;
+	    		}
+	    	}
+	    	
+	    	function rateDown()
+	    	{
+	    		if(vote == false)
+	    		{
+		    		num = num - 1;
+		    		document.getElementById('rating').innerHTML = num;
+		    		changeRatingColor();
+		    		document.getElementById('rateDown').style.background = "Red";
+		    		vote = true;
+	    		}
+	    	}
+	    	
+	    	
+	    	
+	    	changeRatingColor();
+	    	
+			function changeRatingColor()
+			{
+		    	if(num > 0)
+		    	{
+		    		document.getElementById('rating').style.color = "Green";
+		    	}
+		    	else if(num < 0)
+		    	{
+		    		document.getElementById('rating').style.color = "Red";
+		    	}
+		    	else
+		    	{
+		    		document.getElementById('rating').style.color = "White";
+		    	}
+	       }
+
+	    	
+	    	
+	    </script>
 	</body>
 </html>
