@@ -3,28 +3,19 @@ ob_start();
 session_start(); ?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+    <?php include "header.php"; ?>
+
 		<title>jQuery Mobile: Theme Download</title>
-		<link rel="stylesheet" href="CSS/theme1.min.css" />
-		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+
 		<style type="text/css">
-		#apDiv1 {
-	position: absolute;
-	width: 200px;
-	height: 115px;
-	z-index: 1;
-}
+		  #apDiv1 {
+            position: absolute;
+            width: 200px;
+            height: 115px;
+            z-index: 1;
+        }
         </style>
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-        <script>
-            function goTo(url){
-                window.location.href=url;
-            }
-        </script>
 	</head>
 	<body>
         <?php
@@ -66,7 +57,7 @@ session_start(); ?>
                 if ($_REQUEST['guest'] == 0)
                     echo "<a href='#' class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear'>Options</a> </div>";
                 else
-                    echo "<a href='index.html' class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right'>Login</a> </div>";;
+                    echo "<a href='index.html' class='ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right'>Login</a> </div>";
             
             ?>
       <div data-role="content" data-theme="a">

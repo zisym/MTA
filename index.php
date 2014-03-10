@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+    <head>
 	<?php include "header.php"; ?>
+    <title>Trailer Collection</title>    
+    </head>>
 	<body>
 		<div data-role="page" data-theme="a">
 			<div data-role="header" data-position="inline">
