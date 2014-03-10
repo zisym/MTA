@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	<?php include "header.php"; ?>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +38,7 @@ function onDeviceReady() {
 				<h1>Login</h1>
 			</div>
 			<div data-role="content" data-theme="a">
+			
                 <!--
 				<p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
 				<pre>
@@ -55,7 +57,7 @@ function onDeviceReady() {
 				<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
 				<label for="radio-choice-b1">Off</label>
 				</fieldset> -->
-                <form action="home.php" method="get">
+                <form action="videolist.php" method="get">
                     Username or email address: <input type="text" name="username"><br>
                     Password: <input type="text" name="password"><br>
                     <input type="submit" value="Login" >
@@ -63,9 +65,9 @@ function onDeviceReady() {
                     <!--check DB  -->
                     <!-- for more than 2nd attempt, display "forgot your password?" message -->
                     
-                    <input type="button" value="Guest" onClick="goTo('videoComment.html')">
+                    <input type="button" value="Guest" onClick="goTo('videolist.php?guest=1')">
                     <input type="button" value="Register" onClick="goTo('register.html')">
-					<input type="button" value="Video Page" onClick="goTo('videoComment.html')">
+		    <input type="button" value="Video Page" onClick="goTo('videoComment.html')">
                 </form>
 			</div>
 		</div>
