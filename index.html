@@ -8,27 +8,26 @@
 		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-       <script type="text/javascript">
-    $(document).bind("mobileinit", function() {
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
-    });
-</script>
 		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-          <script type="text/javascript">
-    // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
-    document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-        navigator.splashscreen.hide();
+        <script type="text/javascript">
+            $(document).bind(
+                "mobileinit", function() {
+                    $.support.cors = true;
+                    $.mobile.allowCrossDomainPages = true;
+                }
+            );
+            
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+            document.addEventListener("deviceready", onDeviceReady, false);
+            
+            function onDeviceReady() {
+                navigator.splashscreen.hide();
+                document.addEventListener("backbutton", onBackClickEvent, false); // Adding the back button listener    
+            }
 
-        document.addEventListener("backbutton", onBackClickEvent, false); // Adding the back button listener    
-
-    }
-    </script>
-        <script>
-        function goTo(url){
-            window.location.href=url+"";
-        }
+            function goTo(url){
+                window.location.href=url;
+            }
         </script>
 	</head>
 	<body>
@@ -37,25 +36,7 @@ function onDeviceReady() {
 				<h1>Login</h1>
 			</div>
 			<div data-role="content" data-theme="a">
-                <!--
-				<p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
-				<pre>
-                    <strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/theme1.min.css&quot; /&gt;</strong>
-                    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css&quot; /&gt;
-                    &lt;script src=&quot;http://code.jquery.com/jquery-1.10.2.min.js&quot;&gt;&lt;/script&gt;
-                    &lt;script src=&quot;http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js&quot;&gt;&lt;/script&gt;
-				</pre>
-				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-				<label for="slider1">Input slider:</label>
-				<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
-				<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				<legend>Cache settings:</legend>
-				<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
-				<label for="radio-choice-a1">On</label>
-				<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
-				<label for="radio-choice-b1">Off</label>
-				</fieldset> -->
-                <form action="home.php" method="get">
+                <form action="videolist.php" method="get">
                     Username or email address: <input type="text" name="username"><br>
                     Password: <input type="text" name="password"><br>
                     <input type="submit" value="Login" >
@@ -63,7 +44,7 @@ function onDeviceReady() {
                     <!--check DB  -->
                     <!-- for more than 2nd attempt, display "forgot your password?" message -->
                     
-                    <input type="button" value="Guest" onClick="goTo('videoPlayer.html')">
+                    <input type="button" value="Guest" onClick="goTo('videolist.php?guest=1')">
                     <input type="button" value="Register" onClick="goTo('register.html')">
                 </form>
 			</div>
