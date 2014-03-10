@@ -34,9 +34,11 @@
             	</a>
             	-->
             	
-            	<form method="post" action="videoPlayer.html">
-            		
-            		<input id="videoDirect" type="image" width="100%" height="200px" value="29kERg4T9Vc" src='image/babyjesusisborn.jpg')">
+            	<form name="videoForm" method="get" action="videoPlayer.html">
+            		<input type="hidden" name="hiddenInput" value="29kERg4T9Vc">
+            		<a href="videoPlayer.html">
+            			<image src='image/babyjesusisborn.JPG' alt='babyjesus' width="100%" height="200px" />
+            		</a>
             	</form>
             	
             	
@@ -45,11 +47,14 @@
     	</div>
 		<script type="text/javascript">
 		   	var newtext = "";
+		   	
 		    function addtext()
 		    {
 		    	newtext = newtext + "<div class='vendor'><span style='color:purple;'>Tashana:</span><hr />" + document.myform.inputbox.value + "<hr /></div>";
 		    	document.getElementById('returnValue').innerHTML = newtext;
 	    	}
+	    
+	    	
 	    </script>
 	    
 	    <form name="myform">Comment: <br />

@@ -4,10 +4,19 @@
 	</head>
 	<body style="background-color: black;">
 			
+			<label id="display" style="color: white;"></label>
+
 	     	<script>
-            	 var id = document.getElementById("videoDirect");
-            	 
-            	 var ref = window.open('http://www.youtube.com/embed/'+id+'?html5=1', '_blank', 'location=yes');
+
+				var parameters = location.search.substring(13).split("&");
+
+				var id = parameters[0].split("=");
+				 
+				var ref = window.open('http://www.youtube.com/embed/'+id+'?html5=1', '_blank', 'height=200, width=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
+				 
+				//document.getElementById('display').innerHTML = id;
+            	
+            	
             </script>
 	</body>
 </html>
