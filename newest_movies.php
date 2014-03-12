@@ -13,11 +13,11 @@
   <tr>
     <td rowspan=2><img src="image/1.jpg" width="356" height="531"></td>
     <td><img src="image/download (1).jpg" width="178" height="263"></td>
-    <td><img src="image/download (1).jpg" width="178" height="263"></td>
+    
   </tr>
   <tr>
     <td><img src="image/download (2).jpg" width="178" height="263"></td>
-    <td><img src="image/download (2).jpg" width="178" height="263"></td>
+   
     
   </tr>
 </table>
