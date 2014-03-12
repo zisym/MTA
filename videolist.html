@@ -103,6 +103,12 @@
     </div><!-- /page -->
     
     <script>
+	var v;
+	
+	var newest=[];
+	var popular=[];
+	var classic=[];
+	
 newestvideos=[1,2,3];
 popularvideos=[4,5,6];
 classicvideos=[7,8,9];
@@ -112,7 +118,7 @@ classicvideos=[7,8,9];
 $(document).ready( function() {
  
 	var xmlhttp;
-	var v;
+	
 	
 
 if (window.XMLHttpRequest)
@@ -142,13 +148,33 @@ xmlhttp.onreadystatechange=function()
 	v=jQuery.parseJSON(x);
 	
 	document.getElementById("d1").innerHTML=v.videos[3].video_id;
+	
+	
+for(var i=0;i<v.videos.length-1;i++)
+{
+	if(v.videos[i].category=="newest")
+	{
+		newest.push(v.videos[i]);
+	}
+	if(v.videos[i].category=="popular")
+	{
+		popular.push(v.videos[i]);
+	}
+	if(v.videos[i].category=="classic")
+	{
+		classic.push(v.videos[i]);
+	}
+	
+}//assign videos to 3 categories
+
+for(var i=0;i<newest.length;i++)
+{
+	document.getElementById("d").innerHTML+="<a href='videoPlayer.html'><img src='image/download ("+newest[i].video_id+").jpg' width='89' height='132'></a>";
+}
+
     }
   }
   
-  
-  
-  
-
 });
 
 
@@ -160,10 +186,7 @@ xmlhttp.onreadystatechange=function()
 
 
 
-for(var i=0;i<newestvideos.length;i++)
-{
-	document.getElementById("d").innerHTML+="<a href='videoPlayer.html'><img src='image/download ("+newestvideos[i]+").jpg' width='89' height='132'></a>";
-}
+
 
 function loaddiv2()
 {
