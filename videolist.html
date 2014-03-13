@@ -17,26 +17,43 @@
 		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
         <script src="js/videolist.js"></script>
         <style>
+		body
+		{
+			
+		}
 		.navigator
 		{
 	margin: 12px;
 		}
 		.wrap
 		{
-		
+		  margin-left:25px;
 		}
 		.thumbnails_a
 {
 	float: left;
-	margin-top: 5px;
-	margin-right: 10px;
-	margin-bottom: 5px;
-	margin-left: 10px;
+	margin: 7px;	
 }
 .thumbnails_b
 {
 	float: left;
-	margin: 5px;	
+	margin: 7px;	
+}
+a:hover img
+  {
+  opacity:0.7;
+  }
+.thumbnails_a img
+{
+	width:190px;
+	height:269px;
+	box-shadow: 4px 4px 10px #000000;
+}
+.thumbnails_b img
+{
+	width:89px;
+	height:127px;
+	box-shadow: 4px 4px 10px #000000;
 }
 		
 		
@@ -52,7 +69,7 @@
     <div data-role="page" data-theme="a">
     
       <div data-role="header" data-position="fixed">
-        <h1>Page Title</h1>
+        <h1>Trailer List</h1>
         <a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
        </div><!-- /header -->
         
@@ -74,51 +91,15 @@
 <div class="wrap"  >
 
 <div id="div1" style="display: ;">
-<table cellspacing="5" border="0">
-          
-  <tr>
-    <td rowspan=2><img src="image/3.jpg" width="178" height="268"></td>
-    <td><img src="image/download (5).jpg" width="89" height="132"></td>
-    
-  </tr>
-  <tr>
-    <td><img src="image/download (6).jpg" width="89" height="123"></td>
-   
-    
-  </tr>
-</table>
+
 </div>
 
 <div id="div2" style="display: none;">
-<table cellspacing="5" border="0">
-          
-  <tr>
-    <td rowspan=2><img src="image/1.jpg" width="178" height="268"></td>
-    <td><img src="image/download (1).jpg" width="89" height="132"></td>
-    
-  </tr>
-  <tr>
-    <td><img src="image/download (2).jpg" width="89" height="132"></td>
-   
-    
-  </tr>
-</table>
+
 </div>
 
 <div id="div3" style="display: none;">
-<table cellspacing="5" border="0">
-          
-  <tr>
-    <td rowspan=2><img src="image/2.jpg" width="178" height="268"></td>
-    <td><img src="image/download (3).jpg" width="89" height="132"></td>
-    
-  </tr>
-  <tr>
-    <td><img src="image/download (4).jpg" width="89" height="132"></td>
-   
-    
-  </tr>
-</table>
+
 </div>
        
 </div><!-- /wrap -->
@@ -207,31 +188,31 @@ for(var i=0;i<v.videos.length-1;i++)
 
 if(newest.length>0)
 {
-document.getElementById("div2").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+newest[0].video_id+").jpg' width='178' height='264'></a></div>";
+document.getElementById("div2").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+newest[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<newest.length;i++)
 {
-	document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+newest[i].video_id+").jpg' width='89' height='127'></a></div>";
+	document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+newest[i].video_id+").jpg' ></a></div>";
 }
 }//newest
 
 if(popular.length>0)
 {
-document.getElementById("div1").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+popular[0].video_id+").jpg' width='178' height='264'></a></div>";
+document.getElementById("div1").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+popular[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<popular.length;i++)
 {
-	document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+popular[i].video_id+").jpg' width='89' height='127'></a></div>";
+	document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+popular[i].video_id+").jpg' ></a></div>";
 }
 }//popular
 
 if(classic.length>0)
 {
-document.getElementById("div3").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+classic[0].video_id+").jpg' width='178' height='264'></a></div>";
+document.getElementById("div3").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+classic[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<classic.length;i++)
 {
-	document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+classic[i].video_id+").jpg' width='89' height='127'></a></div>";
+	document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='videoPlayer.html'><img src='image/download ("+classic[i].video_id+").jpg' ></a></div>";
 }
 }//classic
 
