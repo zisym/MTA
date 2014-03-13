@@ -27,8 +27,9 @@
 		}
 		.wrap
 		{
-		  margin-left:25px;
+		  margin-left:10px;
 		}
+		
 		.thumbnails_a
 {
 	float: left;
@@ -88,7 +89,7 @@ a:hover img
      
  
 
-<div class="wrap"  >
+<div class="wrap captionfull" id="container" >
 
 <div id="div1" style="display: ;">
 
@@ -222,37 +223,100 @@ for(var i=1;i<classic.length;i++)
 });
 
 
+$(document).ready(function(){
+	
+	
+	
+});//animation
 
 
 
+$( document ).click(function() {
+  
+});
 
-
-
-
+function loaddiv2back()
+{
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="";
+	document.getElementById("div1").style.display="none";
+	document.getElementById("div3").style.display="none";
+  
+}
 
 
 
 function loaddiv2()
 {
-	document.getElementById("div2").style.display="";
-	document.getElementById("div1").style.display="none";
-	document.getElementById("div3").style.display="none";
+	  $( "#container" ).animate({
+    
+    marginLeft: "400px",
+    
+  }, 200 );
+  
+  
 	
+	
+	
+	setTimeout("loaddiv2back()",300);
 	
 }
-function loaddiv3()
+
+function loaddiv3back()
 {
-	document.getElementById("div2").style.display="none";
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="none";
 	document.getElementById("div1").style.display="none";
 	document.getElementById("div3").style.display="";
+  
+}
+
+
+function loaddiv3()
+{
+	 $( "#container" ).animate({
+    
+    marginLeft: "400px",
+    
+  }, 200 );
+  
+	setTimeout("loaddiv3back()",300);
 	
+}
+
+function loaddiv1back()
+{
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="none";
+	document.getElementById("div1").style.display="";
+	document.getElementById("div3").style.display="none";
+  
 }
 
 function loaddiv1()
 {
-	document.getElementById("div2").style.display="none";
-	document.getElementById("div1").style.display="";
-	document.getElementById("div3").style.display="none";
+	 $( "#container" ).animate({
+    
+    marginLeft: "400px",
+    
+  }, 200 );
+  
+	setTimeout("loaddiv1back()",300);
 	
 }
 </script>
