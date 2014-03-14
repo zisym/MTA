@@ -71,9 +71,9 @@ a:hover img
         
         
 	</head>
-	<body>
+	<body >
         
-	
+	<div class="screen">
     <div data-role="page" data-theme="a">
     
       <div data-role="header" data-position="fixed">
@@ -85,9 +85,10 @@ a:hover img
          <div  class="navigator">
         <div data-role="navbar" >
             <ul>
-                <li><a href=""  data-icon="heart" onclick="loaddiv2();return false">Newest</a></li>
-                <li><a href="" data-icon="star" class="ui-btn-active" onclick="loaddiv1();return false">Popular</a></li>
-                <li><a href="" data-icon="video" onclick="loaddiv3();return false">Classic</a></li>
+             <li><a href="" data-icon="star" id="nav1" class="ui-btn-active" onclick="loaddiv1();return false">Popular</a></li>
+                <li><a href=""  data-icon="heart" id="nav2" onclick="loaddiv2();return false">Newest</a></li>
+               
+                <li><a href="" data-icon="video" id="nav3" onclick="loaddiv3();return false">Classic</a></li>
             </ul>
         </div><!-- /navbar -->
 </div><!-- /footer -->
@@ -132,6 +133,8 @@ a:hover img
     
     <script>
 	var v;
+	
+	var n=1;
 	
 	var newest=[];
 	var popular=[];
@@ -230,30 +233,91 @@ for(var i=1;i<classic.length;i++)
   
 });
 
-
-$(document).ready(function(){
+$(document).ready( function() {
 	
-	
-	
-});//animation
-
-
-
-$( document ).click(function() {
-  
-});
+ $( document ).on( "swipeleft", ".screen", function( event ) {
+	 n++;
+	 if(n>3)
+	 n=1;
+	 if(n==1)
+	 {	 
+       loaddiv1();
+	   $('#nav1').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	 }
+	   if(n==2)
+	   {
+	   loaddiv2();
+	   $('#nav2').addClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	   }
+	   
+	   if(n==3)
+	   {
+		   loaddiv3();
+		   $('#nav3').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+		   
+	   }
+	   
+	   
+    });//swipeleft
+	/*
+	$( document ).on( "swiperight", ".ui-page", function( event ) {
+	 n--;
+	 if(n<1)
+	 n=3;
+	 if(n==1)
+	 {	 
+       loaddiv1();
+	   $('#nav1').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	 }
+	   if(n==2)
+	   {
+	   loaddiv2();
+	   $('#nav2').addClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	   }
+	   
+	   if(n==3)
+	   {
+		   loaddiv3();
+		   $('#nav3').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+		   
+	   }
+	   
+	   
+    });//swiperight
+	*/
+});//swipe
 
 function loaddiv2back()
 {
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
 	$( "#container" ).animate({
     
     marginLeft: "10px",
+	
     
   }, 200 );
   
   document.getElementById("div2").style.display="";
 	document.getElementById("div1").style.display="none";
 	document.getElementById("div3").style.display="none";
+	
+	n=2;
   
 }
 
@@ -263,7 +327,8 @@ function loaddiv2()
 {
 	  $( "#container" ).animate({
     
-    marginLeft: "400px",
+    marginLeft: "-400px",
+	width: "0px",
     
   }, 200 );
   
@@ -271,12 +336,17 @@ function loaddiv2()
 	
 	
 	
-	setTimeout("loaddiv2back()",300);
+	setTimeout("loaddiv2back()",240);
 	
 }
 
 function loaddiv3back()
 {
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
 	$( "#container" ).animate({
     
     marginLeft: "10px",
@@ -286,6 +356,8 @@ function loaddiv3back()
   document.getElementById("div2").style.display="none";
 	document.getElementById("div1").style.display="none";
 	document.getElementById("div3").style.display="";
+	
+	n=3;
   
 }
 
@@ -294,16 +366,22 @@ function loaddiv3()
 {
 	 $( "#container" ).animate({
     
-    marginLeft: "400px",
+    marginLeft: "-400px",
+	width: "0px",
     
   }, 200 );
   
-	setTimeout("loaddiv3back()",300);
+	setTimeout("loaddiv3back()",240);
 	
 }
 
 function loaddiv1back()
 {
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
 	$( "#container" ).animate({
     
     marginLeft: "10px",
@@ -313,6 +391,8 @@ function loaddiv1back()
   document.getElementById("div2").style.display="none";
 	document.getElementById("div1").style.display="";
 	document.getElementById("div3").style.display="none";
+	
+	n=1;
   
 }
 
@@ -320,15 +400,17 @@ function loaddiv1()
 {
 	 $( "#container" ).animate({
     
-    marginLeft: "400px",
+    marginLeft: "-400px",
+	
+	width: "0px",
     
   }, 200 );
   
-	setTimeout("loaddiv1back()",300);
+	setTimeout("loaddiv1back()",240);
 	
 }
 </script>
-      
+      </div>
     </body>
 </html>
 
