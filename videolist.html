@@ -35,6 +35,13 @@
 	float: left;
 	margin: 7px;	
 }
+#intro
+{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	opacity:0.7;
+}
 .thumbnails_b
 {
 	float: left;
@@ -92,15 +99,15 @@ a:hover img
 <div class="wrap captionfull" id="container" >
 
 <div id="div1" style="display: ;">
-
+<div id="intro"> Popular Moives</div><br>
 </div>
 
 <div id="div2" style="display: none;">
-
+<div id="intro"> Newest Moives</div><br>
 </div>
 
 <div id="div3" style="display: none;">
-
+<div id="intro"> Classic Moives</div><br>
 </div>
        
 </div><!-- /wrap -->
@@ -189,7 +196,7 @@ for(var i=0;i<v.videos.length-1;i++)
 
 if(newest.length>0)
 {
-document.getElementById("div2").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+newest[0].video_id+").jpg' ></a></div>";
+document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+newest[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<newest.length;i++)
 {
@@ -199,7 +206,7 @@ for(var i=1;i<newest.length;i++)
 
 if(popular.length>0)
 {
-document.getElementById("div1").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+popular[0].video_id+").jpg' ></a></div>";
+document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+popular[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<popular.length;i++)
 {
@@ -209,7 +216,7 @@ for(var i=1;i<popular.length;i++)
 
 if(classic.length>0)
 {
-document.getElementById("div3").innerHTML="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+classic[0].video_id+").jpg' ></a></div>";
+document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='videoPlayer.html'><img src='image/download ("+classic[0].video_id+").jpg' ></a></div>";
 
 for(var i=1;i<classic.length;i++)
 {
