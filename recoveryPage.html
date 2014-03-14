@@ -10,23 +10,27 @@
 .info {
 	color: #F00;
 }
+.col {
+	color: #F00;
+}
 </style>
 </head>
 
 <body>
 <h1>&nbsp; </h1>
 <h1>Password Recovery</h1>
-<p>&nbsp;</p>
-<p>E-mail: 
+<p class="col">Please provide all information and your password will be displayed to you</p>
+<p>E-mail:  
   <input name="firstName" type="text" />
 </p>
-<p>Country of Residence: 
-  <input name="lastName" type="text" />
-</p>
-<p class="info">An email will be sent to the email address provided</p>
-<p>&nbsp;</p>
 <p>
+  <label for="lName">Last Name: </label>
+  <input type="text" name="lName" id="lName" />
+</p>
+<p class="info">
   <input type="submit" name="submit" id="submit" value="Submit" />
 </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 </body>
 </html>
