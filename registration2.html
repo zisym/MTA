@@ -13,16 +13,25 @@
 <h1>&nbsp; </h1>
 <h1 align="center"> Registration</h1>
 <p class="val">* Your e-mail will be used as user name</p>
-<p class="val">* Required Fields</p><table width="413">
+<p class="val">* Required Fields</p>
+<table width="413">
   <tr>
     <th width="176" scope="row">First Name: </th>
     <td width="221" class="col"><input name="firstName" type="text" />
     *</td>
   </tr>
   <tr>
+    <th scope="row">&nbsp;</th>
+    <td class="col">&nbsp;</td>
+  </tr>
+  <tr>
     <th scope="row"><label>Last Name: </label>    </th>
     <td class="col"><input name="lastName" type="text" />
     *</td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td class="col">&nbsp;</td>
   </tr>
   <tr>
     <th scope="row">Email Address:</th>
@@ -31,37 +40,18 @@
     *</td>
   </tr>
   <tr>
-    <th scope="row">Age:</th>
-    <td class="col"><label for="age"></label>
-      <select name="age" size="1" id="age">
-        <option>Select one</option>
-        <option>0 - 10</option>
-        <option>11 - 21</option>
-        <option>22 - 32</option>
-        <option>33 - 43</option>
-        <option>44 - 54</option>
-        <option>55 - 65</option>
-        <option>66 - 76</option>
-        <option>77 - 87</option>
-        <option>88 - 100</option>
-    </select></td>
-  </tr>
-  <tr>
-    <th scope="row"><span class="col">
-      <label for="street">Street Name and Number:</label>
-    </span></th>
-    <td class="col"><input type="text" name="street" id="street" /></td>
-  </tr>
-  <tr>
-    <th scope="row">Country:</th>
-    <td class="col"><label for="country"></label>
-    <input type="text" name="country" id="country" /></td>
+    <th scope="row">&nbsp;</th>
+    <td class="col">&nbsp;</td>
   </tr>
   <tr>
     <th scope="row"><span id="sprypassword2">
     <label for="pwd2">Create Password</label>:</span></th>
     <td class="col"><input type="password" name="pwd" id="pwd" />
     *</td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td class="col">&nbsp;</td>
   </tr>
   <tr>
     <th scope="row"><span id="spryconfirm2">
@@ -75,27 +65,13 @@
     <td class="col">&nbsp;</td>
   </tr>
   <tr>
-    <th scope="row">Sex</th>
-    <td><input type="radio" name="radio" id="male" value="male" />
-    <label for="male">Male<br />
-      <input type="radio" name="radio" id="female" value="female" />
-    Female    </label></td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">Would you like to be added to our mailing list?</th>
-    <td><input type="radio" name="radio" id="yes" value="yes" />
-    <label for="yes">Yes<br />
-      <input type="radio" name="radio" id="no" value="no" />
-    No    </label></td>
+    <th scope="row"><span class="col">
+    <input type="submit" name="submit" id="submit" value="Submit" />
+    </span></th>
+    <td class="col">&nbsp;</td>
   </tr>
 </table>
-<p><span id="sprypassword1"><span class="passwordRequiredMsg"> value is required.</span></span>
-  <input type="submit" name="submit" id="submit" value="Submit" />
-</p>
+<p><span id="sprypassword1"><span class="passwordRequiredMsg"> value is required.</span></span></p>
 <p>&nbsp;</p>
 
 </body>
