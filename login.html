@@ -30,22 +30,56 @@
                 window.location.href=url;
             }
         </script>
+        <script>
+            var users;
+            
+            $(document).ready(function(){
+                $("#login").click(function(){
+                    alert("clicked");
+                    $.ajax({
+                        url:"http://remoteriver.eicp.net/trailercollection/userinfo.php",
+                        type:"get",
+                        dataType:"json"
+                    })
+                    .done(function(data){
+                            alert(data.users[0].email);
+                        var email=$("#email").val();                        
+                        var password=$("#password").val();
+                        alert("GOT IT");
+
+                        for(var i = 0; i < data.users.length; i++)
+                        {
+                            if(email == data.users[i].email)
+                            {
+                                if(password = data.users[i].password)
+                                {
+                                    $(location).attr('href','videolist.html');
+                                }
+                            }
+                        }
+                    });
+              });    
+            });
+            
+            
+        </script>
 	</head>
-	<body>
+	<body id="loginForm">
 		<div data-role="page" data-theme="a">
 			<div data-role="header" data-position="inline">
 				<h1>Login</h1>
 			</div>
 			<div data-role="content" data-theme="a">
-                <form action="home.php" method="get">
-                    Username or Email: <input type="text" name="username"><br>
-                    Password: <input type="text" name="password"><br>
-                    <input type="submit" value="Login" >
+                <form method="post">
+                    Email: <input id="email" type="text" name="username"><br>
+                    Password: <input id="password" type="text" name="password"><br>
+                    <input id="login" type="button" value="Login" >
                      <input type="button" value="Guest" onClick="goTo('videolist.html')">
                     <input type="button" value="Register" onClick="goTo('registration.html')">
                     <input type="button" value="Video Page" onClick="goTo('videoComment.html')">
                 </form>
 			</div>
+            <div id="list"></div>
 		</div>
 	</body>
 </html>
