@@ -35,17 +35,14 @@
             
             $(document).ready(function(){
                 $("#login").click(function(){
-                    alert("clicked");
                     $.ajax({
                         url:"http://remoteriver.eicp.net/trailercollection/userinfo.php",
                         type:"get",
                         dataType:"json"
                     })
                     .done(function(data){
-                            alert(data.users[0].email);
                         var email=$("#email").val();                        
                         var password=$("#password").val();
-                        alert("GOT IT");
 
                         for(var i = 0; i < data.users.length; i++)
                         {
