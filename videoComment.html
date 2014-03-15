@@ -94,11 +94,18 @@
 			</div>
 		</div>
 		
+        <div id="test1">
+        123
+        </div>
+        
+        
 		
 		<!-- START GET JSON -->
 		<script>
 		
 			var parameters = location.search.substring(4);
+			
+			document.getElementById('test1').innerHTML = parameters;
 
 			var videoURL=[];
 			var mtaJSON;
@@ -143,6 +150,8 @@
 					  	document.getElementById('rating').innerHTML = num;
 					  	
 					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
+						
+						
 						
 						var baseUrl = videoURL[videoID];
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
