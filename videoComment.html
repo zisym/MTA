@@ -4,24 +4,27 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>MTA Trailer Collection</title>
-			<meta charset="utf-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>Video Page</title>
-			
-		<style>
-	  
-        	body {
-				background-color: #666; !important
-        	}
+		<meta charset="utf-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Video Page</title>
 
-			.container {
-				width: 100%;
-			}
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		
+	
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+		
+		<style>
 			.vendor {
-				margin-top: -25px;
+				margin-top: 0px;
 				border:groove;
 				padding: 1%;
-				background-color: lightgrey;
+				/*background-color: lightgrey;*/
 				
 			}
 			.inputComments {
@@ -31,81 +34,67 @@
 				width: 50px; !important
 				height: 25px; !important
 			}
-			.div_rating {
-				border:groove;
-				margin-top: -16px;
-				padding: 10px;
-				background-color: lightgrey;
+			a:hover img
+			{
+				box-shadow: 4px 4px 10px #000000;
+				background:rgba(0,0,0,.75);
+              	opacity:0.75;
+               -webkit-transition: opacity .25s ease;
 			}
-        </style>
-        
-        	<!-- 
-			<link rel="stylesheet" href="themes/Black_MC.min.css" />
-			<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 			
-			<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-			-->
-			<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
-			<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-			<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        
+        </style>
 	</head>
 	<body>
-		<h1 align="center" style="border:groove; background-color: grey;">Video Comment Page</h1>
-	 	<div class="container">
-        	<div class="vendor">
+		<div data-role="header" data-position="fixed">
+			<a href="UserSetting.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"/></a> 
+			<h1>Video Page</h1>
+			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
+      	</div>
+	
+	 	<div style="padding: 10px; color: lavender;">
+        	<div style="background-color:dimgray;padding: 10px; border:groove;">
         		<!--<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
             	allowfullscreen=""></iframe><br /> 
-            	
-            		<a href="videoPlayer.html">
-            			<image src='image/babyjesusisborn.jpg' alt='babyjesus' width="100%" height="200px" />
-            		</a>
             	-->
-            	
-            	<!--<form name="videoForm" method="get" action="videoPlayer.html">
-            		<input type="hidden" name="hiddenInput" value="29kERg4T9Vc">
-            		<div id="imageClick">
-					</div>
-            	</form>-->
-            	
-            	<div id="imageClick">
+            	<div class="iv" id="imageClick">
 				</div>
 				
-            	<p>blah<p>
+				<h3>This is a move trailer title</h3>
+				<hr />
+            	<p>this is a description<p>
             </div>
     	</div>
     	
-    	<div class="div_rating" align="center">
-	    	<input class="btnRate" id="rateUp" type="button" value="Up" onClick="rateUp()">
-		    <input class="btnRate" id="rateDown" type="button" value="Down" onClick="rateDown()">
-		  	<label id="rating"></label><br />
+    	<div style="padding:10px;">
+    		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
+		    	<div style="width: 45%; height:40%;">
+			    	<input id="rateUp" type="button" value="Up" onClick="rateUp()">
+			  	</div>
+			  	<div style="width: 45%; height:40%; margin-left:150px; margin-top: -62px;">
+				    <input id="rateDown" type="button" value="Down" onClick="rateDown()">
+			  	</div>
+			  	<div>
+  					<label id="rating" style="font-size: 20px;" align="center"></label>
+	  			</div>
+		  	</div>
 	  	</div>
 	  	
-	  	
-    	<form name="myform">Comment: <br />
-	      <textarea class="inputComments" name="inputbox"></textarea>
+    	<form name="myform" style="margin-top:-18px; background-color: dimgray;"><hr />
+	      <textarea class="inputComments" name="inputbox" placeholder="Enter comment here"></textarea>
 	      <input type="button" name="button" value="Comment" onClick="addtext()">
 	    </form>
 	    
-		<div class="container">
-	        <div>
-	        	<div id=returnValue>
-		    	</div>
+
+	     <div style="padding: 10px;">
+			<div id=returnValue>
 			</div>
 		</div>
-		
-        <div id="test1">
-        123
-        </div>
-        
-        
+
 		
 		<!-- START GET JSON -->
 		<script>
 		
 			var parameters = location.search.substring(4);
-			
-			document.getElementById('test1').innerHTML = parameters;
 
 			var videoURL=[];
 			var mtaJSON;
@@ -147,11 +136,9 @@
 					  	}
 					  	
 					  	
-					  	document.getElementById('rating').innerHTML = num;
+					  	document.getElementById('rating').innerHTML = "Rating<br />" + num;
 					  	
 					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
-						
-						
 						
 						var baseUrl = videoURL[videoID];
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
@@ -166,17 +153,10 @@
 		//END GET JSON
 		
 		//START SCRIPT FUNCTIONS
-
-			function getUrlValue(varSearch)
-			{
-				var searchString = location.search();
-				document.getElementById('returnValue').innerHTML = "test:" + testPara;
-			}
-			
-			
+		
 		    function addtext()
 		    {
-		    	newtext = newtext + "<div class='vendor' style='margin-top: 5px;'><span style='color:purple;'>Tashana:</span><hr />" + 
+		    	newtext = newtext + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
 		    	document.myform.inputbox.value + "<hr /></div>";
 		    	
 		    	document.getElementById('returnValue').innerHTML = newtext;
@@ -188,7 +168,7 @@
 	    		if(vote == false)
 	    		{
 		    		num = num + 1;
-		    		document.getElementById('rating').innerHTML = num;
+		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
 		    		changeRatingColor();
 		    		document.getElementById('rateUp').style.background = "Green";
 		    		vote = true;
@@ -200,7 +180,7 @@
 	    		if(vote == false)
 	    		{
 		    		num = num - 1;
-		    		document.getElementById('rating').innerHTML = num;
+		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
 		    		changeRatingColor();
 		    		document.getElementById('rateDown').style.background = "Red";
 		    		vote = true;
