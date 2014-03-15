@@ -201,30 +201,30 @@ xmlhttp.onreadystatechange=function()
     if(newest.length>0)
 	{ 	
 		
-		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='videoComment.html?id="+newest[0].video_id+"' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
+		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
 		
 		for(var i=1;i<newest.length;i++)
 		{
-			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='videoComment.html?id="+newest[i].video_id+"' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
+			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
 		}
 	}//newest
 
 	if(popular.length>0)
 	{
-		document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='videoComment.html?id="+popular[0].video_id+"' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
+		document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
 	
 		for(var i=1;i<popular.length;i++)
 		{
-			document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='videoComment.html?id="+popular[i].video_id+"' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
+			document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
 		}
 	}//popular
 
 	if(classic.length>0)
 	{
-		document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='videoComment.html?id="+classic[0].video_id+"' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
+		document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
 		for(var i=1;i<classic.length;i++)
 		{
-			document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='videoComment.html?id="+classic[i].video_id+"' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
+			document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
 		}
 	
 	}//classic
