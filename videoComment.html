@@ -94,20 +94,19 @@
 			</div>
 		</div>
 		
-		<script>
-			var testPara = location.search;
-			document.getElementById('returnValue').innerHTML = "test:" + testPara;
-		</script>
 		
 		<!-- START GET JSON -->
 		<script>
+		
+			var parameters = location.search.substring(4);
+
 			var videoURL=[];
 			var mtaJSON;
 			
 			var newtext = "";
 		   	var num = 43;
 		   	
-		   	var videoID = 1;
+		   	var videoID = parameters;
 		   	var vote = false;
 		   	
 			$(document).ready(function() {
@@ -159,7 +158,13 @@
 		
 		//START SCRIPT FUNCTIONS
 
-	
+			function getUrlValue(varSearch)
+			{
+				var searchString = location.search();
+				document.getElementById('returnValue').innerHTML = "test:" + testPara;
+			}
+			
+			
 		    function addtext()
 		    {
 		    	newtext = newtext + "<div class='vendor' style='margin-top: 5px;'><span style='color:purple;'>Tashana:</span><hr />" + 

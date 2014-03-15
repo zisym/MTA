@@ -14,8 +14,7 @@
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-        <script src="js/videolist.js"></script>
+		<!-- <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> -->
         <style>
 		body
 		{
@@ -132,6 +131,7 @@ a:hover img
     </div><!-- /page -->
     
     <script>
+    
 	var v;
 	
 	var n=1;
@@ -196,7 +196,8 @@ xmlhttp.onreadystatechange=function()
     }
     
     if(newest.length>0)
-	{ 
+	{ 	
+		
 		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='videoComment.html?id="+newest[0].video_id+"'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
 		
 		for(var i=1;i<newest.length;i++)
