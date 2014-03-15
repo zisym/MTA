@@ -1,6 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
+			<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
+			<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+			<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	</head>
 	<body style="background-color: black;">
 			
@@ -8,13 +11,14 @@
 
 	     	<script>
 
-				var parameters = location.search.substring(13).split("&");
-
-				var id = parameters[0].split("=");
+				//var parameters = location.search.substring(1).split("&");
+				
+				var parameters = location.search.substring(4);
+				
 				 
-				var ref = window.open('http://www.youtube.com/embed/'+id+'?html5=1', '_blank', 'height=200, width=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
-				 
-				//document.getElementById('display').innerHTML = id;
+				var ref = window.open('http://www.youtube.com/embed/'+parameters+'?html5=1', '_blank', 'height=200, width=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
+				
+				//document.getElementById('display').innerHTML = parameters;
             	
             	
             </script>
