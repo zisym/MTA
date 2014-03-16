@@ -1,50 +1,20 @@
 <html>
-<head>
- <title> My list of jokes </title>
- <style type="text/css">
- .gry {
-	color:#666;
-	background-color: #CCC;
-}
- </style>
-</head>
- <body class="gry">
- 
- <h1 align=center> Registration Page </h1>
- 
-     
-<form name="registration" action="http://expertrating.com/registration.html">
+	<head>
+		 <title> Registration </title>
+		 <style type="text/css">
 
- <p>First name:
-  <input type=text name="realname" /> <br/><br/>
-   Last name: <input type=text name="surname" /> 
- </p>
- <p>
-   <label for="email">E-mail:  </label>
-   <input type="text" name="email" id="email">
-   <br/>
-   <br/>
-   Password: <input type=password name="pass"/> <br/><br/>  
-   Re-Type Password: <input type=password name="repass"/> <br/><br/>
-   
-   SEX<br/>
-   <input type=radio name="sex" value="M"/> Male<br/>
-  <input type=radio name="sex" value="F"/> Female</p>
- <p>Would you like to be added to our mailing list?<br/>
-   <input type="radio" name="radio" id="yes" value="yes">
-   <label for="yes">Yes</label>
-  </p>
- <p>
-   <input type="radio" name="radio" id="no" value="no">
-   <label for="no">No</label>
- </p>
- <p>
-   <input type=reset /><br/><br/>
-   
-   <input type=submit value="Submit" />
-   
- </p>
-</form>
-</body>
-
+		 </style>
+		 
+	</head>
+	<body>
+	 <h1 align="center">Registration Page</h1>
+		<form name="registration" method="post" action="http://remoteriver.eicp.net/trailercollection/registration.php">
+			First name:<input type="text" name="btnFName" /> <br/><br/>
+			Last name: <input type="text" name="btnLName" /> <br/><br/>
+			E-mail: <input type="text" name="btnEmail" /> <br/><br/>
+			Password: <input type="password" name="btnPassword"/> <br/><br/>  
+			Re-Type Password: <input type="password" name="btnRetypePassword"/> <br/><br/>
+			<input type="submit" name="btnSubmit" value="Register" />
+		</form>
+	</body>
 </html>
