@@ -59,9 +59,9 @@
             	<div class="iv" id="imageClick">
 				</div>
 				
-				<h3>This is a move trailer title</h3>
+				<h3 id="videoTitle"></h3>
 				<hr />
-            	<p>this is a description<p>
+            	<p id="videoDescription"><p>
             </div>
     	</div>
     	
@@ -96,7 +96,9 @@
 		
 			var parameters = location.search.substring(4);
 
-			var videoURL=[];
+			var videoURL = [];
+			var videoT = [];
+			var videoD = [];
 			var mtaJSON;
 			
 			var newtext = "";
@@ -132,6 +134,8 @@
 							for(var i=0;i<mtaJSON.videos.length-1;i++)
 							{
 								videoURL[i+1] = mtaJSON.videos[i].url;
+								videoT[i+1] = mtaJSON.videos[i].title;
+								videoD[i+1] = mtaJSON.videos[i].description;
 							}//get video ids
 					  	}
 					  	
@@ -145,7 +149,8 @@
 						
 						//document.getElementById("imageClick").innerHTML="<input type='image' src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'>";
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
-					  	
+					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
+					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
 					  	
 					}		    
 				}
