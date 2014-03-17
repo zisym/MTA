@@ -70,11 +70,11 @@ function onDeviceReady() {
 		
 				<script>
 			
-<!-- 
+	
 
-document.write('<table border="1" cellspacing="1" cellpadding="5">')
+		document.write('<table border="1" cellspacing="1" cellpadding="5">')
 
-for(i = 0; i < 3; i++){
+	for(i = 0; i < 5; i++){
    document.write('<tr>')
    for (j = 0; j < 3; j++){
       document.write('<td>row ' + i + ', column ' + j + '</td>')
@@ -84,9 +84,111 @@ for(i = 0; i < 3; i++){
 
 document.write('</table>')
 
-//-->
 
 				</script>
+				
+				 <script>
+    
+	var v;
+	
+	var n=1;
+	
+	var newest=[];
+	var popular=[];
+	var classic=[];
+	
+newestvideos=[1,2,3];
+popularvideos=[4,5,6];
+classicvideos=[7,8,9];
+
+
+
+$(document).ready( function() {
+ 
+	var xmlhttp;
+	
+	
+
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+xmlhttp.send();
+xmlhttp.onreadystatechange=function(){
+  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+		
+	
+	var x=xmlhttp.responseText;
+	//document.getElementById("d1").innerHTML=x;
+	v=jQuery.parseJSON(x);
+	
+	//document.getElementById("d1").innerHTML=v.videos[3].video_id;
+		for(var i=0;i<v.videos.length-1;i++)
+		{
+			if(v.videos[i].category=="newest")
+			{
+				newest.push(v.videos[i]);
+			}
+			if(v.videos[i].category=="popular")
+			{
+				popular.push(v.videos[i]);
+			}
+			if(v.videos[i].category=="classic")
+			{
+				classic.push(v.videos[i]);
+			}
+			
+		}//assign videos to 3 categories
+
+    }
+    
+    if(newest.length>0)
+	{ 	
+		
+		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
+		
+		for(var i=1;i<newest.length;i++)
+		{
+			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
+		}
+	}//newest
+
+	if(popular.length>0)
+	{
+		document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
+	
+		for(var i=1;i<popular.length;i++)
+		{
+			document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
+		}
+	}//popular
+
+	if(classic.length>0)
+	{
+		document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
+		for(var i=1;i<classic.length;i++)
+		{
+			document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
+		}
+	
+	}//classic
+    
+ }
+  
+});
+
+
+
+
+
+</script>
 			</div>
 		
     </body>
