@@ -45,7 +45,31 @@ function onDeviceReady() {
       <div data-role="content" data-theme="a">
       
       <div data-role="footer" >
-			
+		<div>
+				
+			<label>Select sorting type</label>
+             <select id = "myList">
+               <option value = "1" onclick="getData()">new release</option>
+               <option value = "2">popular</option>
+               <option value = "3">all</option>
+               <option value = "4">type4</option>
+             </select>
+           <input id="search" type="text" placeholder="Search Key Word" onfocus="clearThis(this)"><br />
+	 </div>
+	<div id="div1" style="display: ;">
+		<div id="av">All Videos</div><br>
+	</div>
+	
+	<div id="div2" style="display: none;">
+		<div id="intro"> Newest Movies</div><br>
+	</div>
+	
+	<div id="div3" style="display: none;">
+		<div id="intro"> Classic Movies</div><br>
+	</div>
+	
+	<div class="wrap captionfull" id="container" >
+				
 		 <script type="text/javascript">
       function getvar()
       {
@@ -56,136 +80,102 @@ function onDeviceReady() {
       
       
     </script>
-			<div>
-				
-				 <label>Select sorting type</label>
-             <select id = "myList">
-               <option value = "1">new release</option>
-               <option value = "2">popular</option>
-               <option value = "3">all</option>
-               <option value = "4">type4</option>
-             </select>
-           <input id="search" type="text" placeholder="Search Key Word" onfocus="clearThis(this)"><br />
-			</div>
+
 		
 				<script>
-			
-			function getData(){
+				var parameters = location.search.substring(4);
+
+			var videoURL = [];
+			var videoT = [];
+			var videoD = [];
+			var videoI = [];
+			var mtaJSON;
+		
+		   	var vote = false;
+		   	
+			$(document).ready(function() {
+					var xmlhttp;
+					if (window.XMLHttpRequest)
+					{
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttp=new XMLHttpRequest();
+					}
+					else
+					{
+						// code for IE6, IE5
+						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
 				
-					var v;
-	
-	var n=1;
-	
-	var newest=[];
-	var popular=[];
-	var classic=[];
-	
-newestvideos=[1,2,3];
-popularvideos=[4,5,6];
-classicvideos=[7,8,9];
-
-
-
-$(document).ready( function() {
- 
-	var xmlhttp;
-	
-	
-
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-
-xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
-xmlhttp.send();
-xmlhttp.onreadystatechange=function(){
-  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-		
-	
-	var x=xmlhttp.responseText;
-	//document.getElementById("d1").innerHTML=x;
-	v=jQuery.parseJSON(x);
-	
-	//document.getElementById("d1").innerHTML=v.videos[3].video_id;
-		for(var i=0;i<v.videos.length-1;i++)
-		{
-			if(v.videos[i].category=="newest")
-			{
-				newest.push(v.videos[i]);
-			}
-			if(v.videos[i].category=="popular")
-			{
-				popular.push(v.videos[i]);
-			}
-			if(v.videos[i].category=="classic")
-			{
-				classic.push(v.videos[i]);
-			}
-			
-		}//assign videos to 3 categories
-
-    }
-    
-    if(newest.length>0)
-	{ 	
-		
-		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
-		
-		for(var i=1;i<newest.length;i++)
-		{
-			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
-		}
-	}//newest
-
-	if(popular.length>0)
-	{
-		document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
-	
-		for(var i=1;i<popular.length;i++)
-		{
-			document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
-		}
-	}//popular
-
-	if(classic.length>0)
-	{
-		document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
-		for(var i=1;i<classic.length;i++)
-		{
-			document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
-		}
-	
-	}//classic
-    
- }
-		});		
-			}
-			
-			
-	
-function outputTable(arr){
+					xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+					xmlhttp.send();
+					var counter =0;
+					xmlhttp.onreadystatechange=function()
+			  		{
+			  			if (xmlhttp.readyState==4 || xmlhttp.status==200)
+					    {
+							var getJSON=xmlhttp.responseText;
+						
+							mtaJSON=jQuery.parseJSON(getJSON);
+							
+							for(var i=0;i<mtaJSON.videos.length-1;i+=2)
+							{
+								
+								videoURL[i+1] = mtaJSON.videos[i].url;
+								videoT[i+1] = mtaJSON.videos[i].title;
+								videoD[i+1] = mtaJSON.videos[i].description;
+								
+								function searchFunction()
+								{
+								//if()
+								//{
+									document.getElementById("av").innerHTML+="<br /><a href=''><img src='image/"+mtaJSON.videos[counter].video_id+".jpg'></a>"+mtaJSON.videos[counter].title+ "<br />";
+									
+									if(i < (mtaJSON.videos.length-2))
+									{
+										counter++;
+									}
+								}
+								//}
+								
+							}//get video id
+					  	}
+					  	
+					  	
+					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
+						
+						//var basUrl = videoURL[videoID];
+						//var finalUrl = "videoPlayer.html?id=" + baseUrl;e
+						
+						//document.getElementById("imageClick").innerHTML="<input type='image' src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'>";
+					  	
+					}		    
+				}
+			);	
+function outputTable(){
+			/*
 			document.write('<table border="1" cellspacing="1" cellpadding="5">')
 
 			for(i = 0; i < arr.length; i++){
   				 document.write('<tr>')
   			 for (j = 0; j < 3; j++){
   	  			  document.write('<td>row ' + i + ', column ' + j + '</td>')
+  	  			  
   				 }
   				 document.write('</tr>')
 				}
 
-			document.write('</table>')
+			document.write('</table>')*/
+					document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
+		
+		for(var i=1;i<newest.length;i++)
+		{
+			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
+		}
 }
 				</script>
 				
 
 			</div>
-		
-    </body>
+       
+</div>    </body>
 </html>
