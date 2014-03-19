@@ -21,41 +21,41 @@
             // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
             document.addEventListener("deviceready", onDeviceReady, false);
 
+            // Adding the back button listener
             function onDeviceReady() {
                 navigator.splashscreen.hide();
-                document.addEventListener("backbutton", onBackClickEvent, false); // Adding the back button listener    
+                document.addEventListener("backbutton", onBackClickEvent, false);     
             }
 
+            // Redirect to other page
             function goTo(url){
                 window.location.href=url;
             }
         </script>
         <script>
-            var users;
-            
+            //var users;
+
             $(document).ready(function(){
                 $("#login").click(function(){
+                    
+                    var email=$("#email").val();                        
+                    var password=$("#password").val();
+                    
                     $.ajax({
-                        url:"http://remoteriver.eicp.net/trailercollection/userinfo.php",
-                        type:"get",
+                        
+                        url: "login.php",
+                        type:"POST",
+                        data: {email: email, password: password},
                         dataType:"json"
-                    })
-                    .done(function(data){
-                        var email=$("#email").val();                        
-                        var password=$("#password").val();
-
-                        for(var i = 0; i < data.users.length; i++)
-                        {
-                            if(email == data.users[i].email)
-                            {
-                                if(password = data.users[i].password)
-                                {
-                                    $(location).attr('href','videolist.html');
-                                }
+                    }).done(function(data){
+                            if(data=="OK"){
+                                $(location).attr('href','videolist.html');
+                            }else{
+                                alert("Try Again!");
                             }
-                        }
+                            
                     });
-              });    
+                });    
             });
             
             
@@ -69,7 +69,7 @@
 			<div data-role="content" data-theme="a">
                 <form method="post">
                     Email: <input id="email" type="text" name="username"><br>
-                    Password: <input id="password" type="text" name="password"><br>
+                    Password: <input id="password" type="password" name="password"><br>
                     <input id="login" type="button" value="Login" >
                      <input type="button" value="Guest" onClick="goTo('videolist.html')">
                     <input type="button" value="Register" onClick="goTo('registration.html')">
