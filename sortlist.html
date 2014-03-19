@@ -70,26 +70,9 @@ function onDeviceReady() {
 		
 				<script>
 			
-	
-
-		document.write('<table border="1" cellspacing="1" cellpadding="5">')
-
-	for(i = 0; i < 5; i++){
-   document.write('<tr>')
-   for (j = 0; j < 3; j++){
-      document.write('<td>row ' + i + ', column ' + j + '</td>')
-   }
-   document.write('</tr>')
-}
-
-document.write('</table>')
-
-
-				</script>
+			function getData(){
 				
-				 <script>
-    
-	var v;
+					var v;
 	
 	var n=1;
 	
@@ -181,14 +164,27 @@ xmlhttp.onreadystatechange=function(){
 	}//classic
     
  }
-  
-});
+		});		
+			}
+			
+			
+	
+function outputTable(arr){
+			document.write('<table border="1" cellspacing="1" cellpadding="5">')
 
+			for(i = 0; i < arr.length; i++){
+  				 document.write('<tr>')
+  			 for (j = 0; j < 3; j++){
+  	  			  document.write('<td>row ' + i + ', column ' + j + '</td>')
+  				 }
+  				 document.write('</tr>')
+				}
 
+			document.write('</table>')
+}
+				</script>
+				
 
-
-
-</script>
 			</div>
 		
     </body>
