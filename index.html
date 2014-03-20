@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-   
         <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>WELCOME!</title>
@@ -9,31 +8,24 @@
 		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-       
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-
-      
     </head>
-    
-    <body onload="goToLogin()">
+    <body onload="goToHome()">
         <div >
             <img id="pic" src="image/splash1.jpg"/>
         </div>
           <script>
-		
-		
-  var wh = $(window).height();
-  var ww = $(window).width();
-  $('#pic').height(wh); // body height = window height
-  $('#pic').width(ww);
+              var wh = $(window).height();
+              var ww = $(window).width();
+              $('#pic').height(wh); // body height = window height
+              $('#pic').width(ww);
 
-
-            function goToLogin(){
-                window.setTimeout("redirect()", 2000);
+            function goToHome(){
+                window.setTimeout("redirect()", 3000);
             }
             
             function redirect(){
-                window.location="login.html";
+                window.location="videolist.html";
             }
         </script>
     </body>
