@@ -4,10 +4,18 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Trailer Collection</title>
-		<link rel="stylesheet" href="CSS/theme1.min.css" />
+		<!-- <link rel="stylesheet" href="CSS/theme1.min.css" /> -->
 		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+		
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		
+	
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+		
 	  	<script type="text/javascript">
 		    $(document).bind("mobileinit", function() {
 		        $.support.cors = true;
@@ -33,9 +41,10 @@
 	</head>
 	<body>
 		<div data-role="header" data-position="fixed">
+			<a href="UserSetting.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"/></a> 
 			<h1>Search</h1>
-			<a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
-		</div><!-- /header -->   
+			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
+      	</div> 
 		
 		<div data-role="content" data-theme="a">
 			<div>				
@@ -69,16 +78,9 @@
 					
 					var searchValue = "";
 					var ct = 0;
-					
-					
-					var timer = setInterval(counterFunction,150);
-					
-					
-					//function clearTimer()
-					//{
-						//clearInterval(timer);
-					//}
-					
+							
+					var timer = setInterval(counterFunction,200);
+							
 					function counterFunction()
 					{
 						ct++;
@@ -166,7 +168,7 @@
 											//}
 											
 											
-											if(i < (mtaJSON.videos.length-2))
+											if(i <= (mtaJSON.videos.length-2))
 											{
 												counter++;
 											}
