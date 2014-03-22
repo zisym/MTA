@@ -41,7 +41,7 @@
 	</head>
 	<body>
 		<div data-role="header" data-position="fixed">
-			<a href="UserSetting.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"/></a> 
+			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1>Search</h1>
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div> 
@@ -178,6 +178,10 @@
 							}
 						);
 					}
+					 function goBack()
+  {
+  window.history.back()
+  }
 				</script>
 			</div>
 		</div>    
