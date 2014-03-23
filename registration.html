@@ -1,25 +1,50 @@
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Registration</title>
-		 
-		 
-		<link rel="stylesheet" href="CSS/theme1.min.css" />
-		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
-		
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-		<script src="js/jqm.page.params.js"></script> 
-		<style type="text/css">
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript">
+            $(document).bind(
+                "mobileinit", function() {
+                    $.support.cors = true;
+                    $.mobile.allowCrossDomainPages = true;
+                }
+            );
 
-		</style>
-		 
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // Adding the back button listener
+            function onDeviceReady() {
+                navigator.splashscreen.hide();
+                document.addEventListener("backbutton", onBackClickEvent, false);     
+            }
+            
+            function goBack()
+            {
+                window.history.back();
+            }
+        </script>
 	</head>
 	<body>
+        <!-- HEADER START -->
+        <div data-role="header" data-position="fixed">
+            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+            <h1>Registration</h1>
+       </div>
+        <!-- HEADER END -->
+        
+        <!-- 
 	 	<div data-role="header" data-position="inline">
 				<h1>Registration</h1>
-		</div>
+		</div> -->
 	 	<div style="padding:10px;">
 			<form name="registration" method="post" action="http://remoteriver.eicp.net/trailercollection/registration.php">
 				First name:<input type="text" name="btnFName" />
@@ -30,9 +55,10 @@
 				<input type="submit" name="btnSubmit" value="Register" />
 			</form>
 
-			<input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" />
+			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
 
 		</div>
+    <!--
 		<script>
 			var prevURL = document.URL;
 			function redirectBackToLogin()
@@ -40,5 +66,6 @@
 				window.location.replace(prevURL.substring(0, prevURL.length - 17) + "login.html");
 			}
 		</script>
+-->
 	</body>
 </html>
