@@ -59,6 +59,9 @@
  <div data-role="popup" id="nullpassword">
 	<p>Please type your password.<p>
 </div>
+<div data-role="popup" id="nullusername">
+	<p>Please type a valid email address.<p>
+</div>
 			</form>
 
 			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
@@ -69,6 +72,14 @@
 		{
 			var x=document.forms["registration"]["btnPassword"].value;
 			var y=document.forms["registration"]["btnRetypePassword"].value;
+			var z=document.forms["registration"]["btnEmail"].value;
+			var atpos=z.indexOf("@");
+var dotpos=z.lastIndexOf(".");
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
+			{
+			$( "#nullusername" ).popup( "open" );
+			return false;
+			}
 			if(x==null || x=="")
 			{
 			$( "#nullpassword" ).popup( "open" );
