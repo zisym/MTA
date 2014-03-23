@@ -25,12 +25,13 @@
         
           <script>
 		  
-              var wh = $(window).height();
+             
+
+            function goToHome(){
+				 var wh = $(window).height();
               var ww = $(window).width();
               $('#pic').height(wh); // body height = window height
               $('#pic').width(ww);
-
-            function goToHome(){
                 window.setTimeout("redirect()", 3000);
             }
             
