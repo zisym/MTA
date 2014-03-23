@@ -32,10 +32,14 @@
             function goTo(url){
                 window.location.href=url;
             }
+            
+            // Back button
+            function goBack()
+            {
+                window.history.back();
+            }
         </script>
         <script>
-            //var users;
-
             $(document).ready(function(){
                 $("#login").click(function(){
                     
@@ -58,26 +62,24 @@
                     });
                 });    
             });
-            
-            
         </script>
 	</head>
 	<body id="loginForm">
-		<div data-role="page" data-theme="a">
-			<div data-role="header" data-position="inline">
-				<h1>Login</h1>
-			</div>
-			<div data-role="content" data-theme="a">
-                <form method="post">
-                    Email: <input id="email" type="text" name="username"><br>
-                    Password: <input id="password" type="password" name="password"><br>
-                    <input id="login" type="button" value="Login" >
-                     <input type="button" value="Guest" onClick="goTo('videolist.html')">
-                    <input type="button" value="Register" onClick="goTo('registration.html')">
-                    <!-- <input type="button" value="Forgot Password?" onClick="goTo('recoveryPage.html')"> -->
-                </form>
-			</div>
-            <div id="list"></div>
-		</div>
+        <!--HEADER START -->
+        <div data-role="header" data-position="fixed">
+            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+            <h1>Login</h1>
+        </div>
+        <!-- HEADER END -->
+        
+        <div data-role="content" data-theme="a">
+            <form method="post">
+                Email: <input id="email" type="text" name="username"><br>
+                Password: <input id="password" type="password" name="password"><br>
+                <input id="login" type="button" value="Login" >
+                <input type="button" value="Guest" onClick="goTo('videolist.html')">
+                <input type="button" value="Register" onClick="goTo('registration.html')">
+            </form>
+        </div>
 	</body>
 </html>
