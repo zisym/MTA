@@ -9,12 +9,22 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <style>
+		#pic{
+		 background-image:url(image/splash1.jpg);
+			background-size:100% 100%;
+			background-repeat:no-repeat;
+		}
+		
+		</style>
     </head>
     <body onload="goToHome()">
-        <div >
-            <img id="pic" src="image/splash1.jpg" width="100%"/>
+        <div id="pic" >
         </div>
+           <!-- <img id="pic" src="image/splash1.jpg" style="width:100%; margin:0px;"/> -->
+        
           <script>
+		  
               var wh = $(window).height();
               var ww = $(window).width();
               $('#pic').height(wh); // body height = window height
@@ -26,7 +36,7 @@
             
             function redirect(){
                 window.location="videolist.html";
-            }
+            } 
         </script>
     </body>
 </html>
