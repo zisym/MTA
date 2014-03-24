@@ -48,10 +48,12 @@
             
             function isLoggedin()
             {
+                alert("test");
                 var optionButton = document.getElementById("optionButton");
                 var loginButton = document.getElementById("loginButton");
                 
                 var login = getCookie("isUserLoggedin");
+                alert(login);
                 if(login=="OK"){
                     optionButton.style.visibility='visible';
                     loginButton.style.visibility='hidden';
