@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Login Page</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+        <script type="text/javascript">
+            $(document).bind(
+                "mobileinit", function() {
+                    $.support.cors = true;
+                    $.mobile.allowCrossDomainPages = true;
+                }
+            );
+
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // Adding the back button listener
+            function onDeviceReady() {
+                navigator.splashscreen.hide();
+                document.addEventListener("backbutton", onBackClickEvent, false);     
+            }
+
+            // Redirect to other page
+            function goTo(url){
+                window.location.href=url;
+            }
+            
+            // Back button
+            function goBack()
+            {
+                window.history.back();
+            }
+        </script>
+        <script>
+            alert("Blah");
+            $(document).ready(function(){
+                $("#login").click(function(){
+                    
+                    var email=$("#email").val();                        
+                    var password=$("#password").val();
+                    
+                    $.ajax({
+                        
+                        url: "login.php",
+                        type:"POST",
+                        data: {email: email, password: password},
+                        dataType:"json"
+                    }).done(function(data){
+                            if(data=="OK"){
+                                document.cookie="isUserLoggedin="+data+"; expires=18 Dec 2014 12:00:00 GMT; path=/"; // Set a cookie as "OK"
+                                alert(document.cookie);
+                                $(location).attr('href','sample.html');
+                            }else{
+                                alert("Try Again!");
+                            }
+                            
+                    });
+                });    
+            });
+        </script>
+	</head>
+	<body id="loginForm">
+        <!--HEADER START -->
+        <div data-role="header" data-position="fixed">
+            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+            <h1>Login</h1>
+        </div>
+        <!-- HEADER END -->
+        
+        <div data-role="content" data-theme="a">
+            <form method="post">
+                Email: <input id="email" type="text" name="username"><br>
+                Password: <input id="password" type="password" name="password"><br>
+                <input id="login" type="button" value="Login" >
+                <input type="button" value="Guest" onClick="goTo('sample.html')">
+                <input type="button" value="Register" onClick="goTo('registration.html')">
+            </form>
+        </div>
+	</body>
+</html>
