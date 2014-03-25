@@ -2,22 +2,16 @@
 <!-- saved from url=(0058)file:///C:/Users/TASH/Desktop/videos-pack/mobile/test.html -->
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>MTA Trailer Collection</title>
 		<meta charset="utf-8">
-		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Video Page</title>
-
 		<link rel="stylesheet" href="themes/Black_MC.min.css" />
 		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-		
-	
-		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-		<script src="js/jqm.page.params.js"></script> 
-		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
 		
 		<style>
 			.vendor {
@@ -45,11 +39,14 @@
         </style>
 	</head>
 	<body>
+        <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1>Video Page</h1>
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div>
+        <!--HEADER END -->
+
 	
 	 	<div style="padding: 10px; color: lavender;">
         	<div style="background-color:dimgray;padding: 10px; border:groove;">
@@ -91,9 +88,9 @@
 		</div>
 
 		
-		<!-- START GET JSON -->
-		<script>
 		
+		<script>
+		  // START GET JSON
 			var parameters = location.search.substring(4);
 
 			var videoURL = [];
@@ -210,11 +207,14 @@
 		    		document.getElementById('rating').style.color = "White";
 		    	}
 	       }
+            
 		   function goBack()
-  {
-  window.history.back()
-  }
+            {
+              window.history.back()
+            }
+            
+            //END SCRIPT FUNCTIONS
 	    </script>
-	    <!-- END SCRIPT FUNCTIONS -->
+	    
 	</body>
 </html>

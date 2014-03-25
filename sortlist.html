@@ -3,49 +3,51 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Trailer Collection</title>
-		<!-- <link rel="stylesheet" href="CSS/theme1.min.css" /> -->
-		<link rel="stylesheet" href="CSS/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
-		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-		
+		<title>Login Page</title>
 		<link rel="stylesheet" href="themes/Black_MC.min.css" />
 		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-		
-	
-		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" /> 
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-		
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
 	  	<script type="text/javascript">
 		    $(document).bind("mobileinit", function() {
 		        $.support.cors = true;
 		        $.mobile.allowCrossDomainPages = true;
 		    });
-		</script>
-		<script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-	    <script type="text/javascript">
-		// Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
 		    document.addEventListener("deviceready", onDeviceReady, false);
-			function onDeviceReady() {
+			
+            // Adding the back button listener
+            function onDeviceReady() 
+            {
 		        navigator.splashscreen.hide();
-		
-		        document.addEventListener("backbutton", onBackClickEvent, false); // Adding the back button listener    
-		
+		        document.addEventListener("backbutton", onBackClickEvent, false); 
 		    }
-		</script>
-		<script>
-	        function goTo(url){
+
+	        function goTo(url)
+            {
 	            window.location.href=url+"";
 	        }
+            
+            // Back button
+            function goBack()
+            {
+                window.history.back();
+            }
 		</script>
 	</head>
 	<body>
+        <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1>Search</h1>
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div> 
-		
+        <!--HEADER END -->
+
 		<div data-role="content" data-theme="a">
 			<div>				
 				<label>Search</label>
@@ -178,10 +180,6 @@
 							}
 						);
 					}
-					 function goBack()
-  {
-  window.history.back()
-  }
 				</script>
 			</div>
 		</div>    

@@ -6,8 +6,8 @@
 		<link rel="stylesheet" href="themes/Black_MC.min.css" />
 		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="js/jqm.page.params.js"></script> 
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
         <script type="text/javascript">
@@ -41,10 +41,7 @@
        </div>
         <!-- HEADER END -->
         
-        <!-- 
-	 	<div data-role="header" data-position="inline">
-				<h1>Registration</h1>
-		</div> -->
+
 	 	<div style="padding:10px;">
 			<form name="registration" onsubmit="return validateForm()" method="post" action="http://remoteriver.eicp.net/trailercollection/registration.php">
 				First name:<input type="text" name="btnFName" />
@@ -53,45 +50,49 @@
 				Password: <input type="password" name="btnPassword"/>
 				Re-Type Password: <input type="password" name="btnRetypePassword"/>
 				<input type="submit"  name="btnSubmit" value="Register" />
+                
+                <!-- MESSAGE START -->
                 <div data-role="popup" id="popupBasic">
-	<p>Your password doesn't match, please retype it.<p>
-</div>
- <div data-role="popup" id="nullpassword">
-	<p>Please type your password.<p>
-</div>
-<div data-role="popup" id="nullusername">
-	<p>Please type a valid email address.<p>
-</div>
+                    <p>Your password doesn't match, please retype it.<p>
+                </div>
+                <div data-role="popup" id="nullpassword">
+                    <p>Please type your password.<p>
+                </div>
+                <div data-role="popup" id="nullusername">
+                    <p>Please type a valid email address.<p>
+                </div>
+                 <!-- MESSAGE END -->
 			</form>
 
 			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
-
 		</div>
         <script>
-		function validateForm()
-		{
-			var x=document.forms["registration"]["btnPassword"].value;
-			var y=document.forms["registration"]["btnRetypePassword"].value;
-			var z=document.forms["registration"]["btnEmail"].value;
-			var atpos=z.indexOf("@");
-var dotpos=z.lastIndexOf(".");
-if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
-			{
-			$( "#nullusername" ).popup( "open" );
-			return false;
-			}
-			if(x==null || x=="")
-			{
-			$( "#nullpassword" ).popup( "open" );
-			return false;
-			}
-			if(x!=y)
-			{
-			$( "#popupBasic" ).popup( "open" );
-			return false;
-			}
-			
-		}
+            function validateForm()
+            {
+                var x=document.forms["registration"]["btnPassword"].value;
+                var y=document.forms["registration"]["btnRetypePassword"].value;
+                var z=document.forms["registration"]["btnEmail"].value;
+                var atpos=z.indexOf("@");
+                var dotpos=z.lastIndexOf(".");
+                
+                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
+                {
+                    $( "#nullusername" ).popup( "open" );
+                    return false;
+                }
+                
+                if(x==null || x=="")
+                {
+                    $( "#nullpassword" ).popup( "open" );
+                    return false;
+                }
+                
+                if(x!=y)
+                {
+                    $( "#popupBasic" ).popup( "open" );
+                    return false;
+                }
+            }
 		</script>
     <!--
 		<script>

@@ -12,37 +12,29 @@
          
     </head>
     <body style="margin:0px" onload="goToHome()">
-       
-           <img id="pic" src="image/splash1.jpg" style=" width: 100%;
-    height: 100%"/> 
+        <img id="pic" src="image/splash1.jpg" style=" width: 100%; height: 100%"/> 
            
-         <script>
-		 window.setTimeout("redirect()", 3000);
-		 document.addEventListener("deviceready", onDeviceReady, false);
+        <script>
+             window.setTimeout("redirect()", 3000);
+             document.addEventListener("deviceready", onDeviceReady, false);
 
-function onDeviceReady() {
-    // Now safe to use the PhoneGap API
-	 var wh = $(window).height();
-              var ww = $(window).width();
-              $('#pic').height(wh); // body height = window height
-              $('#pic').width(ww);
-			  
-}
+             function onDeviceReady() {
+                 var wh = $(window).height();
+                  var ww = $(window).width();
+                  $('#pic').height(wh); // body height = window height
+                  $('#pic').width(ww);
+			  }
 		  
-             
-
             function goToHome(){
 				 var wh = $(window).height();
-              var ww = $(window).width();
-              $('#pic').height(wh); // body height = window height
-              $('#pic').width(ww);
-               
+                  var ww = $(window).width();
+                  $('#pic').height(wh); // body height = window height
+                  $('#pic').width(ww);
             }
             
             function redirect(){
                 window.location="videolist.html";
             } 
         </script>
-        
     </body>
 </html>
