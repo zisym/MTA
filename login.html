@@ -7,8 +7,9 @@
 		<link rel="stylesheet" href="themes/Black_MC.min.css" />
 		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="js/jqm.page.params.js"></script> 
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
         <script type="text/javascript">
@@ -39,30 +40,7 @@
                 window.history.back();
             }
         </script>
-        <script>
-            $(document).ready(function(){
-                $("#login").click(function(){
-                    
-                    var email=$("#email").val();                        
-                    var password=$("#password").val();
-                    
-                    $.ajax({
-                        
-                        url: "login.php",
-                        type:"POST",
-                        data: {email: email, password: password},
-                        dataType:"json"
-                    }).done(function(data){
-                            if(data=="OK"){
-                                $(location).attr('href','videolist.html');
-                            }else{
-                                alert("Try Again!");
-                            }
-                            
-                    });
-                });    
-            });
-        </script>
+        
 	</head>
 	<body id="loginForm">
         <!--HEADER START -->
@@ -81,5 +59,28 @@
                 <input type="button" value="Register" onClick="goTo('registration.html')">
             </form>
         </div>
+        <script>
+            
+            $(document).ready(function(){
+                alert("Loaded");
+                $("#login").click(function(){
+                    var email=$("#email").val();                        
+                    var password=$("#password").val();
+                    
+                    $.ajax({
+                        url: "login.php",
+                        type:"POST",
+                        data: {email: email, password: password},
+                        dataType:"json"
+                    }).done(function(data){
+                            if(data=="OK"){
+                                $(location).attr('href','videolist.html');
+                            }else{
+                                alert("Try Again!");
+                            }
+                    });
+                });    
+            });
+        </script>
 	</body>
 </html>
