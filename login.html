@@ -29,10 +29,7 @@
                 document.addEventListener("backbutton", onBackClickEvent, false);     
             }
 
-            // Redirect to other page
-            function goTo(url){
-                window.location.href=url;
-            }
+            
             
             // Back button
             function goBack()
@@ -55,14 +52,13 @@
                 Email: <input id="email" type="text" name="username"><br>
                 Password: <input id="password" type="password" name="password"><br>
                 <input id="login" type="button" value="Login" >
-                <input type="button" value="Guest" onClick="goTo('videolist.html')">
-                <input type="button" value="Register" onClick="goTo('registration.html')">
+                <!-- <input id="guest" type="button" value="Guest" onClick="goTo('videolist.html')"> -->
+                <input id="register" type="button" value="Register" >
             </form>
         </div>
         <script>
             
             $(document).ready(function(){
-                alert("Loaded");
                 $("#login").click(function(){
                     var email=$("#email").val();                        
                     var password=$("#password").val();
@@ -81,6 +77,13 @@
                     });
                 });    
             });
+            
+            $(document).ready(function(){
+                $("#register").click(function(){
+                    window.location.href="registration.html";
+                });
+            });
+            
         </script>
 	</body>
 </html>
