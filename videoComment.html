@@ -74,9 +74,12 @@
 		  	</div>
 	  	</div>
 	  	
-    	<form name="myform" style="margin-top:-18px; background-color: dimgray;"><hr />
-	      <textarea class="inputComments" name="inputbox" placeholder="Enter comment here"></textarea>
-	      <input type="button" name="button" value="Comment" onClick="addtext()">
+    	<form name="commentForm" style="margin-top:-18px; background-color: dimgray;" method="post" action="http://remoteriver.eicp.net/trailercollection/comment.php"><hr />
+	      <textarea class="inputComments" name="comment" placeholder="Enter comment here"></textarea>
+		  <input id="userID" type="hidden" name="userID" value="">
+		  <input id="videoID" type="hidden" name="videoID" value="">
+		  <input id="pd" type="hidden" name="pd" value="">
+	      <input type="submit" name="btnSubmit" value="Comment">
 	    </form>
 	    
 
@@ -85,8 +88,6 @@
 			</div>
 		</div>
 
-		
-		
 		<script>
 		  // START GET JSON
 			var parameters = location.search.substring(4);
@@ -137,10 +138,13 @@
 					  
 					  	document.getElementById('like').innerHTML = numLike;
 					  	document.getElementById('dislike').innerHTML = numDislike;
-					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
+					 
 						
 						var baseUrl = videoURL[videoID];
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
+				
+						document.getElementById("userID").value=1;
+						document.getElementById("videoID").value=mtaJSON.videos[videoID].video_id;
 						
 						//document.getElementById("imageClick").innerHTML="<input type='image' src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'>";
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
@@ -157,7 +161,7 @@
 		    function addtext()
 		    {
 		    	newtext = newtext + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
-		    	document.myform.inputbox.value + "<hr /></div>";
+		    	document.myform.comment.value + "<hr /></div>";
 		    	
 		    	document.getElementById('returnValue').innerHTML = newtext;
 	    	}
@@ -186,10 +190,7 @@
 		    		vote = true;
 	    		}
 	    	}
-	    	
-
-	    	
-	    	
+	    
 			function changeRatingColor()
 			{
 		    	if(num > 0)
