@@ -1,91 +1,164 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html>
 <!-- saved from url=(0058)file:///C:/Users/TASH/Desktop/videos-pack/mobile/test.html -->
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>MTA Trailer Collection</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Video Page</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+		
 		<style>
-        	body {
-				background-color: #666;
-        	}
-
-			.container {
-				width: 100%;
-			}
 			.vendor {
+				margin-top: 0px;
+				border:groove;
 				padding: 1%;
-				background: #d1eed1;
-				margin-bottom: 1em;
+				/*background-color: lightgrey;*/
+				
 			}
 			.inputComments {
 				width: 100%; !important
 			}
 			.btnRate {
-				width: 50px;
-				height: 25px;
+				width: 50px; !important
+				height: 25px; !important
 			}
-			.div_rating {
-				margin-top: -15px;
-				padding: 10px;
-				background-color: #000000;
-				
+			a:hover img
+			{
+				box-shadow: 4px 4px 10px #000000;
+				background:rgba(0,0,0,.75);
+              	opacity:0.75;
+               -webkit-transition: opacity .25s ease;
 			}
+			
         </style>
 	</head>
 	<body>
-	<h1 align="center">Video Comment Page</h1>
-	 	<div class="container">
-        	<div class="vendor">
+        <!--HEADER START -->
+		<div data-role="header" data-position="fixed">
+			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+			<h1>Video Page</h1>
+			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
+      	</div>
+        <!--HEADER END -->
+
+	
+	 	<div style="padding: 10px; color: lavender;">
+        	<div style="background-color:dimgray;padding: 10px; border:groove;">
         		<!--<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
             	allowfullscreen=""></iframe><br /> 
-            	
-            		<a href="videoPlayer.html">
-            			<image src='image/babyjesusisborn.jpg' alt='babyjesus' width="100%" height="200px" />
-            		</a>
             	-->
-            	
-            	<form name="videoForm" method="get" action="videoPlayer.html">
-            		<input type="hidden" name="hiddenInput" value="29kERg4T9Vc">
-					<input type="image" src='image/babyjesusisborn.jpg' width="100%" height="200px">
-            	</form>
-            	
-            	
-            	<p>baby jesus is born. Tashana William's video choice of the month!<p>
+            	<div class="iv" id="imageClick">
+				</div>
+				
+				<h3 id="videoTitle"></h3>
+				<hr />
+            	<p id="videoDescription"><p>
             </div>
     	</div>
     	
-    	<div class="div_rating" align="center">
-	    	<input class="btnRate" id="rateUp" type="button" value="Up" onClick="rateUp()">
-		    <input class="btnRate" id="rateDown" type="button" value="Down" onClick="rateDown()">
-		  	<label id="rating"></label><br />
+    	<div style="padding:10px;">
+    		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
+		    	<div style="width: 45%; height:40%;">
+			    	<input id="rateUp" type="button" value="Up" onClick="rateUp()">
+			  	</div>
+			  	<div style="width: 45%; height:40%; margin-left:150px; margin-top: -62px;">
+				    <input id="rateDown" type="button" value="Down" onClick="rateDown()">
+			  	</div>
+			  	<div>
+  					<label id="rating" style="font-size: 20px;" align="center"></label>
+	  			</div>
+		  	</div>
 	  	</div>
 	  	
-	  	
-    	<form name="myform">Comment: <br />
-	      <textarea class="inputComments" name="inputbox"></textarea>
-	      <input type="button" name="button" value="Check" onClick="addtext()">
+    	<form name="myform" style="margin-top:-18px; background-color: dimgray;"><hr />
+	      <textarea class="inputComments" name="inputbox" placeholder="Enter comment here"></textarea>
+	      <input type="button" name="button" value="Comment" onClick="addtext()">
 	    </form>
 	    
 
-	    
-		<div class="container">
-	        <div>
-	        	<div id=returnValue>
-		    	</div>
+	     <div style="padding: 10px;">
+			<div id=returnValue>
 			</div>
 		</div>
+
 		
-		<script type="text/javascript">
-		   	var newtext = "";
+		
+		<script>
+		  // START GET JSON
+			var parameters = location.search.substring(4);
+
+			var videoURL = [];
+			var videoT = [];
+			var videoD = [];
+			var mtaJSON;
+			
+			var newtext = "";
 		   	var num = 43;
+		   	
+		   	var videoID = parameters;
 		   	var vote = false;
 		   	
-		   	
-		   	document.getElementById('rating').innerHTML = num;
-	  	
+			$(document).ready(function() {
+					var xmlhttp;
+					if (window.XMLHttpRequest)
+					{
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttp=new XMLHttpRequest();
+					}
+					else
+					{
+						// code for IE6, IE5
+						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+				
+					xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+					xmlhttp.send();
+					
+					xmlhttp.onreadystatechange=function()
+			  		{
+			  			if (xmlhttp.readyState==4 || xmlhttp.status==200)
+					    {
+							var getJSON=xmlhttp.responseText;
+						
+							mtaJSON=jQuery.parseJSON(getJSON);
+							
+							for(var i=0;i<mtaJSON.videos.length-1;i++)
+							{
+								videoURL[i+1] = mtaJSON.videos[i].url;
+								videoT[i+1] = mtaJSON.videos[i].title;
+								videoD[i+1] = mtaJSON.videos[i].description;
+							}//get video ids
+					  	}
+					  	
+					  	
+					  	document.getElementById('rating').innerHTML = "Rating<br />" + num;
+					  	
+					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
+						
+						var baseUrl = videoURL[videoID];
+						var finalUrl = "videoPlayer.html?id=" + baseUrl;
+						
+						//document.getElementById("imageClick").innerHTML="<input type='image' src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'>";
+						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
+					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
+					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
+					  	
+					}		    
+				}
+			);
+		//END GET JSON
+		
+		//START SCRIPT FUNCTIONS
+		
 		    function addtext()
 		    {
-		    	newtext = newtext + "<div class='vendor'><span style='color:purple;'>Tashana:</span><hr />" + 
+		    	newtext = newtext + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
 		    	document.myform.inputbox.value + "<hr /></div>";
 		    	
 		    	document.getElementById('returnValue').innerHTML = newtext;
@@ -97,7 +170,7 @@
 	    		if(vote == false)
 	    		{
 		    		num = num + 1;
-		    		document.getElementById('rating').innerHTML = num;
+		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
 		    		changeRatingColor();
 		    		document.getElementById('rateUp').style.background = "Green";
 		    		vote = true;
@@ -109,15 +182,14 @@
 	    		if(vote == false)
 	    		{
 		    		num = num - 1;
-		    		document.getElementById('rating').innerHTML = num;
+		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
 		    		changeRatingColor();
 		    		document.getElementById('rateDown').style.background = "Red";
 		    		vote = true;
 	    		}
 	    	}
 	    	
-	    	
-	    	
+
 	    	changeRatingColor();
 	    	
 			function changeRatingColor()
@@ -135,9 +207,14 @@
 		    		document.getElementById('rating').style.color = "White";
 		    	}
 	       }
-
-	    	
-	    	
+            
+		   function goBack()
+            {
+              window.history.back()
+            }
+            
+            //END SCRIPT FUNCTIONS
 	    </script>
+	    
 	</body>
 </html>

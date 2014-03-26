@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -76,3 +77,112 @@
 
 </body>
 </html>
+=======
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Registration</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript">
+            $(document).bind(
+                "mobileinit", function() {
+                    $.support.cors = true;
+                    $.mobile.allowCrossDomainPages = true;
+                }
+            );
+
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // Adding the back button listener
+            function onDeviceReady() {
+                navigator.splashscreen.hide();
+                document.addEventListener("backbutton", onBackClickEvent, false);     
+            }
+            
+            function goBack()
+            {
+                window.history.back();
+            }
+        </script>
+	</head>
+	<body>
+        <!-- HEADER START -->
+        <div data-role="header" data-position="fixed">
+            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onClick="goBack()"/></a> 
+            <h1>Registration</h1>
+       </div>
+        <!-- HEADER END -->
+        
+
+	 	<div style="padding:10px;">
+			<form name="registration" onsubmit="return validateForm()" method="post" action="http://remoteriver.eicp.net/trailercollection/registration.php">
+				First name:<input type="text" name="btnFName" />
+				Last name: <input type="text" name="btnLName" />
+				E-mail: <input type="text" name="btnEmail" />
+				Password: <input type="password" name="btnPassword"/>
+				Re-Type Password: <input type="password" name="btnRetypePassword"/>
+				<input type="submit"  name="btnSubmit" value="Register" />
+                
+                <!-- MESSAGE START -->
+                <div data-role="popup" id="popupBasic">
+                    <p>Your password doesn't match, please retype it.<p>
+                </div>
+                <div data-role="popup" id="nullpassword">
+                    <p>Please type your password.<p>
+                </div>
+                <div data-role="popup" id="nullusername">
+                    <p>Please type a valid email address.<p>
+                </div>
+                 <!-- MESSAGE END -->
+			</form>
+
+			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
+		</div>
+        <script>
+            function validateForm()
+            {
+                var x=document.forms["registration"]["btnPassword"].value;
+                var y=document.forms["registration"]["btnRetypePassword"].value;
+                var z=document.forms["registration"]["btnEmail"].value;
+                var atpos=z.indexOf("@");
+                var dotpos=z.lastIndexOf(".");
+                
+                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
+                {
+                    $( "#nullusername" ).popup( "open" );
+                    return false;
+                }
+                
+                if(x==null || x=="")
+                {
+                    $( "#nullpassword" ).popup( "open" );
+                    return false;
+                }
+                
+                if(x!=y)
+                {
+                    $( "#popupBasic" ).popup( "open" );
+                    return false;
+                }
+            }
+		</script>
+    <!--
+		<script>
+			var prevURL = document.URL;
+			function redirectBackToLogin()
+			{
+				window.location.replace(prevURL.substring(0, prevURL.length - 17) + "login.html");
+			}
+		</script>
+-->
+	</body>
+</html>
+>>>>>>> 611de588288ea21ff4a246aef0cee404da2945d6

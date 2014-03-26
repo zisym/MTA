@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile: Theme Download</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
+        <script>
+            // Back button
+            function goBack()
+            {
+                window.history.back();
+            }
+            
+            function getCookie(cname)
+            {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                var cookie = ca[0].trim();
+                for(var i=0; i<ca.length; i++) 
+                  {
+                  var c = ca[i].trim();
+                  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                  }
+                return "";
+            }
+            
+            function checkCookie()
+            {
+                var userLoggedin=getCookie("isUserLoggedin");
+                if (userLoggedin=="OK")
+                {
+                  alert("You are logged in");
+                    // TODO: function for registered users
+                }
+                else 
+                {
+                    alert("Not logged in");
+                    // TODO: function for guest users
+                }
+            }
+            
+            function isLoggedin()
+            {
+                alert("test");
+                var optionButton = document.getElementById("optionButton");
+                var loginButton = document.getElementById("loginButton");
+                
+                var login = getCookie("isUserLoggedin");
+                alert(login);
+                if(login=="OK"){
+                    optionButton.style.visibility='visible';
+                    loginButton.style.visibility='hidden';
+                }else{
+                    optionButton.style.visibility='hidden';
+                    loginButton.style.visibility='visible';
+                }
+            }
+            
+            //checkCookie();
+
+        </script>  
+	</head>
+	<body onload="isLoggedin()">
+        <div class="screen">
+            <div data-role="page" data-theme="a">
+                <!-- HEADER START -->
+                <div data-role="header" data-position="fixed">
+                    <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a>  
+                    <h1>Sample Page</h1>
+                    <div id="optionButton">
+                        <a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>
+                    </div>
+                    <div id="loginButton">
+                        <a href="login.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Login</a>
+                    </div>
+                </div>
+                <!-- HEADER END -->
+                <!-- CONTENT START -->
+                <div>
+                    <h1>Sample Page</h1>
+                </div>
+                <!-- CONTENT END -->
+
+            </div>
+        </div>
+    </body>
+</html>
+
