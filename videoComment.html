@@ -24,10 +24,6 @@
 			.inputComments {
 				width: 100%; !important
 			}
-			.btnRate {
-				width: 50px; !important
-				height: 25px; !important
-			}
 			a:hover img
 			{
 				box-shadow: 4px 4px 10px #000000;
@@ -64,15 +60,17 @@
     	
     	<div style="padding:10px;">
     		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
-		    	<div style="width: 45%; height:40%;">
-			    	<input id="rateUp" type="button" value="Up" onClick="rateUp()">
+		    	<div>
+					<table>
+						<tr>
+							<td><input id="rateUp" type="image" src="image/like.png" width="75px" height="30px" onClick="rateUp()"></td>
+							<td><label id="like" style="font-size: 14px;"></label></td>
+							<td><input id="rateDown" type="image" src="image/dislike.png" width="75px" height="30px" onClick="rateDown()"></td>
+							<td><label id="dislike" style="font-size: 14px;"></label></td>
+						</tr>
+					</table>
+			   
 			  	</div>
-			  	<div style="width: 45%; height:40%; margin-left:150px; margin-top: -62px;">
-				    <input id="rateDown" type="button" value="Down" onClick="rateDown()">
-			  	</div>
-			  	<div>
-  					<label id="rating" style="font-size: 20px;" align="center"></label>
-	  			</div>
 		  	</div>
 	  	</div>
 	  	
@@ -99,8 +97,9 @@
 			var mtaJSON;
 			
 			var newtext = "";
-		   	var num = 43;
-		   	
+		   	var numLike = 43;
+		   	var numDislike = 40;
+			
 		   	var videoID = parameters;
 		   	var vote = false;
 		   	
@@ -135,10 +134,9 @@
 								videoD[i+1] = mtaJSON.videos[i].description;
 							}//get video ids
 					  	}
-					  	
-					  	
-					  	document.getElementById('rating').innerHTML = "Rating<br />" + num;
-					  	
+					  
+					  	document.getElementById('like').innerHTML = numLike;
+					  	document.getElementById('dislike').innerHTML = numDislike;
 					 	//document.getElementById('rating').innerHTML = videoURL[videoID];
 						
 						var baseUrl = videoURL[videoID];
@@ -163,16 +161,16 @@
 		    	
 		    	document.getElementById('returnValue').innerHTML = newtext;
 	    	}
-	    	
-
+	    	document.getElementById('like').style.color = "Green";
+			document.getElementById('dislike').style.color = "Red";
 		    function rateUp()
 	    	{
 	    		if(vote == false)
 	    		{
-		    		num = num + 1;
-		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
-		    		changeRatingColor();
-		    		document.getElementById('rateUp').style.background = "Green";
+		    		numLike = numLike + 1;
+		    		document.getElementById('like').innerHTML = numLike;
+					
+		    		//document.getElementById('rateUp').style.background = "Green";
 		    		vote = true;
 	    		}
 	    	}
@@ -181,16 +179,16 @@
 	    	{
 	    		if(vote == false)
 	    		{
-		    		num = num - 1;
-		    		document.getElementById('rating').innerHTML = "Rating<br />" + num;
-		    		changeRatingColor();
-		    		document.getElementById('rateDown').style.background = "Red";
+		    		numDislike = numDislike + 1;
+		    		document.getElementById('dislike').innerHTML = numDislike;
+		    		
+		    		//document.getElementById('rateDown').style.background = "Red";
 		    		vote = true;
 	    		}
 	    	}
 	    	
 
-	    	changeRatingColor();
+	    	
 	    	
 			function changeRatingColor()
 			{
