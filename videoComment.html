@@ -61,28 +61,30 @@
     	<div style="padding:10px;">
     		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
 		    	<div>
-					<table>
-						<tr>
-							<td><input id="rateUp" type="image" src="image/like.png" width="75px" height="30px" onClick="rateUp()"></td>
-							<td><label id="like" style="font-size: 14px;"></label></td>
-							<td><input id="rateDown" type="image" src="image/dislike.png" width="75px" height="30px" onClick="rateDown()"></td>
-							<td><label id="dislike" style="font-size: 14px;"></label></td>
-						</tr>
-					</table>
-			   
+		    		<form>
+						<table>
+							<tr>
+								<form name"ratingForm" method="post" action="http://www.google.ca">
+									<td><input id="rateUp" type="image" src="image/like.png" width="75px" height="30px"></td>
+									<td><label id="like" style="font-size: 14px;"></label></td>
+									<td><input id="rateDown" type="image" src="image/dislike.png" width="75px" height="30px"></td>
+									<td><label id="dislike" style="font-size: 14px;"></label></td>
+								</form>
+							</tr>
+						</table>
+					</form>
 			  	</div>
 		  	</div>
 	  	</div>
 	  	
     	<form name="commentForm" style="margin-top:-18px; background-color: dimgray;" method="post" action="http://remoteriver.eicp.net/trailercollection/comment.php"><hr />
 	      <textarea class="inputComments" name="comment" placeholder="Enter comment here"></textarea>
-		  <input id="userID" type="hidden" name="userID" value="">
 		  <input id="videoID" type="hidden" name="videoID" value="">
+		  <input id="email" type="hidden" name="email" value="">
 		  <input id="pd" type="hidden" name="pd" value="">
 	      <input type="submit" name="btnSubmit" value="Comment">
 	    </form>
 	    
-
 	     <div style="padding: 10px;">
 			<div id=returnValue>
 			</div>
@@ -95,164 +97,138 @@
 			var videoURL = [];
 			var videoT = [];
 			var videoD = [];
-			var mtaJSON;
+			var videoComments = [];
 			
-			var newtext = "";
-		   	var numLike = 43;
-		   	var numDislike = 40;
+			var mtaJSONVideos;
+			var mtaJSONComments;
+			var mtaJSONRatings;
+			
+			var commentList = "";
+		   	var numLike = 0;
+		   	var numDislike = 0;
 			
 		   	var videoID = parameters;
 		   	var vote = false;
 		   	
 			$(document).ready(function() {
-					var xmlhttp;
+					var xmlhttpVideos;
+					var xmlhttpComments;
+					var xmlhttpRatings;
 					if (window.XMLHttpRequest)
 					{
 						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp=new XMLHttpRequest();
+						xmlhttpVideos=new XMLHttpRequest();
+						xmlhttpComments=new XMLHttpRequest();
+						xmlhttpRatings=new XMLHttpRequest();
 					}
 					else
 					{
 						// code for IE6, IE5
-						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpVideos=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpComments=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpRatings=new ActiveXObject("Microsoft.XMLHTTP");
 					}
 				
-					xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
-					xmlhttp.send();
-					
-					xmlhttp.onreadystatechange=function()
+					//Video Table
+					xmlhttpVideos.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+					xmlhttpVideos.send();
+					xmlhttpVideos.onreadystatechange=function()
 			  		{
-			  			if (xmlhttp.readyState==4 || xmlhttp.status==200)
+			  			if (xmlhttpVideos.readyState==4 || xmlhttpVideos.status==200)
 					    {
-							var getJSON=xmlhttp.responseText;
+							var getJSON=xmlhttpVideos.responseText;
 						
-							mtaJSON=jQuery.parseJSON(getJSON);
+							mtaJSONVideos=jQuery.parseJSON(getJSON);
 							
-							for(var i=0;i<mtaJSON.videos.length-1;i++)
+							for(var i=0;i<mtaJSONVideos.videos.length-1;i++)
 							{
-								videoURL[i+1] = mtaJSON.videos[i].url;
-								videoT[i+1] = mtaJSON.videos[i].title;
-								videoD[i+1] = mtaJSON.videos[i].description;
+								videoURL[i+1] = mtaJSONVideos.videos[i].url;
+								videoT[i+1] = mtaJSONVideos.videos[i].title;
+								videoD[i+1] = mtaJSONVideos.videos[i].description;
 							}//get video ids
 					  	}
 					  
+					  	//Assigning Numbers to like and dislike
 					  	document.getElementById('like').innerHTML = numLike;
 					  	document.getElementById('dislike').innerHTML = numDislike;
 					 
-						
+						//video player
 						var baseUrl = videoURL[videoID];
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
 				
-						document.getElementById("userID").value=1;
-						document.getElementById("videoID").value=mtaJSON.videos[videoID].video_id;
+						//Passing data to form - form to comment database
+						document.getElementById("email").value="abc@abc.com";
+						document.getElementById("videoID").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
-						//document.getElementById("imageClick").innerHTML="<input type='image' src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'>";
+						//Image Link for videos
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
-					  	
 					}		    
+				
+				
+					//Comment Table
+					xmlhttpComments.open("GET","http://remoteriver.eicp.net/trailercollection/getComments.php",true);
+					xmlhttpComments.send();
+					xmlhttpComments.onreadystatechange=function()
+					{
+						if (xmlhttpComments.readyState==4 && xmlhttpComments.status==200)
+					    {
+							var getJSON=xmlhttpComments.responseText;
+							
+							mtaJSONComments=jQuery.parseJSON(getJSON);
+							
+							
+							for(var i=0;i<mtaJSONComments.comments.length-1;i++)
+							{
+								videoComments[i+1] = mtaJSONComments.comments[i].comment;
+							}//get comment
+					  	}
+					  	
+					  	//Looping Comments
+					  	for(var i = 0; i < videoComments.length-1;i++)
+					  	{
+					  		if(mtaJSONComments.comments[i].video_id == videoID)
+					  		{
+					  		commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
+					  		+mtaJSONComments.comments[i].email+"</span><hr />"+videoComments[i+1]+"<hr /></div>";
+		    				document.getElementById('returnValue').innerHTML = commentList;
+		    				}
+					  	}
+					}
+					
+					
+					//Rating Table
+					xmlhttpRatings.open("GET","http://remoteriver.eicp.net/trailercollection/getRating.php",true);
+					xmlhttpRatings.send();
+					xmlhttpRatings.onreadystatechange=function()
+					{
+						if (xmlhttpRatings.readyState==4 && xmlhttpRatings.status==200)
+					    {
+							var getJSON=xmlhttpRatings.responseText;
+							
+							mtaJSONRatings=jQuery.parseJSON(getJSON);
+							
+					  	}
+					}
+					
 				}
 			);
 		//END GET JSON
 		
 		
-		//start get rating json
-		
-			var userlist [];
-		   	var userid [];
-		   	var videoid [];
-		   	
-			$(document).ready(function() {
-					var xmlhttp;
-					if (window.XMLHttpRequest)
-					{
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp=new XMLHttpRequest();
-					}
-					else
-					{
-						// code for IE6, IE5
-						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-					}
-				
-					xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/getRating.php",true);
-					xmlhttp.send();
-					
-					xmlhttp.onreadystatechange=function()
-			  		{
-			  			if (xmlhttp.readyState==4 || xmlhttp.status==200)
-					    {
-							var getJSON=xmlhttp.responseText;
-						
-							mtaJSON=jQuery.parseJSON(getJSON);
-							
-							for(var i=0;i<mtaJSON.users.length-1;i++)
-							{
-								
-								userid[i+1] = mtaJSON.users[i].user_id;
-								videoid[i+1] = mtaJSON.videos[i].video_id;
-								
-							}//get video ids and user id.
-					  	}
-					  	}
-					  	
-					  }
-					  
-					 }//end json
-					  	
-		
 		//START SCRIPT FUNCTIONS
 		
 		    function addtext()
 		    {
-		    	newtext = newtext + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
+		    	commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
 		    	document.myform.comment.value + "<hr /></div>";
-		    	
-		    	document.getElementById('returnValue').innerHTML = newtext;
+		    	document.getElementById('returnValue').innerHTML = commentList;
 	    	}
 	    	document.getElementById('like').style.color = "Green";
 			document.getElementById('dislike').style.color = "Red";
-		    function rateUp()
-	    	{
-	    		if(vote == false)
-	    		{
-		    		numLike = numLike + 1;
-		    		document.getElementById('like').innerHTML = numLike;
-					
-		    		//document.getElementById('rateUp').style.background = "Green";
-		    		vote = true;
-	    		}
-	    	}
-	    	
-	    	function rateDown()
-	    	{
-	    		if(vote == false)
-	    		{
-		    		numDislike = numDislike + 1;
-		    		document.getElementById('dislike').innerHTML = numDislike;
-		    		
-		    		//document.getElementById('rateDown').style.background = "Red";
-		    		vote = true;
-	    		}
-	    	}
-	    
-			function changeRatingColor()
-			{
-		    	if(num > 0)
-		    	{
-		    		document.getElementById('rating').style.color = "Green";
-		    	}
-		    	else if(num < 0)
-		    	{
-		    		document.getElementById('rating').style.color = "Red";
-		    	}
-		    	else
-		    	{
-		    		document.getElementById('rating').style.color = "White";
-		    	}
-	       }
-            
+			
+
 		   function goBack()
             {
               window.history.back()
