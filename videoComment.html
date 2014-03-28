@@ -30,14 +30,18 @@
 				background:rgba(0,0,0,.75);
               	opacity:0.75;
                -webkit-transition: opacity .25s ease;
-			}		
+			}
+			.lh1
+			{
+				margin-left:auto;
+			}
         </style>
 	</head>
 	<body>
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
-			<h1>Video Page</h1>
+			<h1 class="lh1" id="videoTitle"></h1>
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div>
         <!--HEADER END -->
@@ -50,9 +54,6 @@
             	-->
             	<div class="iv" id="imageClick">
 				</div>
-				
-				<h3 id="videoTitle"></h3>
-				<hr />
             	<p id="videoDescription"><p>
             </div>
     	</div>
