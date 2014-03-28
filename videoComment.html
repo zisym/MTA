@@ -22,7 +22,7 @@
 				
 			}
 			.inputComments {
-				width: 100%; !important
+				width: 100%;
 			}
 			a:hover img
 			{
@@ -30,8 +30,7 @@
 				background:rgba(0,0,0,.75);
               	opacity:0.75;
                -webkit-transition: opacity .25s ease;
-			}
-			
+			}		
         </style>
 	</head>
 	<body>
@@ -61,15 +60,18 @@
     	<div style="padding:10px;">
     		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
 		    	<div>
-		    		<form>
-						<table>
+					<form name"ratingForm" method="post" action="http://remoteriver.eicp.net/trailercollection/rating.php">
+						<input id="videoIDR" type="hidden" name="videoID" value="">
+						<input id="emailR" type="hidden" name="email" value="">
+						<input id="rating" type="hidden" name="rt" value="">
+						<table align="center">
 							<tr>
-								<form name"ratingForm" method="post" action="http://www.google.ca">
-									<td><input id="rateUp" type="image" src="image/like.png" width="75px" height="30px"></td>
-									<td><label id="like" style="font-size: 14px;"></label></td>
-									<td><input id="rateDown" type="image" src="image/dislike.png" width="75px" height="30px"></td>
-									<td><label id="dislike" style="font-size: 14px;"></label></td>
-								</form>
+								<td><input id="rateUp" data-icon="carat-u" name="rateUp" type="submit" onClick="ru()" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>	
+								<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="submit" onClick="rd()" value="Dislike"></td>
+							</tr>
+							<tr align="center">
+								<td><label id="like" style="font-size: 16px;" value="0"></label></td>
+								<td><label id="dislike" style="font-size: 16px;" value="0"></label></td>
 							</tr>
 						</table>
 					</form>
@@ -104,8 +106,8 @@
 			var mtaJSONRatings;
 			
 			var commentList = "";
-		   	var numLike = 0;
-		   	var numDislike = 0;
+		   	var numLike = 2000;
+		   	var numDislike = 2000;
 			
 		   	var videoID = parameters;
 		   	var vote = false;
@@ -159,6 +161,8 @@
 						//Passing data to form - form to comment database
 						document.getElementById("email").value="abc@abc.com";
 						document.getElementById("videoID").value=mtaJSONVideos.videos[videoID-1].video_id;
+						document.getElementById("emailR").value="abc@abc.com";
+						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
 						//Image Link for videos
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
@@ -197,7 +201,7 @@
 					  	}
 					}
 					
-					
+				
 					//Rating Table
 					xmlhttpRatings.open("GET","http://remoteriver.eicp.net/trailercollection/getRating.php",true);
 					xmlhttpRatings.send();
@@ -205,10 +209,20 @@
 					{
 						if (xmlhttpRatings.readyState==4 && xmlhttpRatings.status==200)
 					    {
+					    	
 							var getJSON=xmlhttpRatings.responseText;
 							
 							mtaJSONRatings=jQuery.parseJSON(getJSON);
+						
 							
+							for(var i = 0;i < mtaJSONRatings.rate.length-1;i++)
+							{
+								if((mtaJSONRatings.rate[i].email == "abc@abc.com") && (mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									document.getElementById('rateUp').disabled = true;
+									document.getElementById('rateDown').disabled = true;
+								}
+							}
 					  	}
 					}
 					
@@ -219,22 +233,25 @@
 		
 		//START SCRIPT FUNCTIONS
 		
-		    function addtext()
-		    {
-		    	commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>Tashana:</span><hr />" + 
-		    	document.myform.comment.value + "<hr /></div>";
-		    	document.getElementById('returnValue').innerHTML = commentList;
-	    	}
 	    	document.getElementById('like').style.color = "Green";
 			document.getElementById('dislike').style.color = "Red";
 			
-
+		   function ru()
+		   {
+		   		document.getElementById("rating").value="1";
+		   }
+		   
+		   function rd()
+		   {
+		   		document.getElementById("rating").value="0";
+		   }
+		   
 		   function goBack()
             {
               window.history.back()
             }
             
-            //END SCRIPT FUNCTIONS
+        //END SCRIPT FUNCTIONS
 	    </script>
 	    
 	</body>
