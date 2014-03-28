@@ -22,8 +22,9 @@
 				
 			}
 			.inputComments {
-				width: 100%; !important
+				width: 100%;
 			}
+<<<<<<< HEAD
 			.btnRate {
 				width: 50px; !important
 				height: 25px; !important
@@ -34,6 +35,18 @@
 				background:rgba(0,0,0,.75);
               	opacity:0.75;
                -webkit-transition: opacity .25s ease;
+=======
+			a:hover img
+			{
+				box-shadow: 4px 4px 10px #000000;
+				background:rgba(0,0,0,.75);
+              	opacity:0.75;
+               -webkit-transition: opacity .25s ease;
+			}
+			.lh1
+			{
+				margin-left:auto;
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
 			}
 			
         </style>
@@ -42,7 +55,11 @@
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+<<<<<<< HEAD
 			<h1>Video Page</h1>
+=======
+			<h1 class="lh1" id="videoTitle"></h1>
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div>
         <!--HEADER END -->
@@ -55,15 +72,19 @@
             	-->
             	<div class="iv" id="imageClick">
 				</div>
+<<<<<<< HEAD
 				
 				<h3 id="videoTitle"></h3>
 				<hr />
+=======
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
             	<p id="videoDescription"><p>
             </div>
     	</div>
     	
     	<div style="padding:10px;">
     		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
+<<<<<<< HEAD
 		    	<div style="width: 45%; height:40%;">
 			    	<input id="rateUp" type="button" value="Up" onClick="rateUp()">
 			  	</div>
@@ -82,10 +103,41 @@
 	    </form>
 	    
 
+=======
+		    	<div>
+					<form name"ratingForm" method="post" action="http://remoteriver.eicp.net/trailercollection/rating.php">
+						<input id="videoIDR" type="hidden" name="videoID" value="">
+						<input id="emailR" type="hidden" name="email" value="">
+						<input id="rating" type="hidden" name="rt" value="">
+						<table align="center">
+							<tr>
+								<td><input id="rateUp" data-icon="carat-u" name="rateUp" type="submit" onClick="ru()" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>	
+								<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="submit" onClick="rd()" value="Dislike"></td>
+							</tr>
+							<tr align="center">
+								<td><label id="like" style="font-size: 16px;" value="0"></label></td>
+								<td><label id="dislike" style="font-size: 16px;" value="0"></label></td>
+							</tr>
+						</table>
+					</form>
+			  	</div>
+		  	</div>
+	  	</div>
+	  	
+    	<form name="commentForm" style="margin-top:-18px; background-color: dimgray;" method="post" action="http://remoteriver.eicp.net/trailercollection/comment.php"><hr />
+	      <textarea class="inputComments" name="comment" placeholder="Enter comment here"></textarea>
+		  <input id="videoID" type="hidden" name="videoID" value="">
+		  <input id="email" type="hidden" name="email" value="">
+		  <input id="pd" type="hidden" name="pd" value="">
+	      <input type="submit" name="btnSubmit" value="Comment">
+	    </form>
+	    
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
 	     <div style="padding: 10px;">
 			<div id=returnValue>
 			</div>
 		</div>
+<<<<<<< HEAD
 
 		
 		
@@ -208,12 +260,183 @@
 		    	}
 	       }
             
+=======
+
+		<script>
+		  // START GET JSON
+			var parameters = location.search.substring(4);
+
+			var videoURL = [];
+			var videoT = [];
+			var videoD = [];
+			var videoComments = [];
+			
+			var mtaJSONVideos;
+			var mtaJSONComments;
+			var mtaJSONRatings;
+			
+			var commentList = "";
+		   	var numLike = 0;
+		   	var numDislike = 0;
+			
+		   	var videoID = parameters;
+		   	var vote = false;
+		   	
+			$(document).ready(function() {
+					var xmlhttpVideos;
+					var xmlhttpComments;
+					var xmlhttpRatings;
+					if (window.XMLHttpRequest)
+					{
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttpVideos=new XMLHttpRequest();
+						xmlhttpComments=new XMLHttpRequest();
+						xmlhttpRatings=new XMLHttpRequest();
+					}
+					else
+					{
+						// code for IE6, IE5
+						xmlhttpVideos=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpComments=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpRatings=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+				
+					//Video Table
+					xmlhttpVideos.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+					xmlhttpVideos.send();
+					xmlhttpVideos.onreadystatechange=function()
+			  		{
+			  			if (xmlhttpVideos.readyState==4 || xmlhttpVideos.status==200)
+					    {
+							var getJSON=xmlhttpVideos.responseText;
+						
+							mtaJSONVideos=jQuery.parseJSON(getJSON);
+							
+							for(var i=0;i<mtaJSONVideos.videos.length-1;i++)
+							{
+								videoURL[i+1] = mtaJSONVideos.videos[i].url;
+								videoT[i+1] = mtaJSONVideos.videos[i].title;
+								videoD[i+1] = mtaJSONVideos.videos[i].description;
+							}//get video ids
+					  	}
+					  
+						//video player
+						var baseUrl = videoURL[videoID];
+						var finalUrl = "videoPlayer.html?id=" + baseUrl;
+				
+						//Passing data to form - form to comment database
+						document.getElementById("email").value="abc@abc.com";
+						document.getElementById("videoID").value=mtaJSONVideos.videos[videoID-1].video_id;
+						document.getElementById("emailR").value="abc@abc.com";
+						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
+						
+						//Image Link for videos
+						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
+					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
+					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
+					}		    
+				
+				
+					//Comment Table
+					xmlhttpComments.open("GET","http://remoteriver.eicp.net/trailercollection/getComments.php",true);
+					xmlhttpComments.send();
+					xmlhttpComments.onreadystatechange=function()
+					{
+						if (xmlhttpComments.readyState==4 && xmlhttpComments.status==200)
+					    {
+							var getJSON=xmlhttpComments.responseText;
+							
+							mtaJSONComments=jQuery.parseJSON(getJSON);
+							
+							
+							for(var i=0;i<mtaJSONComments.comments.length-1;i++)
+							{
+								videoComments[i+1] = mtaJSONComments.comments[i].comment;
+							}//get comment
+					  	}
+					  	
+					  	//Looping Comments
+					  	for(var i = 0; i < videoComments.length-1;i++)
+					  	{
+					  		if(mtaJSONComments.comments[i].video_id == videoID)
+					  		{
+					  		commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
+					  		+mtaJSONComments.comments[i].email+"</span><hr />"+videoComments[i+1]+"<hr /></div>";
+		    				document.getElementById('returnValue').innerHTML = commentList;
+		    				}
+					  	}
+					}
+					
+				
+					//Rating Table
+					xmlhttpRatings.open("GET","http://remoteriver.eicp.net/trailercollection/getRating.php",true);
+					xmlhttpRatings.send();
+					var countRU = 0;
+					var countRD = 0;
+					xmlhttpRatings.onreadystatechange=function()
+					{
+						if (xmlhttpRatings.readyState==4 && xmlhttpRatings.status==200)
+					    {
+					    	
+							var getJSON=xmlhttpRatings.responseText;
+							
+							mtaJSONRatings=jQuery.parseJSON(getJSON);
+							
+							for(var i = 0;i < mtaJSONRatings.rate.length-1;i++)
+							{
+								if((mtaJSONRatings.rate[i].email == "abc@abc.com") && (mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									document.getElementById('rateUp').disabled = true;
+									document.getElementById('rateDown').disabled = true;
+								}
+								if((mtaJSONRatings.rate[i].rating == 1)&&(mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									countRU++;
+								}
+								else if((mtaJSONRatings.rate[i].rating == 0)&&(mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									countRD++;
+								}
+							}
+					  	}
+						numLike = countRU;
+						numDislike = countRD;
+						document.getElementById('like').innerHTML = numLike;
+					  	document.getElementById('dislike').innerHTML = numDislike;
+						
+					}
+					
+				}
+			);
+		//END GET JSON
+		
+		
+		//START SCRIPT FUNCTIONS
+		
+	    	document.getElementById('like').style.color = "Green";
+			document.getElementById('dislike').style.color = "Red";
+			
+		   function ru()
+		   {
+		   		document.getElementById("rating").value="1";
+		   }
+		   
+		   function rd()
+		   {
+		   		document.getElementById("rating").value="0";
+		   }
+		   
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
 		   function goBack()
             {
               window.history.back()
             }
             
+<<<<<<< HEAD
             //END SCRIPT FUNCTIONS
+=======
+        //END SCRIPT FUNCTIONS
+>>>>>>> 3c05633ce541e9eba4d3760951830a92d6f78b90
 	    </script>
 	    
 	</body>
