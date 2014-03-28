@@ -106,8 +106,8 @@
 			var mtaJSONRatings;
 			
 			var commentList = "";
-		   	var numLike = 2000;
-		   	var numDislike = 2000;
+		   	var numLike = 0;
+		   	var numDislike = 0;
 			
 		   	var videoID = parameters;
 		   	var vote = false;
@@ -150,10 +150,6 @@
 							}//get video ids
 					  	}
 					  
-					  	//Assigning Numbers to like and dislike
-					  	document.getElementById('like').innerHTML = numLike;
-					  	document.getElementById('dislike').innerHTML = numDislike;
-					 
 						//video player
 						var baseUrl = videoURL[videoID];
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
@@ -205,6 +201,8 @@
 					//Rating Table
 					xmlhttpRatings.open("GET","http://remoteriver.eicp.net/trailercollection/getRating.php",true);
 					xmlhttpRatings.send();
+					var countRU = 0;
+					var countRD = 0;
 					xmlhttpRatings.onreadystatechange=function()
 					{
 						if (xmlhttpRatings.readyState==4 && xmlhttpRatings.status==200)
@@ -213,7 +211,6 @@
 							var getJSON=xmlhttpRatings.responseText;
 							
 							mtaJSONRatings=jQuery.parseJSON(getJSON);
-						
 							
 							for(var i = 0;i < mtaJSONRatings.rate.length-1;i++)
 							{
@@ -222,8 +219,21 @@
 									document.getElementById('rateUp').disabled = true;
 									document.getElementById('rateDown').disabled = true;
 								}
+								if((mtaJSONRatings.rate[i].rating == 1)&&(mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									countRU++;
+								}
+								else if((mtaJSONRatings.rate[i].rating == 0)&&(mtaJSONRatings.rate[i].video_id == videoID))
+								{
+									countRD++;
+								}
 							}
 					  	}
+						numLike = countRU;
+						numDislike = countRD;
+						document.getElementById('like').innerHTML = numLike;
+					  	document.getElementById('dislike').innerHTML = numDislike;
+						
 					}
 					
 				}
