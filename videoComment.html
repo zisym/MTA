@@ -247,6 +247,7 @@
 						
 		    $(document).ready(function(){
            	  $("#btnComment").click(function(){
+           	  document.getElementById('btnComment').disabled = true;
 	          var co = $('#comment').val();
 			  var vID = $('#videoID').val();
 			  var em = $('#email').val();
@@ -265,7 +266,7 @@
 			  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/comment.php",true);
 			  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			  xmlhttp.send("comment="+co+"&videoID="+vID+"&email="+em+"&pd="+po);
-			           
+			         
 			   xmlhttp.onreadystatechange=function()
 			   {
 			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -279,6 +280,8 @@
             
            	$(document).ready(function(){
            	  $("#rateUp").click(function(){
+           	  document.getElementById('rateUp').disabled = true;
+			  document.getElementById('rateDown').disabled = true;
 	          var vID = $('#videoIDR').val();
 	    	  var em = $('#emailR').val();
 			  var ra = 1;
@@ -309,6 +312,8 @@
 			
 			$(document).ready(function(){
            	  $("#rateDown").click(function(){
+           	  document.getElementById('rateUp').disabled = true;
+			  document.getElementById('rateDown').disabled = true;
 	          var vID = $('#videoIDR').val();
 	    	  var em = $('#emailR').val();
 			  var ra = 0;
