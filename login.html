@@ -48,42 +48,76 @@
         <!-- HEADER END -->
         
         <div data-role="content" data-theme="a">
-            <form method="post">
+            <form>
                 Email: <input id="email" type="text" name="username"><br>
                 Password: <input id="password" type="password" name="password"><br>
-                <input id="login" type="button" value="Login" >
+                <input id="login" type="button" value="Login">
                 <!-- <input id="guest" type="button" value="Guest" onClick="goTo('videolist.html')"> -->
                 <input id="register" type="button" value="Register" >
             </form>
         </div>
+        
         <script>
-            
+			/*
             $(document).ready(function(){
                 $("#login").click(function(){
+                	
                     var email=$("#email").val();                        
                     var password=$("#password").val();
-                    
+            
                     $.ajax({
-                        url: "login.php",
+                        url: "http://remoteriver.eicp.net/trailercollection/login.php",
                         type:"POST",
                         data: {email: email, password: password},
                         dataType:"json"
                     }).done(function(data){
                             if(data=="OK"){
-                                $(location).attr('href','videolist.html');
+                                window.location ="videolist.html";
                             }else{
                                 alert("Try Again!");
                             }
                     });
+                     
                 });    
             });
-            
+            */
+           
+           $(document).ready(function(){
+           	  $("#login").click(function(){
+		      var e=document.getElementById("email").value;
+			  var p=document.getElementById("password").value;
+			  var xmlhttp;
+				
+				
+				alert(e+p);
+			  if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			     xmlhttp=new XMLHttpRequest();
+			  }
+			  else
+			  {// code for IE6, IE5
+			  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  
+			  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/login.php",true);
+			  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			  xmlhttp.send("email="+e+"&password=cccd"+p);
+			           
+			   xmlhttp.onreadystatechange=function()
+			   {
+			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    	{
+			    		alert(xmlhttp.responseText);
+			    	}
+			  	}
+				});
+            });
+           
             $(document).ready(function(){
                 $("#register").click(function(){
                     window.location.href="registration.html";
                 });
             });
-            
         </script>
 	</body>
 </html>

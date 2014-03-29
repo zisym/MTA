@@ -61,15 +61,13 @@
     	<div style="padding:10px;">
     		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
 		    	<div>
-					<form name"ratingForm" method="post" action="http://remoteriver.eicp.net/trailercollection/rating.php">
-						<input id="cur" type="hidden" name="cur" value="">
+					<form>
 						<input id="videoIDR" type="hidden" name="videoID" value="">
 						<input id="emailR" type="hidden" name="email" value="">
-						<input id="rating" type="hidden" name="rt" value="">
 						<table align="center">
 							<tr>
-								<td><input id="rateUp" data-icon="carat-u" name="rateUp" type="submit" onClick="ru()" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>	
-								<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="submit" onClick="rd()" value="Dislike"></td>
+								<td><input id="rateUp" data-icon="carat-u" name="rateUp" type="button" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>	
+								<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="button" value="Dislike"></td>
 							</tr>
 							<tr align="center">
 								<td><label id="like" style="font-size: 16px;" value="0"></label></td>
@@ -81,13 +79,12 @@
 		  	</div>
 	  	</div>
 	  	
-    	<form name="commentForm" style="margin-top:-18px; background-color: dimgray;" method="post" action="http://remoteriver.eicp.net/trailercollection/comment.php"><hr />
-	      <textarea class="inputComments" name="comment" placeholder="Enter comment here"></textarea>
-	      <input id="cuc" type="hidden" name="cuc" value="">
+    	<form style="margin-top:-18px; background-color: dimgray;"><hr />
+	      <textarea class="inputComments" id="comment" name="comment" placeholder="Enter comment here"></textarea>
 		  <input id="videoID" type="hidden" name="videoID" value="">
 		  <input id="email" type="hidden" name="email" value="">
 		  <input id="pd" type="hidden" name="pd" value="">
-	      <input type="submit" name="btnSubmit" value="Comment">
+	      <input type="button" id="btnComment" name="btnComment" value="Comment">
 	    </form>
 	    
 	     <div style="padding: 10px;">
@@ -163,10 +160,6 @@
 						document.getElementById("emailR").value="abc@abc.com";
 						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
-						document.getElementById('cuc').value=document.URL;
-		  				document.getElementById('cur').value=document.URL;
-						
-						
 						//Image Link for videos
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
@@ -214,7 +207,6 @@
 					{
 						if (xmlhttpRatings.readyState==4 && xmlhttpRatings.status==200)
 					    {
-					    	
 							var getJSON=xmlhttpRatings.responseText;
 							
 							mtaJSONRatings=jQuery.parseJSON(getJSON);
@@ -252,18 +244,102 @@
 		
 	    	document.getElementById('like').style.color = "Green";
 			document.getElementById('dislike').style.color = "Red";
+						
+		    $(document).ready(function(){
+           	  $("#btnComment").click(function(){
+	          var co = $('#comment').val();
+			  var vID = $('#videoID').val();
+			  var em = $('#email').val();
+			  var po = "1111-00-00 00:00:00";
+			  var xmlhttp;
+			  
+			  if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			     xmlhttp=new XMLHttpRequest();
+			  }
+			  else
+			  {// code for IE6, IE5
+			  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  
+			  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/comment.php",true);
+			  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			  xmlhttp.send("comment="+co+"&videoID="+vID+"&email="+em+"&pd="+po);
+			           
+			   xmlhttp.onreadystatechange=function()
+			   {
+			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    	{
+			    		window.location = document.URL;
+			    	}
+			  	}
+				});
+            });
+            
+            
+           	$(document).ready(function(){
+           	  $("#rateUp").click(function(){
+	          var vID = $('#videoIDR').val();
+	    	  var em = $('#emailR').val();
+			  var ra = 1;
+			  var xmlhttp;
+			  
+			  if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			     xmlhttp=new XMLHttpRequest();
+			  }
+			  else
+			  {// code for IE6, IE5
+			  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  
+			  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/rating.php",true);
+			  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			  xmlhttp.send("rt="+ra+"&videoID="+vID+"&email="+em);
+			           
+			   xmlhttp.onreadystatechange=function()
+			   {
+			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    	{
+			    		window.location = document.URL;
+			    	}
+			  	}
+				});
+            });
 			
-		   function ru()
-		   {
-		   		document.getElementById("rating").value="1";
-		   }
+			$(document).ready(function(){
+           	  $("#rateDown").click(function(){
+	          var vID = $('#videoIDR').val();
+	    	  var em = $('#emailR').val();
+			  var ra = 0;
+			  var xmlhttp;
+			  
+			  if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			     xmlhttp=new XMLHttpRequest();
+			  }
+			  else
+			  {// code for IE6, IE5
+			  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  
+			  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/rating.php",true);
+			  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			  xmlhttp.send("rt="+ra+"&videoID="+vID+"&email="+em);
+			           
+			   xmlhttp.onreadystatechange=function()
+			   {
+			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    	{
+			    		window.location = document.URL;
+			    	}
+			  	}
+				});
+            });
+			
+
 		   
-		   function rd()
-		   {
-		   		document.getElementById("rating").value="0";
-		   }
-		   
-		   function goBack()
+		    function goBack()
             {
               window.history.back()
             }
