@@ -43,13 +43,13 @@
         
 
 	 	<div style="padding:10px;">
-			<form name="registration" onsubmit="return validateForm()" method="post" action="http://remoteriver.eicp.net/trailercollection/registration.php">
-				First name:<input type="text" name="btnFName" />
-				Last name: <input type="text" name="btnLName" />
-				E-mail: <input type="text" name="btnEmail" />
-				Password: <input type="password" name="btnPassword"/>
-				Re-Type Password: <input type="password" name="btnRetypePassword"/>
-				<input type="submit"  name="btnSubmit" value="Register" />
+			<form name="registration" align="center">
+				Full Name<hr /><input type="text" id="fName" name="fName" placeholder="Enter First Name" />
+				<input type="text" id="lName" name="lName" placeholder="Enter Last Name" /><br />
+				Email<hr /><input type="text" id="email" name="email" placeholder="Enter an Email" /><br />
+				Password<hr /><input type="password" id="password" name="password" placeholder="Enter Password"/>
+				<input type="password" id="retypePassword" name="retypePassword" placeholder="Re-type Password"/><hr />
+				<input type="button" id="btnRegister" name="btnRegister" value="Register"  />
                 
                 <!-- MESSAGE START -->
                 <div data-role="popup" id="popupBasic">
@@ -69,9 +69,9 @@
         <script>
             function validateForm()
             {
-                var x=document.forms["registration"]["btnPassword"].value;
-                var y=document.forms["registration"]["btnRetypePassword"].value;
-                var z=document.forms["registration"]["btnEmail"].value;
+                var x=document.forms["registration"]["password"].value;
+                var y=document.forms["registration"]["retypePassword"].value;
+                var z=document.forms["registration"]["email"].value;
                 var atpos=z.indexOf("@");
                 var dotpos=z.lastIndexOf(".");
                 
@@ -81,7 +81,7 @@
                     return false;
                 }
                 
-                if(x==null || x=="")
+				if(x==null || x=="")
                 {
                     $( "#nullpassword" ).popup( "open" );
                     return false;
@@ -93,6 +93,67 @@
                     return false;
                 }
             }
+
+            
+           	$(document).ready(function(){
+           	 	 $("#btnRegister").click(function(){
+           	  	
+           	  	
+           	  		var x=document.forms["registration"]["password"].value;
+	                var y=document.forms["registration"]["retypePassword"].value;
+	                var z=document.forms["registration"]["email"].value;
+	                var atpos=z.indexOf("@");
+	                var dotpos=z.lastIndexOf(".");
+	                
+	                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
+	                {
+	                    $( "#nullusername" ).popup( "open" );
+	                    return false;
+	                }
+	                
+					if(x==null || x=="")
+	                {
+	                    $( "#nullpassword" ).popup( "open" );
+	                    return false;
+	                }
+	                
+	                if(x!=y)
+	                {
+	                    $( "#popupBasic" ).popup( "open" );
+	                    return false;
+	                }
+           	  	
+	           	  document.getElementById('btnRegister').disabled = true;
+	           	  
+		    	  var f = document.getElementById("fName").value;
+				  var l = document.getElementById("lName").value;
+				  var e = document.getElementById("email").value;
+				  var p = document.getElementById("password").value;
+				  
+				  var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				     xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {// code for IE6, IE5
+				  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				 
+				  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/registration.php",true);
+				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send("email="+e+"&fName="+f+"&lName="+l+"&password="+p);
+				           
+				   xmlhttp.onreadystatechange=function()
+				   {
+				  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    	{
+				    		window.location = document.URL;
+				    	}
+				   }
+				   });
+            });
+            
 		</script>
     <!--
 		<script>
