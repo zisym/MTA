@@ -67,33 +67,6 @@
 			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
 		</div>
         <script>
-            function validateForm()
-            {
-                var x=document.forms["registration"]["password"].value;
-                var y=document.forms["registration"]["retypePassword"].value;
-                var z=document.forms["registration"]["email"].value;
-                var atpos=z.indexOf("@");
-                var dotpos=z.lastIndexOf(".");
-                
-                if (atpos<1 || dotpos<atpos+2 || dotpos+2>=z.length)
-                {
-                    $( "#nullusername" ).popup( "open" );
-                    return false;
-                }
-                
-				if(x==null || x=="")
-                {
-                    $( "#nullpassword" ).popup( "open" );
-                    return false;
-                }
-                
-                if(x!=y)
-                {
-                    $( "#popupBasic" ).popup( "open" );
-                    return false;
-                }
-            }
-
             
            	$(document).ready(function(){
            	 	 $("#btnRegister").click(function(){
