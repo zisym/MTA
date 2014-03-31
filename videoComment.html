@@ -97,6 +97,7 @@
         </style>
 	</head>
 	<body>
+    <div class="screen">
     <div data-role="page">
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
@@ -105,16 +106,17 @@
 			<a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> 
       	</div>
         <!--HEADER END -->
-
+<div class="iv" id="imageClick">
+				</div>
 <!--content start -->
 	<div data-role="content" data-theme="a" >
+    
 	 	<div >
         	<div >
         		<!--<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
             	allowfullscreen=""></iframe><br /> 
             	-->
-            	<div class="iv" id="imageClick">
-				</div>
+            	
             	
             </div>
     	</div>
@@ -184,10 +186,14 @@
     	
 	    
 	     <div>
+         <div style="padding:10px; font-size:20px">Comments
+         </div>
 			<div id=returnValue>
 			</div>
 		</div>
 </div><!--content END -->
+
+  
 		<script>
 		  // START GET JSON
 			var parameters = location.search.substring(4);
@@ -257,7 +263,7 @@
 						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
 						//Image Link for videos
-						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
+						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='240px'></a>";	 	
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
 						document.getElementById("vTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
@@ -403,6 +409,7 @@
 			    		window.location = document.URL;
 			    	}
 			  	}
+				reloadPage();
 				});
             });
 			
@@ -435,6 +442,7 @@
 			    		window.location = document.URL;
 			    	}
 			  	}
+				reloadPage();
 				});
             });
 			
@@ -449,5 +457,6 @@
         //END SCRIPT FUNCTIONS
 	    </script>
 	    </div><!-- page div -->
+        </div><!-- screen -->
 	</body>
 </html>
