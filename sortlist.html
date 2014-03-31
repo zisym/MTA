@@ -150,21 +150,15 @@
 											function compare(lowLength, highLength)
 											{
 												
-												var one = "";
-												var two = "";
-												//for(var i = 1;i < lowLength.length+1;i++)
-												//{
-													one = lowLength.substring(0, lowLength.length);
-													two = highLength.substring(0, lowLength.length);
-													
-													if(one.toLowerCase() == two.toLowerCase())
-													{
-													//	document.getElementById("av").innerHTML+="<a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg'></a>"+mtaJSON.videos[counter].title+ "<br />";
+												var searching = highLength.toLowerCase().search(lowLength);
+												
+												if(searching != -1)
+												{
 
-													document.getElementById("av").innerHTML+="<table border='1'><tr><td colspan='2' align='center'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'>"+mtaJSON.videos[counter].title+"</a></td></tr><tr><td><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg' width='75px' height='116px'></a></td><td>"+mtaJSON.videos[counter].description+"</td></tr></table>";
+												document.getElementById("av").innerHTML+="<table border='1'><tr><td colspan='2' align='center'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'>"+mtaJSON.videos[counter].title+"</a></td></tr><tr><td><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg' width='75px' height='116px'></a></td><td>"+mtaJSON.videos[counter].description+"</td></tr></table>";
 
-													}
-												//}
+												}
+
 											}
 											
 											//if(mtaJSON.videos[counter].title.toLowerCase() == searchValue.toLowerCase())
