@@ -113,11 +113,11 @@
     
 	 	<div >
         	<div >
-        		<!--<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
+            <!--
+        		<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
             	allowfullscreen=""></iframe><br /> 
+            	
             	-->
-            	
-            	
             </div>
     	</div>
         <!--NAV START -->
@@ -263,7 +263,12 @@
 						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
 						//Image Link for videos
-						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='240px'></a>";	 	
+						//document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='240px'></a>";	 
+						document.getElementById("imageClick").innerHTML="<iframe width='100%' height='340' src='http://www.youtube.com/embed/"+baseUrl+"' frameborder='0' allowfullscreen=''></iframe>";
+						//document.getElementById("imageClick").innerHTML=baseUrl;
+						
+						
+							
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
 						document.getElementById("vTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
