@@ -35,9 +35,69 @@
 			{
 				margin-left:auto;
 			}
+			#commentcontainer
+			{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+	opacity: 0.9;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	margin-right: 12px;
+	margin-left: 12px;
+	font-size: 13px;
+			}
+			#commentemailcontainer
+			{
+				opacity: 0.5;
+			padding-top: 5px;	
+	font-size: 11px;				
+			}
+			.navcontainer
+			{
+	
+			background-color: #333;	
+			 
+			}
+			#vTitle
+			{
+	padding-top: 12px;
+	padding-right: 9px;
+	padding-bottom: 9px;
+	padding-left: 9px;
+	font-size: 30px;
+			}
+			#videoDescription
+			{
+	padding-top: 0px;
+	padding-right: 9px;
+	padding-bottom: 9px;
+	padding-left: 9px;
+	font-size: 12px;
+			}
+			.rateup_button
+			{
+				background-image: url(/images/buttons/add.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+			}
+			.ratecontainer
+			{
+				padding-top: 10px;
+	padding-right: 9px;
+	
+	padding-left: 9px;
+			}
         </style>
 	</head>
 	<body>
+    <div data-role="page">
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
@@ -46,52 +106,88 @@
       	</div>
         <!--HEADER END -->
 
-	
-	 	<div style="padding: 10px; color: lavender;">
-        	<div style="background-color:dimgray;padding: 10px; border:groove;">
+<!--content start -->
+	<div data-role="content" data-theme="a" >
+	 	<div >
+        	<div >
         		<!--<iframe title="Video Title" height="349" width="100%" src="http://www.youtube.com/embed/29kERg4T9Vc" frameborder="0" 
             	allowfullscreen=""></iframe><br /> 
             	-->
             	<div class="iv" id="imageClick">
 				</div>
-            	<p id="videoDescription"><p>
+            	
             </div>
     	</div>
-    	
-    	<div style="padding:10px;">
-    		<div style="border:groove; margin-top:-20px; padding:10px;background-color:black;">
-		    	<div>
-					<form>
+        <!--NAV START -->
+        
+        <div data-role="tabs" id="tabs" >
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#Description_Nav" data-ajax="false">Description</a></li>
+      
+      <li><a href="#Comments_Nav" data-ajax="false">Comment</a></li>
+    </ul>
+  </div>
+  <div class="navcontainer">
+  <div id="Description_Nav">
+  	<div id="vTitle"></div>
+   		<div id="videoDescription"></div>
+        <div class="ratecontainer">
+        <form>
 						<input id="videoIDR" type="hidden" name="videoID" value="">
 						<input id="emailR" type="hidden" name="email" value="">
-						<table align="center">
+						<table>
 							<tr>
-								<td><input id="rateUp" data-icon="carat-u" name="rateUp" type="button" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>	
-								<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="button" value="Dislike"></td>
-							</tr>
-							<tr align="center">
-								<td><label id="like" style="font-size: 16px;" value="0"></label></td>
-								<td><label id="dislike" style="font-size: 16px;" value="0"></label></td>
+                            <td>
+                            <a href="" id="rateUp" class="ratebutton"><img width="20px" src="image\thumbs-up.png"/></a>
+                            </td>
+                            <td><label id="like" style="font-size: 16px;" value="0"></label></td>
+                            <td>
+                            <a href="" id="rateDown" class="ratebutton"><img width="20px" src="image\thumbs-down.png"/></a>
+                            </td>
+									
+							<td><label id="dislike" style="font-size: 16px;" value="0"></label></td>	
+							
+								
+                              
+								
 							</tr>
 						</table>
 					</form>
+                    </div><!-- rating -->
+    
+  </div>
+  <div id="Rating_Nav">
+   <div>
+    		<div>
+		    	<div>
+					
 			  	</div>
 		  	</div>
 	  	</div>
-	  	
-    	<form style="margin-top:-18px; background-color: dimgray;"><hr />
+  </div>
+  <div id="Comments_Nav">
+   <form style="margin-top:-18px; background-color: dimgray;"><hr />
 	      <textarea class="inputComments" id="comment" name="comment" placeholder="Enter comment here"></textarea>
 		  <input id="videoID" type="hidden" name="videoID" value="">
 		  <input id="email" type="hidden" name="email" value="">
 		  <input id="pd" type="hidden" name="pd" value="">
 	      <input type="button" id="btnComment" name="btnComment" value="Comment">
 	    </form>
+  </div>
+</div>
+        </div>
+    	<!--NAV END -->
+        
+    	
+	  	
+    	
 	    
-	     <div style="padding: 10px;">
+	     <div>
 			<div id=returnValue>
 			</div>
 		</div>
-
+</div><!--content END -->
 		<script>
 		  // START GET JSON
 			var parameters = location.search.substring(4);
@@ -163,6 +259,7 @@
 						//Image Link for videos
 						document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";	 	
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
+						document.getElementById("vTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
 					}		    
 				
@@ -190,8 +287,7 @@
 					  	{
 					  		if(mtaJSONComments.comments[i].video_id == videoID)
 					  		{
-					  		commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
-					  		+mtaJSONComments.comments[i].email+"</span><hr />"+videoComments[i+1]+"<hr /></div>";
+					  		commentList = commentList + "<div id='commentcontainer'>"+videoComments[i+1]+"<br><div id='commentemailcontainer'> <table width='100%'><tr><td>"+mtaJSONComments.comments[i].email+"</td><td  align='right'>"+"</td></tr></table></div></div>";
 		    				document.getElementById('returnValue').innerHTML = commentList;
 		    				}
 					  	}
@@ -349,8 +445,9 @@
               window.history.back()
             }
             
+			
         //END SCRIPT FUNCTIONS
 	    </script>
-	    
+	    </div><!-- page div -->
 	</body>
 </html>
