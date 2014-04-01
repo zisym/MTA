@@ -50,5 +50,5 @@
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <access origin="http://127.0.0.1*" />
 	<access origin="http://remoteriver.eicp.net" />
-	<access origin="https://www.youtube.com/" />
+	<access origin=".*" />
 </widget>

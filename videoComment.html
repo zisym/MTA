@@ -167,9 +167,8 @@
 						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
 						//Image Link for videos
-						//document.getElementById("imageClick").innerHTML="<a href='"+finalUrl+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";
-						
-						document.getElementById("imageClick").innerHTML="<iframe width='100%' height='200px' src='//www.youtube.com/embed/"+videoURL[videoID]+"' frameborder='0' allowfullscreen></iframe>";
+						document.getElementById("imageClick").innerHTML="<a href='http://www.youtube.com/embed/"+videoURL[videoID]+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";
+						//document.getElementById("imageClick").innerHTML="<iframe width='100%' height='200px' src='//www.youtube.com/embed/"+videoURL[videoID]+"' frameborder='0' allowfullscreen></iframe>";
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
 					}		    
