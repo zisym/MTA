@@ -130,14 +130,14 @@
 								var lengthTitle = 0;
 								xmlhttp.onreadystatechange=function()
 						  		{
-						  			if (xmlhttp.readyState==4 || xmlhttp.status==200)
+						  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 								    {
 										var getJSON=xmlhttp.responseText;
 									
 										mtaJSON=jQuery.parseJSON(getJSON);
 										
 										
-										for(var i=0;i<mtaJSON.videos.length-1;i+=2)
+										for(var i=0;i<mtaJSON.videos.length-1;i++)
 										{
 											lengthInput = searchValue.length;
 											lengthTitle = mtaJSON.videos[counter].title.length;
