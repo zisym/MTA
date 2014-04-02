@@ -57,7 +57,7 @@
 				   <option value = "3">all</option>
 				   <option value = "4">type4</option>
 				</select> -->
-				<input id="search" type="text" placeholder="Search Key Word" onkeydown="clearCounter()"><br />
+				<input id="search" type="search" placeholder="Search Key Word" onkeydown="clearCounter()"><br />
 			</div>
 	 
 			<div id="div1" style="display: ;">
@@ -150,7 +150,7 @@
 											function compare(lowLength, highLength)
 											{
 												
-												var searching = highLength.toLowerCase().search(lowLength);
+												var searching = highLength.toLowerCase().search(lowLength.toLowerCase());
 												
 												if(searching != -1)
 												{
