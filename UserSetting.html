@@ -59,7 +59,6 @@
 			<!-- <a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> -->
       	</div>
         <!--HEADER END -->
-    
     	<div>		
 			<div>				
 				<div data-position="inline">
@@ -84,38 +83,75 @@
 					</div>
 					<div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false">
 						<h4>Change Password</h4>
-						<form id="formChangePassword">	
-							<p id="msgPwd"></p>
+						<form id="formChangePassword">
 							<input id="pwd" type="password" placeholder="Password" onfocus="clearThis(this)">
 							<input id="retypePwd" type="password" placeholder="Re-type Password" onfocus="clearThis(this)">
-							<input onclick="btnChangePassword()" type="button" value="Save Changes"/> <!-- value doesn't show up -->
+							<input id="btnSaveChange" type="button" value="Save Changes"/> <!-- value doesn't show up -->
+							
+							<!-- MESSAGE START -->
+			                <div data-role="popup" id="popupBasic">
+			                    <p>Your password doesn't match, please retype it.<p>
+			                </div>
+			                <div data-role="popup" id="nullpassword">
+			                    <p>Please type your password.<p>
+			                </div>
+			                <div data-role="popup" id="pwcs">
+			                    <p>Password Change Successfully!<p>
+			                </div>
+			                 <!-- MESSAGE END -->
+							
 						</form> 
 					</div>
 					
 
 				</div>
 				<script>
-					document.getElementById('lblFullName').innerHTML += 'John Derp';
-					document.getElementById('lblEmail').innerHTML += 'abc@abc.com';
-	             
-					function btnChangePassword()
-					{
-						var form = document.getElementById("formChangePassword");
-						var pwd = form.elements[0].value;
-						var retypePwd = form.elements[1].value;
-						switch(pwd)
-						{
-						case "":
-							document.getElementById('msgPwd').innerHTML = "Empty Value! <br />";
-							break;
-						case retypePwd:
-							document.getElementById('msgPwd').innerHTML = "Password Changed! <br />";
-							break;
-						default:
-							document.getElementById('msgPwd').innerHTML = "Does not match! <br />";
-						}
-					}
-                    
+					document.getElementById('lblFullName').innerHTML = 'John Derp';
+					document.getElementById('lblEmail').innerHTML = 'abc@abc.com';
+	             	
+					  var pw = $('#pwd').val();
+	    	 		  var em = "abc@abc.com";
+				  $(document).ready(function(){
+		           	  $("#btnSaveChange").click(function(){
+		           	  	var x=document.forms["formChangePassword"]["pwd"].value;
+		                var y=document.forms["formChangePassword"]["retypePwd"].value;
+
+						if(x==null || x=="")
+		                {
+		                    $( "#nullpassword" ).popup( "open" );
+		                    return false;
+		                }
+		                if(x!=y)
+		                {
+		                    $( "#popupBasic" ).popup( "open" );
+		                    return false;
+		                }
+					  
+					  if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+					     xmlhttp=new XMLHttpRequest();
+					  }
+					  else
+					  {// code for IE6, IE5
+					  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					  
+					  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/ChangePassword.php",true);
+					  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					  xmlhttp.send("email="+em+"&password="+pw);
+					         
+					   xmlhttp.onreadystatechange=function()
+					   {
+					  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					    	{
+					    		 $( "#pwcs" ).popup( "open" );
+					    	}
+					  	}
+						});
+						
+		            });
+					
+					
 					function clearThis(target)
 					{
 						target.value= "";
