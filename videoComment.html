@@ -66,13 +66,12 @@
 					</table>
 				</form>
 				<hr />
-				<span id="videoDescription"></span>
-				<a  id="hideDesc" name='hideDesc'>hide...</a>
-				<a  id="showDesc" name='showDesc'>show description...</a>
-				<br /><br />
+				<div data-role="collapsible" data-theme="a" data-content-theme="a">
+					    <h4>Description</h4>
+					  	<span id="videoDescription"></span>
+				</div>
             </div>
     	</div>
-		
     	<form style="margin-top:-18px; background-color: dimgray;"><hr />
 	      <textarea class="inputComments" id="comment" name="comment" placeholder="Enter comment here"></textarea>
 		  <input id="videoID" type="hidden" name="videoID" value="">
@@ -80,12 +79,15 @@
 		  <input id="pd" type="hidden" name="pd" value="">
 	      <input type="button" id="btnComment" name="btnComment" value="Comment">
 	    </form>
-	    
+		<div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false">
+			<h4>View Comments</h4>
+			<span id="videoDescription"></span>
+			<span id="fcn">Be the first to comment this video!</span>
 	     <div style="padding: 10px; color: white;">
 			<div id=returnValue>
 			</div>
 		</div>
-
+		</div>
 		<script>
 		  // START GET JSON
 		  	var tUp = "<a id='rateUp' name='rateUp'><img src='image/thumbs-up.png' height='28px' width='28px' /></a>";
@@ -116,8 +118,6 @@
 		    document.getElementById('tDown').innerHTML = tDown;
 		   	document.getElementById("tUp").style.display = "none";
 		   	document.getElementById("tDown").style.display = "none";
-		   	document.getElementById("hideDesc").style.display = "none";
-		   	document.getElementById("videoDescription").style.display = "none";
 			$(document).ready(function() {
 					var xmlhttpVideos;
 					var xmlhttpComments;
@@ -198,7 +198,7 @@
 					  		if(mtaJSONComments.comments[i].video_id == videoID)
 					  		{
 					  		//commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
-					  		
+					  		document.getElementById('fcn').style.display = "none";
 					  		commentList = commentList + "<div style='width:100%;word-wrap:break-word;'><br /><table><tr valign='top'><td rowspan='2'><img src='image/defaultavatar.jpg' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
 					  		+mtaJSONComments.comments[i].email+"</span></td></tr><tr><td>"
 					  		+videoComments[i+1]+"</td></tr></table></div><br />";
@@ -356,23 +356,8 @@
 				});
             });
 			
-			$(document).ready(function(){
-           	  $("#showDesc").click(function(){
-           	  	document.getElementById("videoDescription").style.display = "block";
-           	  	document.getElementById("showDesc").style.display = "none";
-           	  	document.getElementById("hideDesc").style.display = "block";
-		   	  });
-            });
-            
-           $(document).ready(function(){
-           	  $("#hideDesc").click(function(){
-           	  	document.getElementById("videoDescription").style.display = "none";
-           	  	document.getElementById("showDesc").style.display = "block";
-           	  	document.getElementById("hideDesc").style.display = "none";
-		   	  });
-            });
-            
-            
+
+           
 		    function goBack()
             {
               window.history.back()
