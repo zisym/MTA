@@ -21,7 +21,35 @@
             {
               window.history.back()
             }
+            
         </script>
+        <style>
+		 table.detail {
+			border-width: 1px;
+			border-spacing: 2px;
+			border-style: none;
+			border-color: gray;
+			border-collapse: collapse;
+			text-align: center;
+		}
+		table.detail th {
+			border-width: 1px;
+			padding: 1px;
+			border-style: inset;
+			border-color: black;
+			background-color: ;
+			-moz-border-radius: ;
+		}
+		table.detail td {
+			border-width: 1px;
+			padding: 1px;
+			border-style: inset;
+			border-color: black;
+			background-color: ;
+			-moz-border-radius: ;
+			padding: 10px;
+		}
+        </style>
     </head>
     <body>
         <!--HEADER START -->
@@ -33,30 +61,43 @@
         <!--HEADER END -->
     
     	<div>		
-			<div>
-				<h1>Detail</h1>
-				<hr />
-				
-				<label id="lblUsername"></label><br />
-				<label id="lblEmail"></label><br />
-				<label id="lblAge"></label><br />
-				
-				<h1>Change Password</h1>
-				<hr />
-				
+			<div>				
 				<div data-position="inline">
-					<form id="formChangePassword">
-						<label id="msgPwd"></label>
-						<input id="pwd" type="password" placeholder="Password" onfocus="clearThis(this)"><br />
-						<input id="retypePwd" type="password" placeholder="Re-type Password" onfocus="clearThis(this)"><br />
-						<input onclick="btnChangePassword()" type="submit" value="Submit"/> <!-- value doesn't show up -->
-					</form> 
+					<div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
+					    <h4>Avatar Selection</h4>
+					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
+					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
+					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
+					</div>
+					<div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
+					    <h4>Detail</h4>
+					    <table class="detail" align="center">
+					    	<tr style="background-color: black;">
+					    		<td style="color: orange;">Full Name</td>
+					    		<td style="color: orange;">Email</td>
+					    	</tr>
+					    	<tr style="background-color: white;">
+					    		<td><p id="lblFullName" style="color: black;"></p></td>
+					    		<td><p id="lblEmail" style="color: black;"></p></td>
+					    	</tr>
+					    </table>
+					</div>
+					<div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false">
+						<h4>Change Password</h4>
+						<form id="formChangePassword">	
+							<p id="msgPwd"></p>
+							<input id="pwd" type="password" placeholder="Password" onfocus="clearThis(this)">
+							<input id="retypePwd" type="password" placeholder="Re-type Password" onfocus="clearThis(this)">
+							<input onclick="btnChangePassword()" type="button" value="Save Changes"/> <!-- value doesn't show up -->
+						</form> 
+					</div>
+					
+
 				</div>
 				<script>
-					document.getElementById('lblUsername').innerHTML = 'UsernameNumber1224';
-					document.getElementById('lblEmail').innerHTML = 'test@email.com';
-					document.getElementById('lblAge').innerHTML = '203 Years Old';
-                    
+					document.getElementById('lblFullName').innerHTML += 'John Derp';
+					document.getElementById('lblEmail').innerHTML += 'abc@abc.com';
+	             
 					function btnChangePassword()
 					{
 						var form = document.getElementById("formChangePassword");
@@ -82,16 +123,15 @@
 				</script>
 			</div>
             
-            <!-- LOGOUT START -->
+            <!-- LOGOUT START
             <div>
                 <h1></h1>
 				<hr />
                 <form>
                     <input type="button" value="Logout" onClick="goTo('videolist.html')">
-                    <!-- Clear Session -->
+                    Clear Session
                 </form>
-            </div>
-            <!-- LOGOUT END -->
+            </div>LOGOUT END-->
 
 		</div>
     </body>
