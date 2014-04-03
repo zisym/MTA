@@ -35,9 +35,75 @@
 			{
 				margin-left:auto;
 			}
+			.navcontainer
+			{
+	
+			
+			margin-bottom:20px;
+			 
+			}
+			#Description_Nav
+			{
+				background-color: #333;	
+			}
+			#vTitle
+			{
+	padding-top: 12px;
+	padding-right: 15px;
+	padding-bottom: 9px;
+	padding-left: 15px;
+	font-size: 30px;
+	color:orange;
+	font-weight:bold;
+			}
+			#videoDescription
+			{
+	padding-top: 0px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	font-size: 14px;
+			}
+			.rateicon
+			{
+				width:26px;
+				
+			}
+			#rateicontable 
+			{
+				margin-left:15px;
+			}
+			#comment
+			{
+				width:98%;
+				min-height:100px;
+				margin-left:auto;
+				margin-right:auto;
+				border-radius:1px;
+				margin-top:15px;
+				margin-bottom:15px;
+				
+				
+			}
+			.commentcollapsible
+			{
+				border-radius:1px;
+			}
+			.commentlistelement
+			{
+				width:100%;
+				word-wrap:break-word;
+				
+				
+				
+				
+				
+			}
         </style>
 	</head>
 	<body>
+    <div class="screen">
+    <div data-role="page">
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
@@ -48,52 +114,86 @@
 
 		<div class="iv" id="imageClick">
 		</div>
-	 	<div style="color: white;">
-        	<div style="background-color:black;padding: 10px;">
+        
+        <!--content start -->
+	<div data-role="content" data-theme="a" >
+    
+	 	<div>
+        	<div>
         		<form>
 					<input id="videoIDR" type="hidden" name="videoID" value="">
 					<input id="emailR" type="hidden" name="email" value="">
-					<table>
+					<table id="rateicontable">
 						<tr>
 							<!-- <td><input id="rateUp" data-icon="carat-u" name="rateUp" type="button" value="&nbsp;&nbsp;Like&nbsp;&nbsp;"></td>
 							<td><input id="rateDown" data-icon="carat-d" name="rateDown" type="button" value="Dislike"></td> -->
 							
-							<td><div id="tUp"></div></td>		
-							<td><label id="like" style="font-size: 16px;" value="0"></label></td>
-							<td><div id="tDown"></div></td>
-							<td><label id="dislike" style="font-size: 16px;" value="0"></label></td>
+							<td ><div id="tUp"></div></td>		
+							<td width="15px" align="center"><label id="like" style="font-size: 16px;" value="0"></label></td>
+							<td ><div id="tDown"></div></td>
+							<td width="15px" align="center"><label id="dislike" style="font-size: 16px;" value="0"></label></td>
 						</tr>
 					</table>
 				</form>
-				<hr />
-				<div data-role="collapsible" data-theme="a" data-content-theme="a">
-					    <h4>Description</h4>
-					  	<span id="videoDescription"></span>
-				</div>
-            </div>
-    	</div>
-    	<form style="margin-top:-18px; background-color: dimgray;"><hr />
+                
+                 <!--NAV START -->
+        
+        <div data-role="tabs" id="tabs" >
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#Description_Nav" data-ajax="false">Description</a></li>
+      
+      <li><a href="#Comments_Nav" data-ajax="false">Comment</a></li>
+    </ul>
+  </div>
+  <div class="navcontainer">
+  <div id="Description_Nav">
+  	<div id="vTitle"></div>
+   		<div id="videoDescription"></div>
+        <div class="ratecontainer">
+        <form>
+						<input id="videoIDR" type="hidden" name="videoID" value="">
+						<input id="emailR" type="hidden" name="email" value="">
+						
+					</form>
+                    </div><!-- rating -->
+    
+  </div>
+  
+  <div id="Comments_Nav">
+   <form >
 	      <textarea class="inputComments" id="comment" name="comment" placeholder="Enter comment here"></textarea>
 		  <input id="videoID" type="hidden" name="videoID" value="">
 		  <input id="email" type="hidden" name="email" value="">
 		  <input id="pd" type="hidden" name="pd" value="">
 	      <input type="button" id="btnComment" name="btnComment" value="Comment">
 	    </form>
-		<div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false">
+  </div>
+</div>
+        </div>
+    	<!--NAV END -->
+                
+				
+            </div>
+    	</div>
+    	
+		<div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false" class="commentcollapsible">
 			<h4>View Comments</h4>
 			<span id="videoDescription"></span>
 			<span id="fcn">Be the first to comment this video!</span>
-	     <div style="padding: 10px; color: white;">
-			<div id=returnValue>
+	     <div style="padding: 5px; color: white;">
+			<div id="returnValue">
 			</div>
 		</div>
 		</div>
+        </div><!-- content end-->
+        </div><!-- page end -->
 		<script>
 		  // START GET JSON
-		  	var tUp = "<a id='rateUp' name='rateUp'><img src='image/thumbs-up.png' height='28px' width='28px' /></a>";
-		  	var tDown = "&nbsp;&nbsp;&nbsp;<a id='rateDown' name='rateDown'><img src='image/thumbs-down.png' height='28px' width='28px' /></a>";
-		  	var tUpD = "<img src='image/thumbs-up.png' height='28px' width='28px' />";
-		  	var tDownD = "&nbsp;&nbsp;&nbsp;<img src='image/thumbs-down.png' height='28px' width='28px' />";
+		  	var tUp = "<a id='rateUp' name='rateUp'><img src='image/thumbs-up.png' class='rateicon'  /></a>";
+		  	var tDown = "&nbsp;&nbsp;&nbsp;<a id='rateDown' name='rateDown'><img src='image/thumbs-down.png' class='rateicon'  /></a>";
+		  	var tUpD = "<img src='image/thumbs-up.png' class='rateicon'  />";
+		  	var tDownD = "&nbsp;&nbsp;&nbsp;<img src='image/thumbs-down.png' class='rateicon' />";
 			
 			var parameters = location.search.substring(4);
 
@@ -169,6 +269,7 @@
 						//Image Link for videos
 						document.getElementById("imageClick").innerHTML="<a href='http://www.youtube.com/embed/"+videoURL[videoID]+"'><img src='image/imageVP/"+videoID+".jpg' width='100%' height='200px'></a>";
 						//document.getElementById("imageClick").innerHTML="<iframe width='100%' height='200px' src='//www.youtube.com/embed/"+videoURL[videoID]+"' frameborder='0' allowfullscreen></iframe>";
+						document.getElementById("vTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoTitle").innerHTML=videoT[videoID];
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
 					}		    
@@ -199,7 +300,7 @@
 					  		{
 					  		//commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
 					  		document.getElementById('fcn').style.display = "none";
-					  		commentList = commentList + "<div style='width:100%;word-wrap:break-word;'><br /><table><tr valign='top'><td rowspan='2'><img src='image/defaultavatar.jpg' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
+					  		commentList = commentList + "<div style='' class='commentlistelement'><table><tr valign='top'><td rowspan='2' width='60px'><img src='image/defaultavatar.jpg' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
 					  		+mtaJSONComments.comments[i].email+"</span></td></tr><tr><td>"
 					  		+videoComments[i+1]+"</td></tr></table></div><br />";
 		    				document.getElementById('returnValue').innerHTML = commentList;
@@ -256,8 +357,8 @@
 		
 		//START SCRIPT FUNCTIONS
 		
-	    	document.getElementById('like').style.color = "Green";
-			document.getElementById('dislike').style.color = "Red";
+	    	//document.getElementById('like').style.color = "Green";
+			//document.getElementById('dislike').style.color = "Red";
 			
 		    $(document).ready(function(){
            	  $("#btnComment").click(function(){
@@ -365,6 +466,7 @@
             
         //END SCRIPT FUNCTIONS
 	    </script>
-	    
+        
+	    </div><!-- screen end-->
 	</body>
 </html>
