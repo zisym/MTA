@@ -38,6 +38,62 @@
                 window.history.back();
             }
 		</script>
+        <style>
+		.videolistitem table
+		{
+			width:100%;
+		}
+		.videolistitem .tdimage
+		{
+			width:107px;
+			
+		}
+		.videolistitem
+		{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #555;		
+	height:155px;	
+		}
+		.videolistitem:hover
+		{
+			opacity:0.4;
+		}
+		.videolistitemimage
+		{
+			
+			
+		}
+		.videolistitemtext
+		{
+			margin-left:4px;
+		}
+		.videolistitemtitle
+		{
+			
+			 
+			 font-size:22px;
+			 margin-bottom:6px;
+			 
+			 
+			 
+		}
+		.videolistitemtitle a
+		{
+			text-decoration:none;
+			
+			
+		}
+		
+		.videolistitemdesc
+		{
+			
+			
+			height:100px;
+		}
+		
+		
+		</style>
 	</head>
 	<body>
         <!--HEADER START -->
@@ -108,6 +164,16 @@
 					    location.href = "videoComment.html?id="+videoid;
 					}//link to video player
 					
+					function trimByWord(sentence) {
+var result = sentence;
+var resultArray = result.split(" ");
+if(resultArray.length > 29){
+resultArray = resultArray.slice(0, 29);
+result = resultArray.join(" ") + "…";
+}
+return result;
+}
+					
 				   	function searchFunction()
 					{
 						$(document).ready(function() {
@@ -155,7 +221,9 @@
 												if(searching != -1)
 												{
 
-												document.getElementById("av").innerHTML+="<table><tr><td colspan='2' align='center'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'>"+mtaJSON.videos[counter].title+"</a></td></tr><tr><td><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg' width='100px' height='116px'></a></td><td>"+mtaJSON.videos[counter].description+"</td></tr></table><br /><hr>";
+											//	document.getElementById("av").innerHTML+="<table><tr><td rowspan='2'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg'  height='150px'></a></td><td  align='center'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'>"+mtaJSON.videos[counter].title+"</a></td></tr ><tr><td>"+mtaJSON.videos[counter].description+"</td></tr></table>";
+												
+												document.getElementById("av").innerHTML+="<div class='videolistitem'> <table ><tr><td class='tdimage'> <div class='videolistitemimage'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'><img src='image/"+mtaJSON.videos[counter].video_id+".jpg'  height='150px' width='107px'></a> </div> </td><td><div class='videolistitemtext'>  <div class='videolistitemtitle'><a href='' onclick='goVideoPlayer("+mtaJSON.videos[counter].video_id+")'>"+mtaJSON.videos[counter].title+"</a></div>  <div class='videolistitemdesc'>"+trimByWord(mtaJSON.videos[counter].description)+"</div> </div></td></tr></table> </div>";
 
 												}
 
