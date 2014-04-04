@@ -11,33 +11,7 @@
         <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
-	  	<script type="text/javascript">
-		    $(document).bind("mobileinit", function() {
-		        $.support.cors = true;
-		        $.mobile.allowCrossDomainPages = true;
-		    });
-
-            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
-		    document.addEventListener("deviceready", onDeviceReady, false);
-			
-            // Adding the back button listener
-            function onDeviceReady() 
-            {
-		        navigator.splashscreen.hide();
-		        document.addEventListener("backbutton", onBackClickEvent, false); 
-		    }
-
-	        function goTo(url)
-            {
-	            window.location.href=url+"";
-	        }
-            
-            // Back button
-            function goBack()
-            {
-                window.history.back();
-            }
-		</script>
+	  	
         <style>
 		.videolistitem table
 		{
@@ -126,8 +100,32 @@
 					{
 						var videolist = 'connect to db and then get list';
 					}
-				</script>
-				<script>
+					  $(document).bind("mobileinit", function() {
+		        $.support.cors = true;
+		        $.mobile.allowCrossDomainPages = true;
+		    });
+
+            // Listener that will invoke the onDeviceReady() function as soon as phonegap has loaded properly
+		    document.addEventListener("deviceready", onDeviceReady, false);
+			
+            // Adding the back button listener
+            function onDeviceReady() 
+            {
+		        navigator.splashscreen.hide();
+		        document.addEventListener("backbutton", onBackClickEvent, false); 
+		    }
+
+	        function goTo(url)
+            {
+	            window.location.href=url+"";
+	        }
+            
+            // Back button
+            function goBack()
+            {
+                window.history.back();
+            }
+				
 					var videoURL = [];
 					var videoT = [];
 					var videoD = [];
@@ -167,8 +165,8 @@
 					function trimByWord(sentence) {
 var result = sentence;
 var resultArray = result.split(" ");
-if(resultArray.length > 29){
-resultArray = resultArray.slice(0, 29);
+if(resultArray.length > 20){
+resultArray = resultArray.slice(0, 20);
 result = resultArray.join(" ") + "…";
 }
 return result;
