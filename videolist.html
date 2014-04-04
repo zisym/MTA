@@ -13,10 +13,7 @@
         <script src="js/jqm.page.params.js"></script> 
          
         <style>
-            body
-            {
-
-            }
+            
             .navigator
             {
                 margin: 12px;
@@ -282,13 +279,16 @@
 
             function loaddiv2back()
             {
+				var ww = $(window).width()-20;
+				
                 $( "#container" ).css({
-                    marginLeft: "400px",
-                    width: "auto",
+                    marginLeft: ww,
+                    width: ww,
                 });
 
                 $( "#container" ).animate({
                     marginLeft: "10px",
+					width: ww,
                 }, 200 );
 
                 document.getElementById("div2").style.display="";
@@ -302,23 +302,28 @@
 
             function loaddiv2()
             {
-                $( "#container" ).animate({
-                    marginLeft: "-400px",
-                    width: "0px",
+				var ww = $(window).width()-20;
+                 $( "#container" ).animate({
+                    marginLeft: -ww,
+                    width: ww,
                 }, 200 );
 
                 setTimeout("loaddiv2back()",240);
+				setTimeout("setcontainercss()", 460);
             }
 
             function loaddiv3back()
             {
+				var ww = $(window).width()-20;
+				
                 $( "#container" ).css({
-                    marginLeft: "400px",
-                    width: "auto",
+                    marginLeft: ww,
+                    width: ww,
                 });
 
                 $( "#container" ).animate({
                     marginLeft: "10px",
+					width: ww,
                 }, 200 );
 
                 document.getElementById("div2").style.display="none";
@@ -331,24 +336,31 @@
 
             function loaddiv3()
             {
+				var ww = $(window).width()-20;
                  $( "#container" ).animate({
-                    marginLeft: "-400px",
-                    width: "0px",
+                    marginLeft: -ww,
+                    width: ww,
                 }, 200 );
 
                 setTimeout("loaddiv3back()",240);
+				setTimeout("setcontainercss()", 460);
             }
 
             function loaddiv1back()
             {
+				var ww = $(window).width()-20;
+				
                 $( "#container" ).css({
-                    marginLeft: "400px",
-                    width: "auto",
+                    marginLeft: ww,
+                    width: ww,
                 });
 
                 $( "#container" ).animate({
                     marginLeft: "10px",
+					width: ww,
                 }, 200 );
+				
+				
 
                 document.getElementById("div2").style.display="none";
                 document.getElementById("div1").style.display="";
@@ -359,13 +371,22 @@
 
             function loaddiv1()
             {
+				var ww = $(window).width()-20;
                  $( "#container" ).animate({
-                    marginLeft: "-400px",
-                    width: "0px",
+                    marginLeft: -ww,
+                    width: ww,
                 }, 200 );
 
                 setTimeout("loaddiv1back()",240);
+				setTimeout("setcontainercss()", 480);
             }
+			
+			function setcontainercss(){
+                $( "#container" ).css({
+                    
+                    width: "auto",
+                });
+            } 
 
             function goBack()
             {
