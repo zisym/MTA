@@ -111,16 +111,19 @@
         </style>
 	</head>
 	<body>
+	
+		
     <div class="screen">
     <div data-role="page">
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed" class="tc_header">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1 class="lh1" id="videoTitle"></h1>
-			<a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'">Options</a>
+			<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
+			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
       	</div>
         <!--HEADER END -->
-
+		
 		<div class="iv" id="imageClick">
 		</div>
         
@@ -197,6 +200,19 @@
 		</div>
         </div><!-- content end-->
         </div><!-- page end -->
+        
+    <div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close" onclick="goBack()">Close menu</a></li>
+            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
+            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+        </ul>
+    </div><!-- /panel -->
+        
+        
+        
 		<script>
 		  // START GET JSON
 		  	var tUp = "<a id='rateUp' name='rateUp'><img src='image/thumbs-up.png' class='rateicon'  /></a>";
@@ -309,7 +325,7 @@
 					  		{
 					  		//commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
 					  		document.getElementById('fcn').style.display = "none";
-					  		commentList = commentList + "<div style='' class='commentlistelement'><table><tr valign='top'><td rowspan='2' width='60px'><img src='image/defaultavatar.jpg' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
+					  		commentList = commentList + "<div style='' class='commentlistelement'><table><tr valign='top'><td rowspan='2' width='60px'><img src='image/Avatar/av6.png' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
 					  		+mtaJSONComments.comments[i].email+"</span></td></tr><tr><td>"
 					  		+videoComments[i+1]+"</td></tr></table></div><br />";
 		    				document.getElementById('returnValue').innerHTML = commentList;
