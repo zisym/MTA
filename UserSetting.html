@@ -26,9 +26,8 @@
         <style>
 		 table.detail {
 			border-width: 1px;
-			border-spacing: 2px;
 			border-style: none;
-			border-color: gray;
+			border-color: white;
 			border-collapse: collapse;
 			text-align: center;
 		}
@@ -36,7 +35,7 @@
 			border-width: 1px;
 			padding: 1px;
 			border-style: inset;
-			border-color: black;
+			border-color: white;
 			background-color: ;
 			-moz-border-radius: ;
 		}
@@ -44,10 +43,11 @@
 			border-width: 1px;
 			padding: 1px;
 			border-style: inset;
-			border-color: black;
+			border-color: orange;
 			background-color: ;
 			-moz-border-radius: ;
 			padding: 10px;
+			width: 50%;
 		}
         </style>
     </head>
@@ -64,9 +64,28 @@
 				<div data-position="inline">
 					<div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
 					    <h4>Avatar Selection</h4>
-					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
-					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
-					  	<img src="image/defaultavatar.jpg" height="92px" width="92px" />
+					    <table align="center">
+						    <tr>
+						    	<td rowspan="2"><div id="displayAv"><img src='image/defaultavatar.jpg' height='92px' width='92px' /></div></td>
+						    	<td>
+						    		<div data-role="collapsible" data-collapsed="true" data-icon="none" data-theme="a" data-content-theme="a">
+					    				<h4>Select Avatar</h4>
+					    				<a onClick="av(1)"><img src='image/Avatar/av1.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(2)"><img src='image/Avatar/av2.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(3)"><img src='image/Avatar/av3.png' height='40px' width='40px' /></a><br />
+					    				<a onClick="av(4)"><img src='image/Avatar/av4.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(5)"><img src='image/Avatar/av5.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(6)"><img src='image/Avatar/av6.png' height='40px' width='40px' /></a><br />
+					    				<a onClick="av(7)"><img src='image/Avatar/av7.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(8)"><img src='image/Avatar/av8.png' height='40px' width='40px' /></a>
+					    				<a onClick="av(9)"><img src='image/Avatar/av9.png' height='40px' width='40px' /></a>		
+						    		</div>
+						    	</td>
+						  	</tr>
+						  	<tr>
+						  		<td><input id="btnSaveAv" type="button" value="Save Avatar"/></td>
+						  	</tr>
+					  	</table>
 					</div>
 					<div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
 					    <h4>Detail</h4>
@@ -75,9 +94,9 @@
 					    		<td style="color: orange;">Full Name</td>
 					    		<td style="color: orange;">Email</td>
 					    	</tr>
-					    	<tr style="background-color: white;">
-					    		<td><p id="lblFullName" style="color: black;"></p></td>
-					    		<td><p id="lblEmail" style="color: black;"></p></td>
+					    	<tr style="background-color: none;">
+					    		<td><p id="lblFullName" style="color: white;"></p></td>
+					    		<td><p id="lblEmail" style="color: white;"></p></td>
 					    	</tr>
 					    </table>
 					</div>
@@ -86,7 +105,7 @@
 						<form id="formChangePassword">
 							<input id="pwd" type="password" placeholder="Password" onfocus="clearThis(this)">
 							<input id="retypePwd" type="password" placeholder="Re-type Password" onfocus="clearThis(this)">
-							<input id="btnSaveChange" type="button" value="Save Changes"/> <!-- value doesn't show up -->
+							<input id="btnSavePassword" type="button" value="Save Password"/> <!-- value doesn't show up -->
 							
 							<!-- MESSAGE START -->
 			                <div data-role="popup" id="popupBasic">
@@ -99,20 +118,33 @@
 			                    <p>Password Change Successfully!<p>
 			                </div>
 			                 <!-- MESSAGE END -->
-							
 						</form> 
 					</div>
-					
+					<!-- LOGOUT START
+            		<div>
+		                <h1></h1>
+						<hr />
+		                <form>
+		                    <input type="button" value="Logout" onClick="goTo('videolist.html')">
+		                </form>
+            		</div> LOGOUT END-->
 
 				</div>
 				<script>
-					document.getElementById('lblFullName').innerHTML = 'John Derp';
-					document.getElementById('lblEmail').innerHTML = 'abc@abc.com';
+				
+				
+				
+				
+				//document.getElementById('displayAv').innerHTML = "<img src='image/Avatar/av9.png' height='92px' width='92px' />";
+				
+				  document.getElementById('lblFullName').innerHTML = 'John Derp';
+				  document.getElementById('lblEmail').innerHTML = 'abc@abc.com';
 	             	
-					  var pw = $('#pwd').val();
-	    	 		  var em = "abc@abc.com";
+				  var pw = $('#pwd').val();
+	    	 	  var em = "abc@abc.com";
+	    	 	  var selectedAv = "defaultavatar.jpg";
 				  $(document).ready(function(){
-		           	  $("#btnSaveChange").click(function(){
+		           	  $("#btnSavePassword").click(function(){
 		           	  	var x=document.forms["formChangePassword"]["pwd"].value;
 		                var y=document.forms["formChangePassword"]["retypePwd"].value;
 
@@ -151,24 +183,34 @@
 						
 		            });
 					
+					function av(avNum)
+					{
+						
+						selectedAv = "av"+avNum+".png";
+						document.getElementById('displayAv').innerHTML = "<img src='image/Avatar/"+selectedAv+"' height='92px' width='92px' />";
+					}
+					
+
+		            
+		            $(document).ready(function(){
+		           	  $("#btnSaveAv").click(function(){
+							
+						
+						});
+						
+		            });
 					
 					function clearThis(target)
 					{
 						target.value= "";
 					}
+					
+					function goTo(baseUrl)
+					{
+						window.location = baseUrl;
+					}
 				</script>
 			</div>
-            
-            <!-- LOGOUT START
-            <div>
-                <h1></h1>
-				<hr />
-                <form>
-                    <input type="button" value="Logout" onClick="goTo('videolist.html')">
-                    Clear Session
-                </form>
-            </div>LOGOUT END-->
-
 		</div>
     </body>
 </html>
