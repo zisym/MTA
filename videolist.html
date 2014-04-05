@@ -12,7 +12,68 @@
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
         <script src="js/jqm.page.params.js"></script> 
-         
+        <script>
+            function getCookie(cname)
+            {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                var cookie = ca[0].trim();
+                for(var i=0; i<ca.length; i++) 
+                  {
+                  var c = ca[i].trim();
+                  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                  }
+                return "";
+            }
+            
+            function checkCookie()
+            {
+                var userLoggedin=getCookie("isUserLoggedin");
+                if (userLoggedin=="OK")
+                {
+                  alert("You are logged in");
+                    // TODO: function for registered users
+                }
+                else 
+                {
+                    alert("Not logged in");
+                    // TODO: function for guest users
+                }
+            }
+            
+            // Login check
+            function isLoggedin()
+            {
+                alert(getCookie("isUserLoggedin"));
+                
+                var optionButton = document.getElementById("optionButton");
+                var loginButton = document.getElementById("loginButton");
+                
+                var login = getCookie("isUserLoggedin");
+                
+                if(login=="OK"){
+                    optionButton.style.visibility='visible';
+                    loginButton.style.visibility='hidden';
+                }else{
+                    optionButton.style.visibility='hidden';
+                    loginButton.style.visibility='visible';
+                }
+            }
+            
+            // Erase a cookie
+            function eraseCookie(name){
+                var today = new Date();
+                alert(document.cookie);
+                document.cookie = name + '=';
+                alert(document.cookie);
+            }
+            
+            // Logout - erase a cookie
+            function logout(url){
+                eraseCookie('isUserLoggedin');
+                goTo(url);
+            }
+        </script>
         <style>
             
             .navigator
@@ -67,18 +128,33 @@
 			
 		</style>
 	</head>
-	<body >
+	<body onload="isLoggedin()">
 	<em></em>
         
 	<div class="screen">
     <div data-role="page" data-theme="a">
     
+        <!-- HEADER START -->
+        <div data-role="header" data-position="fixed">
+            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a>  
+            <h1>Trailer List</h1>
+            <div id="optionButton">
+                <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onClick="logout('videolist.html')">Logout</a>
+            </div>
+            <div id="loginButton">
+                <a href="login.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Login</a>
+            </div>
+        </div>
+        <!-- HEADER END --> 
+        
         <!-- /header -->
+        <!--
       <div data-role="header" data-position="fixed" class="tc_header">
       
         <h1>Trailer List</h1>
         <a href="login.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Login</a> 
        </div>
+        -->
         
         <!-- navigation -->
        

@@ -120,6 +120,7 @@
 			    	{
                         if(xmlhttp.responseText=="\"OK\"")
                         {
+                            document.cookie="isUserLoggedin=OK; expires=18 Dec 2014 12:00:00 GMT; path=/"; // Set a cookie as "OK"
                             window.location ="videolist.html";
                         }else{
                             alert("not logged in");
