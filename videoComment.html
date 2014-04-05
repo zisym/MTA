@@ -122,6 +122,19 @@
 			<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
 			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
       	</div>
+        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+	        <ul data-role="listview">
+	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
+	            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
+	            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	            <hr />
+	            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
+				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
+				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+	        </ul>
+       </div><!-- /panel -->
         <!--HEADER END -->
 		
 		<div class="iv" id="imageClick">
@@ -171,7 +184,6 @@
                     </div><!-- rating -->
     
   </div>
-  
   <div id="Comments_Nav">
    <form >
 	      <textarea class="inputComments" id="comment" name="comment" placeholder="Enter comment here"></textarea>
@@ -200,18 +212,6 @@
 		</div>
         </div><!-- content end-->
         </div><!-- page end -->
-        
-    <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="a" id="nav-panel">
-        <ul data-role="listview">
-            <li data-icon="delete"><a href="#" data-rel="close" onclick="goBack()">Close menu</a></li>
-            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
-            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
-            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
-            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
-        </ul>
-    </div><!-- /panel -->
-        
-        
         
 		<script>
 		  // START GET JSON

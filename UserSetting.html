@@ -66,7 +66,20 @@
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1>User Setting</h1>
 			<!-- <a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> -->
+			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
       	</div>
+      	<div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+	        <ul data-role="listview">
+	            <li data-icon="delete"><a href="#" data-rel="close">Close Menu</a></li>
+	            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	            <hr />
+	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+	            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
+				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
+				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+	        </ul>
+        </div><!-- /panel -->
         <!--HEADER END -->
     	<div>		
 			<div>				
@@ -126,6 +139,9 @@
 			                <div data-role="popup" id="pwcs">
 			                    <p>Password Change Successfully!<p>
 			                </div>
+			                <div data-role="popup" id="awcs">
+			                    <p>Avatar Change Successfully!<p>
+			                </div>
 			                 <!-- MESSAGE END -->
 						</form> 
 					</div>
@@ -148,15 +164,16 @@
 				
 				  document.getElementById('lblFullName').innerHTML = 'John Derp';
 				  document.getElementById('lblEmail').innerHTML = 'abc@abc.com';
-	             	
-				  var pw = $('#pwd').val();
+	            
+				  //var pw = 
+				  
 	    	 	  var em = "abc@abc.com";
 	    	 	  var selectedAv = "defaultavatar.jpg";
 				  $(document).ready(function(){
 		           	  $("#btnSavePassword").click(function(){
 		           	  	var x=document.forms["formChangePassword"]["pwd"].value;
 		                var y=document.forms["formChangePassword"]["retypePwd"].value;
-
+						var xmlhttp;
 						if(x==null || x=="")
 		                {
 		                    $( "#nullpassword" ).popup( "open" );
@@ -179,8 +196,8 @@
 					  
 					  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/ChangePassword.php",true);
 					  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					  xmlhttp.send("email="+em+"&password="+pw);
-					         
+					  xmlhttp.send("email="+em+"&password="+$('#pwd').val());
+					
 					   xmlhttp.onreadystatechange=function()
 					   {
 					  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -199,14 +216,32 @@
 						document.getElementById('displayAv').innerHTML = "<img src='image/Avatar/"+selectedAv+"' height='92px' width='92px' />";
 					}
 					
-
+	
 		            
 		            $(document).ready(function(){
 		           	  $("#btnSaveAv").click(function(){
-							
-						
+		           	  	var xmlhttp;
+		           	  	if (window.XMLHttpRequest)
+						{// code for IE7+, Firefox, Chrome, Opera, Safari
+						   xmlhttp=new XMLHttpRequest();
+						}
+						else
+						{// code for IE6, IE5
+						   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+		           	  	
+						xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/ChangeAvatar.php",true);
+					    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					    xmlhttp.send("email="+em+"&avatar="+selectedAv);
+						xmlhttp.onreadystatechange=function()
+					    {
+					    	alert("test");
+					  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					    	{
+					    		 $( "#awcs" ).popup( "open" );
+					    	}
+					  	}
 						});
-						
 		            });
 					
 					function clearThis(target)

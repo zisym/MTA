@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/TASH/Desktop/videos-pack/mobile/test.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>FAQ</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <link rel="stylesheet" href="css/tc_style.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+        
+        <style>
+        	.ui-selectmenu.ui-popup .ui-input-search {
+			    margin-left: .5em;
+			    margin-right: .5em;
+			}
+			.ui-selectmenu.ui-dialog .ui-content {
+			    padding-top: 0;
+			}
+			.ui-selectmenu.ui-dialog .ui-selectmenu-list {
+			    margin-top: 0;
+			}
+			.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+			    border-top-width: 1px;
+			    -webkit-border-radius: 0;
+			    border-radius: 0;
+			}
+			.ui-selectmenu.ui-dialog .ui-header {
+			    border-bottom-width: 1px;
+			}
+        </style>
+       	
+    </head>
+    <body>
+    	<div id="div_header">
+			<div data-role="header" data-position="fixed" class="tc_header">
+				<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+				<h1 class="lh1">FAQ</h1>
+				<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+	      	</div>
+	        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+		        <ul data-role="listview">
+		            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
+		            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
+		            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+		            <hr />
+		            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+		            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+					<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
+					<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+		        </ul>
+	       </div><!-- /panel -->
+       </div><br />
+       <div id="div_logo" align="center">
+       <img src="image/LogoAndIcon/MTA_icon.png" height="100px" width="100px" /><br />
+       <span>Movie Trailer App</span>
+       <br />
+       </div>
+       <div id="div_content" style="padding:10px;">
+		   <form>
+			    <select id="filter-menu" data-native-menu="false" onchange="if (this.selectedIndex) displayAnswer();">
+			    	<option value="ss" selected="selected">Select a Question:</option>
+			        <option value="q1">What is the name of your app?</option>
+			        <option value="q2">Who is the leader of the group project?</option>
+			        <option value="q3">How many people is in your group?</option>
+			        <option value="q4">What is this app about?</option>
+			        <option value="q5">Is this app for everyone?</option>
+			        <option value="q6">When did you start this project?</option>
+			        <option value="q7">Why did you create this app?</option>
+			        <option value="q8">What is the age range?</option>
+			        <option value="q9">This app is available on what platform?</option>
+			      	<option value="q10">I have suggestion, where do I send them?</option>
+			        <option value="q11">Can I help with this app?</option>
+			        <option value="q12">Is this app free?</option>
+			        <option value="q13">Why is the app slow?</option>
+			        <option value="q14">Who created this logo?</option>
+			        <option value="q15">Where do you live?</option>
+			        <option value="q16">Who do you work for?</option>
+			        <option value="q17">Who is the designer of this app?</option>
+			        <option value="q18">Why is this app not working?</option>
+			        <option value="q19">Can I create millions of accounts?</option>
+			        <option value="q20">Am I allowed to destroy your app?</option>
+			    </select>
+		   </form>
+		  
+		   <div data-role="tabs" id="tabs">
+			  <div data-role="navbar">
+			    <ul>
+			      <li><a href="#one" data-ajax="false">Answers:</a></li>
+			    </ul>
+			  </div>
+			  <div id="one" class="ui-body-d ui-content" style="background-color: #333; margin-right:-4px; margin-left:1px;">
+			     <p id="answers">No Question Selected</p>
+			  </div>
+		  </div>
+			   
+		   
+       </div>
+       <script>
+       $.mobile.document
+	    .on( "listviewcreate", "#filter-menu-menu", function( e ) {
+	        var input,
+	            listbox = $( "#filter-menu-listbox" ),
+	            form = listbox.jqmData( "filter-form" ),
+	            listview = $( e.target );
+	        if ( !form ) {
+	            input = $( "<input data-type='search'></input>" );
+	            form = $( "<form></form>" ).append( input );
+	            input.textinput();
+	            $( "#filter-menu-listbox" )
+	                .prepend( form )
+	                .jqmData( "filter-form", form );
+	        }
+	        listview.filterable({ input: input });
+	    })
+
+	    .on( "pagebeforeshow pagehide", "#filter-menu-dialog", function( e ) {
+	        var form = $( "#filter-menu-listbox" ).jqmData( "filter-form" ),
+	            placeInDialog = ( e.type === "pagebeforeshow" ),
+	            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#filter-menu-listbox" );
+	        form
+	            .find( "input" )
+	            .textinput( "option", "inset", !placeInDialog )
+	            .end()
+	            .prependTo( destination );
+	    });
+       
+       	function displayAnswer()
+       	{
+       		var q = document.getElementById('filter-menu').value;
+       		
+       		if(q == "q1")
+       		{
+       			document.getElementById('answers').innerHTML = "MTA - Movie Trailer App";
+       		}
+       		else if(q == "q2")
+       		{
+       			document.getElementById('answers').innerHTML = "Yoko Onuma is the leader of MTA.";
+       		}
+       		else if(q == "q3")
+       		{
+       			document.getElementById('answers').innerHTML = "There are five people in total. Yoko, Ryan, Selina, Danny, and Tashana.";
+       		}
+       		else if(q == "q4")
+       		{
+       			document.getElementById('answers').innerHTML = "This is a Movie Trailer App that allows the users to view, rate, and comment videos.";
+       		}
+       		else if(q == "q5")
+       		{
+       			document.getElementById('answers').innerHTML = "If you are not interest in watching movies then this app is not for you.";
+			}
+       		else if(q == "q6")
+       		{
+       			document.getElementById('answers').innerHTML = "We started beginning the process of this app on late 2013.";
+       		}
+       		else if(q == "q7")
+       		{
+       			document.getElementById('answers').innerHTML = "We are discussing what app to make for our major project during in college. Our leader decided that making a video group was a good choice.";
+       		}
+       		else if(q == "q8")
+       		{
+       			document.getElementById('answers').innerHTML = "The youngest was 21 years old and the oldest was 30.";
+       		}
+       		else if(q == "q9")
+       		{
+       			document.getElementById('answers').innerHTML = "This app was build on phonegap; however, it is only available for android and windows phone. We do not have a IOS developer license yet.";
+       		}
+       		else if(q == "q10")
+       		{
+       			document.getElementById('answers').innerHTML = "You can go to menu option and select Feedback. You can submit your suggestions there. Feel free to submit as many as you want.";
+       		}
+       		else if(q == "q11")
+       		{
+       			document.getElementById('answers').innerHTML = "We are currently not hiring anyone at the moment. If you would like to help, you can drop off a suggestion using Feedback page.";
+       		}
+       		else if(q == "q12")
+       		{
+       			document.getElementById('answers').innerHTML = "Yes, this is app free for everyone. All age group.";
+       		}
+       		else if(q == "q13")
+       		{
+       			document.getElementById('answers').innerHTML = "This app is currently using a weak server, but still good enough for local use.";
+       		}
+       		else if(q == "q14")
+       		{
+       			document.getElementById('answers').innerHTML = "Tashana Williams and Ryan Gao created this awesome logo.";
+       		}
+       		else if(q == "q15")
+       		{
+       			document.getElementById('answers').innerHTML = "Everywhere.";
+       		}
+       		else if(q == "q16")
+       		{
+       			document.getElementById('answers').innerHTML = "This is classified information, sorry.";
+       		}
+       		else if(q == "q17")
+       		{
+       			document.getElementById('answers').innerHTML = "Ryan Gao is the main designer for MTA. The others did some designing as well.";
+       		}
+       		else if(q == "q18")
+       		{
+       			document.getElementById('answers').innerHTML = "This app is not working because of our end problem due to weak connection or you are using the app incorrectly.";
+       		}
+       		else if(q == "q19")
+       		{
+       			document.getElementById('answers').innerHTML = "As long as we have enough space in our database. I suggest you only create an extra account if you forgot your password.";
+       		}
+       		else if(q == "q20")
+       		{
+       			document.getElementById('answers').innerHTML = "Go away and destroy your own things instead.";
+       		}
+       	}
+       
+        function goBack()
+        {
+            window.history.back();
+        }
+       </script>
+   	</body>
+</html>

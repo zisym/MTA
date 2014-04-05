@@ -84,8 +84,22 @@
 		<div data-role="header" data-position="fixed" class="tc_header">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
 			<h1>Search</h1>
-			<a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'">Options</a>
-      	</div> 
+			<!--<a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'">Options</a>-->
+			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+      	</div>
+      	<div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+	        <ul data-role="listview">
+	            <li data-icon="delete"><a href="#" data-rel="close">Close Menu</a></li>
+	            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
+	            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	            <hr />
+	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
+				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
+				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+	
+	        </ul>
+        </div><!-- /panel -->
         <!--HEADER END -->
 
 		<div data-role="content" data-theme="a">

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>About Us</title>
+		<link rel="stylesheet" href="themes/Black_MC.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
+        <link rel="stylesheet" href="css/tc_style.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="js/jqm.page.params.js"></script> 
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+   </head>
+   <body>
+   		<div id="div_header">
+			<div data-role="header" data-position="fixed" class="tc_header">
+				<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
+				<h1 class="lh1">About Us</h1>
+				<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+	      	</div>
+	        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+		        <ul data-role="listview">
+		            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
+		            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
+		            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+		            <hr />
+		            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+		            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+					<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
+					<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+		        </ul>
+	       </div><!-- /panel -->
+       </div>
+       <br />
+       <div id="div_content" align="center">
+       		<img src="image/LogoAndIcon/MTA_icon.png" height="100px" width="100px" /><br />
+       		<span>Movie Trailer App</span>
+       		
+			<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
+			    <div data-role="collapsible" id="set1" data-collapsed="false">
+			        <h3>Developers</h3>
+			        <p>Leader: Yoko Onuma<br />
+			        Ryan(Sihe) Gao<br />
+			        Selina(Huixian) Xie<br />
+			        Danny Tran<br />
+			        Tashana Williams</p>
+			        <p>We are students of George Brown College. We are all in the same program called Computer Programmer Analyst.
+					We've created this app on our 5th and 6th semester. </p>
+			    </div>
+			    <div data-role="collapsible" id="set1" data-collapsed="true">
+			        <h3>Location</h3>
+			        <p>George Brown College Casa Loma Campus<br />
+					160 Kendal Avenue<br />
+					Toronto, Ontario<br />
+					Canada<br />
+					M5R 1M3<br />
+					(416) 415-2000 </p>
+			    </div>
+			    <div data-role="collapsible" id="set1" data-collapsed="true">
+			        <h3>Contact</h3>
+			        <p>yoko.onuma@gmail.com<br />
+					remoteriver@gmail.com<br />
+					selina.huixian.xie@gmail.com<br />
+					dannyvantran@gmail.com<br />
+					tashanawilliams@hotmail.com</p>
+			    </div>
+			</div>
+       </div>
+       <script>
+   		function goBack()
+        {
+          window.history.back()
+        }
+       </script>
+       
+   </body>
+</html>
