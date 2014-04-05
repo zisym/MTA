@@ -100,7 +100,7 @@
 			  var xmlhttp;
 				
 				
-				alert(e+p);
+				//alert(e+p);
 			  if (window.XMLHttpRequest)
 			  {// code for IE7+, Firefox, Chrome, Opera, Safari
 			     xmlhttp=new XMLHttpRequest();
@@ -118,7 +118,12 @@
 			   {
 			  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			    	{
-			    		alert(xmlhttp.responseText);
+                        if(xmlhttp.responseText=="\"OK\"")
+                        {
+                            window.location ="videolist.html";
+                        }else{
+                            alert("not logged in");
+                        }
 			    	}
 			  	}
 				});
