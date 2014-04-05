@@ -1,3 +1,7 @@
+<?php
+    ob_start(); 
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,477 +10,410 @@
 		<title>jQuery Mobile: Theme Download</title>
 		<link rel="stylesheet" href="themes/Black_MC.min.css" />
 		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+       
 		<link rel="stylesheet" href="jquerymobile/jquery.mobile.structure-1.4.2.min.css" />
-        <link rel="stylesheet" href="css/tc_style.css" />
-        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
         <script src="js/jqm.page.params.js"></script> 
-        <script>
-            function getCookie(cname)
-            {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                var cookie = ca[0].trim();
-                for(var i=0; i<ca.length; i++) 
-                  {
-                  var c = ca[i].trim();
-                  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-                  }
-                return "";
-            }
-            
-            function checkCookie()
-            {
-                var userLoggedin=getCookie("isUserLoggedin");
-                if (userLoggedin=="OK")
-                {
-                  alert("You are logged in");
-                    // TODO: function for registered users
-                }
-                else 
-                {
-                    alert("Not logged in");
-                    // TODO: function for guest users
-                }
-            }
-            
-            // Login check
-            function isLoggedin()
-            {
-                var optionButton = document.getElementById("optionButton");
-                var loginButton = document.getElementById("loginButton");
-                
-                var login = getCookie("isUserLoggedin");
-                
-                if(login=="OK"){
-                    optionButton.style.visibility='visible';
-                    loginButton.style.visibility='hidden';
-                }else{
-                    optionButton.style.visibility='hidden';
-                    loginButton.style.visibility='visible';
-                }
-            }
-            
-            // Erase a cookie
-            function eraseCookie(name){
-                var today = new Date();
-                alert(document.cookie);
-                document.cookie = name + '=';
-                alert(document.cookie);
-            }
-            
-            // Logout - erase a cookie
-            function logout(url){
-                eraseCookie('isUserLoggedin');
-                goTo(url);
-            }
-        </script>
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
+		 <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+         
         <style>
-            
-            .navigator
-            {
-                margin: 12px;
-            }
-            .wrap
-            {
-                margin-left:10px;
-            }
-            .thumbnails_a
-            {
-                float: left;
-                margin: 7px;	
-            }
-            #intro
-            {
-                border-bottom-width: 1px;
-                border-bottom-style: solid;
-                border-bottom-color: #CCC;
-                opacity:0.7;
-            }
-            .thumbnails_b
-            {
-                float: left;
-                margin: 7px;	
-            }
-            a:hover img
-            {
-              opacity:0.7;
-            }
-            .thumbnails_a img
-            {
-                width:190px;
-                height:269px;
-                box-shadow: 4px 4px 10px #000000;
-            }
-            .thumbnails_b img
-            {
-                width:89px;
-                height:127px;
-                box-shadow: 4px 4px 10px #000000;
-            }
-			.tc_header
-			{
-				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
-			}
-			.tc_footer
-			{
-				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
-			}
+		body
+		{
 			
+		}
+		.navigator
+		{
+	margin: 12px;
+		}
+		.wrap
+		{
+		  margin-left:10px;
+		}
+		
+		.thumbnails_a
+{
+	float: left;
+	margin: 7px;	
+}
+#intro
+{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	opacity:0.7;
+}
+.thumbnails_b
+{
+	float: left;
+	margin: 7px;	
+}
+a:hover img
+  {
+  opacity:0.7;
+  }
+.thumbnails_a img
+{
+	width:190px;
+	height:269px;
+	box-shadow: 4px 4px 10px #000000;
+}
+.thumbnails_b img
+{
+	width:89px;
+	height:127px;
+	box-shadow: 4px 4px 10px #000000;
+}
+		
+		
 		</style>
+        
+        
+        
+        
 	</head>
-	<body onload="isLoggedin()">
+	<body >
 	<em></em>
         
 	<div class="screen">
     <div data-role="page" data-theme="a">
     
-        <!-- HEADER START -->
-        <div data-role="header" data-position="fixed">
-            <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a>  
-            <h1>Trailer List</h1>
-            <div id="optionButton">
-                <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onClick="logout('videolist.html')">Logout</a>
-            </div>
-            <div id="loginButton">
-                <a href="login.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Login</a>
-            </div>
-        </div>
-        <!-- HEADER END --> 
-        
-        <!-- /header -->
-        <!--
-      <div data-role="header" data-position="fixed" class="tc_header">
-      
+      <div data-role="header" data-position="fixed">
+       <a href="UserSetting.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"/></a> 
         <h1>Trailer List</h1>
         <a href="login.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Login</a> 
-       </div>
-        -->
+       </div><!-- /header -->
         
-        <!-- navigation -->
+         <div  class="navigator">
+        <div data-role="navbar" >
+            <ul>
+             <li><a href="" data-icon="star" id="nav1" class="ui-btn-active" onclick="loaddiv1();return false">Popular</a></li>
+                <li><a href=""  data-icon="heart" id="nav2" onclick="loaddiv2();return false">Newest</a></li>
+               
+                <li><a href="" data-icon="video" id="nav3" onclick="loaddiv3();return false">Classic</a></li>
+            </ul>
+        </div><!-- /navbar -->
+</div><!-- /footer -->
+
+      <div data-role="content" data-theme="a" >
+      
+     
+ 
+
+<div class="wrap captionfull" id="container" >
+
+<div id="div1" style="display: ;">
+<div id="intro"> Popular Movies</div><br>
+</div>
+
+<div id="div2" style="display: none;">
+<div id="intro"> Newest Movies</div><br>
+</div>
+
+<div id="div3" style="display: none;">
+<div id="intro"> Classic Movies</div><br>
+</div>
+       
+</div><!-- /wrap -->
+      
+     
+       
+       
        
 
-        <!-- content start -->
-      <div data-role="content" data-theme="a" >
-            <!-- wrap start -->
-            <div class="wrap captionfull" id="container" >
-
-            <div id="div1" style="display: ;">
-            <div id="intro"> Popular Movies</div><br>
-            </div>
-
-            <div id="div2" style="display: none;">
-            <div id="intro"> Newest Movies</div><br>
-            </div>
-
-            <div id="div3" style="display: none;">
-            <div id="intro"> Classic Movies</div><br>
-            </div>
-
-            </div>
-            <!-- wrap end -->
-        </div>
-        <!-- content end -->
+ </div><!-- /content -->
  
-        <!-- Search Box Start -->
-        <div data-role="footer" data-position="fixed" class="tc_footer">
-            <!-- <div data-role="navbar">
-                <ul>
-                    
-                </ul>
-            </div> -->
-        	<div  class="navigator">
-	            <div data-role="navbar" >
-	                <ul>
-	                 <li><a href="" data-icon="star" id="nav1" class="ui-btn-active" onclick="loaddiv1();return false">Popular</a></li>
-	                    <li><a href=""  data-icon="heart" id="nav2" onclick="loaddiv2();return false">Newest</a></li>
-	                    <li><a href="" data-icon="video" id="nav3" onclick="loaddiv3();return false">Classic</a></li>
-	                    <li><a href="" data-icon="search" data-theme="a" onclick="window.location.href ='sortlist.html'">Search</a></li>
-	                </ul>
-	            </div>
-            </div>
-        </div>
-        <!-- Serach BOx END-->
-    </div>
+ <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+        <ul>
+            <li><a href="sortlist.html" data-icon="search" data-theme="a">Search</a></li>
+           
+        </ul>
+    </div><!-- /navbar -->
+</div><!-- /footer -->
+    </div><!-- /page -->
     
     <script>
-    	
-        var v;
-
-        var n=1;
-
-        var newest=[];
-        var popular=[];
-        var classic=[];
-
-        newestvideos=[1,2,3];
-        popularvideos=[4,5,6];
-        classicvideos=[7,8,9];
-
-
-
-        $(document).ready( function() {
-
-            var xmlhttp;
-
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-              xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-
-            xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
-            xmlhttp.send();
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-
-                //document.getElementById("d1").innerHTML=videos[0].video_id;
-
-                //document.getElementById("d1").innerHTML=xmlhttp.responseText;
-                    var x=xmlhttp.responseText;
-                //document.getElementById("d1").innerHTML=x;
-                    v=jQuery.parseJSON(x);
-
-                //document.getElementById("d1").innerHTML=v.videos[3].video_id;
-                    for(var i=0;i<v.videos.length-1;i++)
-                    {
-                        if(v.videos[i].category=="newest")
-                        {
-                            newest.push(v.videos[i]);
-                        }
-                        if(v.videos[i].category=="popular")
-                        {
-                            popular.push(v.videos[i]);
-                        }
-                        if(v.videos[i].category=="classic")
-                        {
-                            classic.push(v.videos[i]);
-                        }
-
-                    }//assign videos to 3 categories
-
-                }
-
-                if(newest.length>0)
-                { 	
-                    document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
-                    for(var i=1;i<newest.length;i++)
-                    {
-                        document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
-                    }
-                }//newest
-
-                if(popular.length>0)
-                {
-                    document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
-                    for(var i=1;i<popular.length;i++)
-                    {
-                        document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
-                    }
-                }//popular
-
-                if(classic.length>0)
-                {
-                    document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
-                    for(var i=1;i<classic.length;i++)
-                    {
-                        document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
-                    }
-                }//classic
-              }
-            });
-
-            function goVideoPlayer(videoid) {
-                location.href = "videoComment.html?id="+videoid;
-            }//link to video player
-
-            $(document).ready( function() {
-                $( document ).on( "swipeleft", ".screen", function( event ) {
-                     n++;
-                     if(n>3)
-                     n=1;
-                     if(n==1)
-                     {	 
-                       loaddiv1();
-                       $('#nav1').addClass('ui-btn-active');
-                       $('#nav2').removeClass('ui-btn-active');
-                       $('#nav3').removeClass('ui-btn-active');
-                     }
-                       if(n==2)
-                       {
-                       loaddiv2();
-                       $('#nav2').addClass('ui-btn-active');
-                       $('#nav1').removeClass('ui-btn-active');
-                       $('#nav3').removeClass('ui-btn-active');
-                       }
-
-                       if(n==3)
-                       {
-                           loaddiv3();
-                           $('#nav3').addClass('ui-btn-active');
-                       $('#nav2').removeClass('ui-btn-active');
-                       $('#nav1').removeClass('ui-btn-active');
-
-                       }
-
-
-                    });//swipeleft
-                /*
-                $( document ).on( "swiperight", ".ui-page", function( event ) {
-                 n--;
-                 if(n<1)
-                 n=3;
-                 if(n==1)
-                 {	 
-                   loaddiv1();
-                   $('#nav1').addClass('ui-btn-active');
-                   $('#nav2').removeClass('ui-btn-active');
-                   $('#nav3').removeClass('ui-btn-active');
-                 }
-                   if(n==2)
-                   {
-                   loaddiv2();
-                   $('#nav2').addClass('ui-btn-active');
-                   $('#nav1').removeClass('ui-btn-active');
-                   $('#nav3').removeClass('ui-btn-active');
-                   }
-
-                   if(n==3)
-                   {
-                       loaddiv3();
-                       $('#nav3').addClass('ui-btn-active');
-                   $('#nav2').removeClass('ui-btn-active');
-                   $('#nav1').removeClass('ui-btn-active');
-
-                   }
-
-
-                });//swiperight
-                */
-                });//swipe
-
-            function loaddiv2back()
-            {
-				var ww = $(window).width()-20;
-				
-                $( "#container" ).css({
-                    marginLeft: ww,
-                    width: ww,
-                });
-
-                $( "#container" ).animate({
-                    marginLeft: "10px",
-					width: ww,
-                }, 200 );
-
-                document.getElementById("div2").style.display="";
-                document.getElementById("div1").style.display="none";
-                document.getElementById("div3").style.display="none";
-
-                n=2;
-            }
+    
+	var v;
+	
+	var n=1;
+	
+	var newest=[];
+	var popular=[];
+	var classic=[];
+	
+newestvideos=[1,2,3];
+popularvideos=[4,5,6];
+classicvideos=[7,8,9];
 
 
 
-            function loaddiv2()
-            {
-				var ww = $(window).width()-20;
-                 $( "#container" ).animate({
-                    marginLeft: -ww,
-                    width: ww,
-                }, 200 );
+$(document).ready( function() {
+ 
+	var xmlhttp;
+	
+	
 
-                setTimeout("loaddiv2back()",240);
-				setTimeout("setcontainercss()", 460);
-            }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
 
-            function loaddiv3back()
-            {
-				var ww = $(window).width()-20;
-				
-                $( "#container" ).css({
-                    marginLeft: ww,
-                    width: ww,
-                });
-
-                $( "#container" ).animate({
-                    marginLeft: "10px",
-					width: ww,
-                }, 200 );
-
-                document.getElementById("div2").style.display="none";
-                document.getElementById("div1").style.display="none";
-                document.getElementById("div3").style.display="";
-
-                n=3;
-            }
-
-
-            function loaddiv3()
-            {
-				var ww = $(window).width()-20;
-                 $( "#container" ).animate({
-                    marginLeft: -ww,
-                    width: ww,
-                }, 200 );
-
-                setTimeout("loaddiv3back()",240);
-				setTimeout("setcontainercss()", 460);
-            }
-
-            function loaddiv1back()
-            {
-				var ww = $(window).width()-20;
-				
-                $( "#container" ).css({
-                    marginLeft: ww,
-                    width: ww,
-                });
-
-                $( "#container" ).animate({
-                    marginLeft: "10px",
-					width: ww,
-                }, 200 );
-				
-				
-
-                document.getElementById("div2").style.display="none";
-                document.getElementById("div1").style.display="";
-                document.getElementById("div3").style.display="none";
-
-                n=1;
-            }
-
-            function loaddiv1()
-            {
-				var ww = $(window).width()-20;
-                 $( "#container" ).animate({
-                    marginLeft: -ww,
-                    width: ww,
-                }, 200 );
-
-                setTimeout("loaddiv1back()",240);
-				setTimeout("setcontainercss()", 480);
-            }
+xmlhttp.open("GET","http://remoteriver.eicp.net/trailercollection/videoinfo.php",true);
+xmlhttp.send();
+xmlhttp.onreadystatechange=function()
+  {
+  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+		
+	//document.getElementById("d1").innerHTML=videos[0].video_id;
+		
+    //document.getElementById("d1").innerHTML=xmlhttp.responseText;
+	var x=xmlhttp.responseText;
+	//document.getElementById("d1").innerHTML=x;
+	v=jQuery.parseJSON(x);
+	
+	//document.getElementById("d1").innerHTML=v.videos[3].video_id;
+		for(var i=0;i<v.videos.length-1;i++)
+		{
+			if(v.videos[i].category=="newest")
+			{
+				newest.push(v.videos[i]);
+			}
+			if(v.videos[i].category=="popular")
+			{
+				popular.push(v.videos[i]);
+			}
+			if(v.videos[i].category=="classic")
+			{
+				classic.push(v.videos[i]);
+			}
 			
-			function setcontainercss(){
-                $( "#container" ).css({
-                    
-                    width: "auto",
-                });
-            } 
+		}//assign videos to 3 categories
 
-            function goBack()
-            {
-              window.history.back()
-            }
-        </script>
+    }
+    
+    if(newest.length>0)
+	{ 	
+		
+		document.getElementById("div2").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+newest[0].video_id+")'><img src='image/"+newest[0].video_id+".jpg' ></a></div>";
+		
+		for(var i=1;i<newest.length;i++)
+		{
+			document.getElementById("div2").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+newest[i].video_id+")'><img src='image/"+newest[i].video_id+".jpg' ></a></div>";
+		}
+	}//newest
+
+	if(popular.length>0)
+	{
+		document.getElementById("div1").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+popular[0].video_id+")'><img src='image/"+popular[0].video_id+".jpg' ></a></div>";
+	
+		for(var i=1;i<popular.length;i++)
+		{
+			document.getElementById("div1").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+popular[i].video_id+")'><img src='image/"+popular[i].video_id+".jpg' ></a></div>";
+		}
+	}//popular
+
+	if(classic.length>0)
+	{
+		document.getElementById("div3").innerHTML+="<div class='thumbnails_a'><a href='' onclick='goVideoPlayer("+classic[0].video_id+")'><img src='image/"+classic[0].video_id+".jpg' ></a></div>";
+		for(var i=1;i<classic.length;i++)
+		{
+			document.getElementById("div3").innerHTML+="<div class='thumbnails_b'><a href='' onclick='goVideoPlayer("+classic[i].video_id+")'><img src='image/"+classic[i].video_id+".jpg' ></a></div>";
+		}
+	
+	}//classic
+    
+  }
+  
+});
+
+function goVideoPlayer(videoid) {
+    location.href = "videoComment.html?id="+videoid;
+}//link to video player
+
+$(document).ready( function() {
+	
+ $( document ).on( "swipeleft", ".screen", function( event ) {
+	 n++;
+	 if(n>3)
+	 n=1;
+	 if(n==1)
+	 {	 
+       loaddiv1();
+	   $('#nav1').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	 }
+	   if(n==2)
+	   {
+	   loaddiv2();
+	   $('#nav2').addClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	   }
+	   
+	   if(n==3)
+	   {
+		   loaddiv3();
+		   $('#nav3').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+		   
+	   }
+	   
+	   
+    });//swipeleft
+	/*
+	$( document ).on( "swiperight", ".ui-page", function( event ) {
+	 n--;
+	 if(n<1)
+	 n=3;
+	 if(n==1)
+	 {	 
+       loaddiv1();
+	   $('#nav1').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	 }
+	   if(n==2)
+	   {
+	   loaddiv2();
+	   $('#nav2').addClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+	   $('#nav3').removeClass('ui-btn-active');
+	   }
+	   
+	   if(n==3)
+	   {
+		   loaddiv3();
+		   $('#nav3').addClass('ui-btn-active');
+	   $('#nav2').removeClass('ui-btn-active');
+	   $('#nav1').removeClass('ui-btn-active');
+		   
+	   }
+	   
+	   
+    });//swiperight
+	*/
+});//swipe
+
+function loaddiv2back()
+{
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+	
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="";
+	document.getElementById("div1").style.display="none";
+	document.getElementById("div3").style.display="none";
+	
+	n=2;
+  
+}
+
+
+
+function loaddiv2()
+{
+	  $( "#container" ).animate({
+    
+    marginLeft: "-400px",
+	width: "0px",
+    
+  }, 200 );
+  
+  
+	
+	
+	
+	setTimeout("loaddiv2back()",240);
+	
+}
+
+function loaddiv3back()
+{
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="none";
+	document.getElementById("div1").style.display="none";
+	document.getElementById("div3").style.display="";
+	
+	n=3;
+  
+}
+
+
+function loaddiv3()
+{
+	 $( "#container" ).animate({
+    
+    marginLeft: "-400px",
+	width: "0px",
+    
+  }, 200 );
+  
+	setTimeout("loaddiv3back()",240);
+	
+}
+
+function loaddiv1back()
+{
+	$( "#container" ).css({
+		marginLeft: "400px",
+		width: "auto",
+	});
+	
+	$( "#container" ).animate({
+    
+    marginLeft: "10px",
+    
+  }, 200 );
+  
+  document.getElementById("div2").style.display="none";
+	document.getElementById("div1").style.display="";
+	document.getElementById("div3").style.display="none";
+	
+	n=1;
+  
+}
+
+function loaddiv1()
+{
+	 $( "#container" ).animate({
+    
+    marginLeft: "-400px",
+	
+	width: "0px",
+    
+  }, 200 );
+  
+	setTimeout("loaddiv1back()",240);
+	
+}
+</script>
       </div>
     </body>
 </html>
