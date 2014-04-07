@@ -30,8 +30,6 @@
                 document.addEventListener("backbutton", onBackClickEvent, false);     
             }
 
-            
-            
             // Back button
             function goBack()
             {
@@ -55,19 +53,45 @@
         <div data-role="header" data-position="fixed" class="tc_header">
             <a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
             <h1>Login</h1>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
         </div>
+        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+	        <ul data-role="listview">
+	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
+	            <hr />
+	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
+	            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
+				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
+				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
+	        </ul>
+       </div><!-- /panel -->
         <!-- HEADER END -->
         
-        <div data-role="content" data-theme="a">
-            <form>
-                Email: <input id="email" type="text" name="username"><br>
-                Password: <input id="password" type="password" name="password"><br>
+        <br />
+        <div align="center">
+	       	<img src="image/LogoAndIcon/mta_icon.png" height="100px" width="100px" align="center" /><br />
+		    <span>Movie Trailer App</span>
+        </div>
+        <br />
+
+        <div data-role="tabs" id="tabs" style="margin-left: -4px;">
+		  <div data-role="navbar">
+		    <ul>
+		      <li><a href="#one" data-ajax="false">Please Login</a></li>
+		    </ul>
+		  </div>
+		  <div id="one" class="ui-body-d ui-content" style="background-color: #333; margin-right:-4px; margin-left:1px;">
+        	<span style="color: red; font-size: 12px;">Note: You must login to comment and rate videos</span>
+            <form align="center">
+                <input id="email" type="text" name="username" placeholder="Email">
+                <input id="password" type="password" name="password" placeholder="password">
                 <input id="login" type="button" value="Login">
                 <!-- <input id="guest" type="button" value="Guest" onClick="goTo('videolist.html')"> -->
                 <input id="register" type="button" value="Register" >
             </form>
-        </div>
-        
+		  </div>
+	   </div>
         <script>
 			/*
             $(document).ready(function(){
@@ -120,16 +144,47 @@
 			    	{
                         if(xmlhttp.responseText=="\"OK\"")
                         {
-                            document.cookie="isUserLoggedin=OK; expires=18 Dec 2014 12:00:00 GMT; path=/"; // Set a cookie as "OK"
-                            window.location ="videolist.html";
+                            //document.cookie="isUserLoggedin=OK;"; // Set a cookie as "OK"
+							getFullName();
                         }else{
-                            alert("not logged in");
+                            alert("Incorrect Email or Password");
                         }
 			    	}
 			  	}
 				});
             });
-           
+            
+			function getFullName() {
+	            $(document).ready(function(){
+			      var e=document.getElementById("email").value;
+				  var xmlhttp;
+				
+				  if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				     xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {// code for IE6, IE5
+				  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  
+				  xmlhttp.open("POST","http://remoteriver.eicp.net/trailercollection/FullName.php",true);
+				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send("email="+e+"&email2="+e);
+				           
+				   xmlhttp.onreadystatechange=function()
+				   {
+				  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    	{
+							window.localStorage['email'] = e;
+							window.localStorage['fullName'] = xmlhttp.responseText.substring(1, xmlhttp.responseText.length-1);
+                            window.location ="videolist.html";
+				    	}
+				  	}
+					
+	            });
+            }
+            
             $(document).ready(function(){
                 $("#register").click(function(){
                     window.location.href="registration.html";

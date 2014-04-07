@@ -69,8 +69,17 @@
 				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
 			}
 			
+			#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
+			
+			
 		</style>
 		<script>
+			/*
             function getCookie(cname)
             {
                 var name = cname + "=";
@@ -90,12 +99,12 @@
                 if (userLoggedin=="OK")
                 {
                   alert("You are logged in");
-                    // TODO: function for registered users
+                    //function for registered users
                 }
                 else 
                 {
                     alert("Not logged in");
-                    // TODO: function for guest users
+                    //function for guest users
                 }
             }
             
@@ -123,11 +132,33 @@
                 //alert(document.cookie);
                 document.cookie = name + '=';
                 //alert(document.cookie);
-            }
+            }*/
             
             // Logout - erase a cookie
+            
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
+            
+            
             function logout(url){
-                eraseCookie('isUserLoggedin');
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
                  window.location ="videolist.html";
             }
         </script>
@@ -149,9 +180,9 @@
        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 	        <ul data-role="listview">
 	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-	            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
                 <script>
-                    if(isLoggedin() == "true"){
+                    if(isLoggedin() == true){
+                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
                         document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
                     }else{
                         document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
@@ -164,14 +195,15 @@
 				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
 	        </ul>
        </div><!-- /panel --> 
-        
-        
         <!-- navigation -->
        
 
         <!-- content start -->
+      <div id="userData" align="center">
+      </div>
       <div data-role="content" data-theme="a" >
             <!-- wrap start -->
+            
             <div class="wrap captionfull" id="container" >
 
             <div id="div1" style="display: ;">
@@ -213,6 +245,8 @@
     </div>
     
     <script>
+    	document.getElementById('userData').innerHTML = 'Hello there ' + window.localStorage['fullName'] + "!";
+    	
     	
         var v;
 

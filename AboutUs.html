@@ -11,7 +11,42 @@
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
+        <script>
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
+            
+            
+            function logout(url){
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
+            }
+        </script>
+        <style>
+        	#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
+        </style>
    </head>
    <body>
    		<div id="div_header">
@@ -24,8 +59,14 @@
 	        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 		        <ul data-role="listview">
 		            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-		            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
-		            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	                <script>
+	                    if(isLoggedin() == true){
+	                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
+	                        document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
+	                    }else{
+	                        document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
+	                    }
+	                </script>
 		            <hr />
 		            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
 		            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
@@ -33,6 +74,8 @@
 					<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
 		        </ul>
 	       </div><!-- /panel -->
+       </div>
+       <div id="userData" align="center">
        </div>
        <br />
        <div id="div_content" align="center">
@@ -42,7 +85,7 @@
 			<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
 			    <div data-role="collapsible" id="set1" data-collapsed="false">
 			        <h3>Developers</h3>
-			        <p>Leader: Yoko Onuma<br />
+			        <p>Yoko Onuma<br />
 			        Ryan(Sihe) Gao<br />
 			        Selina(Huixian) Xie<br />
 			        Danny Tran<br />
@@ -61,15 +104,16 @@
 			    </div>
 			    <div data-role="collapsible" id="set1" data-collapsed="true">
 			        <h3>Contact</h3>
-			        <p>yoko.onuma@gmail.com<br />
-					remoteriver@gmail.com<br />
-					selina.huixian.xie@gmail.com<br />
-					dannyvantran@gmail.com<br />
+			        <p>yonuma@georgebrown.ca<br />
+					sgao5@georgebrown.ca<br />
+					hxie6@georgebrown.ca<br />
+					dtran18@georgebrown.ca<br />
 					tashanawilliams@hotmail.com</p>
 			    </div>
 			</div>
        </div>
        <script>
+       document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
    		function goBack()
         {
           window.history.back()

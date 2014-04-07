@@ -12,13 +12,45 @@
         <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
-        
+        <script>
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
+            
+            
+            function logout(url){
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
+            }
+        </script>
         <style>
+        	#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
+
         	#txtFB
         	{
         		height: 200px !important;
         	}
-        	
         </style>
    </head>
    <body>
@@ -29,11 +61,17 @@
 				<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 	      	</div>
-	        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+	       <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 		        <ul data-role="listview">
 		            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-		            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
-		            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	                <script>
+	                    if(isLoggedin() == true){
+	                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
+	                        document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
+	                    }else{
+	                        document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
+	                    }
+	                </script>
 		            <hr />
 		            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
 		            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
@@ -41,14 +79,16 @@
 					<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
 		        </ul>
 	       </div><!-- /panel -->
-       </div><br />
+       </div>
        <div id="div_logo" align="center">
-	       <img src="image/LogoAndIcon/mta_icon.png" height="100px" width="100px" /><br />
+       		<div id="userData" align="center">
+            </div><br />
+	       <img src="image/LogoAndIcon/mta_icon.png" height="100px" width="100px" align="center" /><br />
 	       <span>Movie Trailer App</span>
 	       <br />
        </div>
        	<br /> 
-	   <div data-role="tabs" id="tabs">
+	   <div data-role="tabs" id="tabs" style="margin-left: -4px;">
 		  <div data-role="navbar">
 		    <ul>
 		      <li><a href="#one" data-ajax="false">Please Leave Feedback</a></li>
@@ -73,7 +113,7 @@
 	  </div>
        
        <script>
-       		
+       		document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
        		$(document).ready(function(){
            	  $("#btnFeedback").click(function(){
 			  document.getElementById('btnFeedback').disabled = true;

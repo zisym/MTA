@@ -13,7 +13,33 @@
         <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
-        
+        <script>
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
+            
+            
+            function logout(url){
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
+            }
+        </script>
         <style>
         	.ui-selectmenu.ui-popup .ui-input-search {
 			    margin-left: .5em;
@@ -33,6 +59,12 @@
 			.ui-selectmenu.ui-dialog .ui-header {
 			    border-bottom-width: 1px;
 			}
+			#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
         </style>
        	
     </head>
@@ -47,8 +79,14 @@
 	        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 		        <ul data-role="listview">
 		            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-		            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
-		            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	                <script>
+	                    if(isLoggedin() == true){
+	                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
+	                        document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
+	                    }else{
+	                        document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
+	                    }
+	                </script>
 		            <hr />
 		            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
 		            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
@@ -56,7 +94,11 @@
 					<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
 		        </ul>
 	       </div><!-- /panel -->
-       </div><br />
+	        <!--HEADER END -->
+       </div>
+       <div id="userData" align="center">
+       </div>
+       <br />
        <div id="div_logo" align="center">
        <img src="image/LogoAndIcon/mta_icon.png" height="100px" width="100px" /><br />
        <span>Movie Trailer App</span>
@@ -103,6 +145,7 @@
 		   
        </div>
        <script>
+       document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
        $.mobile.document
 	    .on( "listviewcreate", "#filter-menu-menu", function( e ) {
 	        var input,

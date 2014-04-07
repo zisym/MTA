@@ -18,11 +18,33 @@
                 window.location.href=url;
             }
             
-			function goBack()
+            
+            
+            function isLoggedin()
             {
-              window.history.back()
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
             }
             
+            
+            function logout(url){
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
+            }
         </script>
         <style>
 		 table.detail {
@@ -37,7 +59,6 @@
 			padding: 1px;
 			border-style: inset;
 			border-color: white;
-			background-color: ;
 			-moz-border-radius: ;
 		}
 		table.detail td {
@@ -47,7 +68,8 @@
 			border-color: orange;
 			background-color: ;
 			-moz-border-radius: ;
-			padding: 10px;
+			padding-right: 10px;
+			padding-left: 10px;
 			width: 50%;
 		}
 		.tc_header
@@ -57,6 +79,12 @@
 			.tc_footer
 			{
 				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
+			}
+			#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
 			}
         </style>
     </head>
@@ -68,22 +96,24 @@
 			<!-- <a href="UserSetting.html" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a> -->
 			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
       	</div>
-      	<div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
+        <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 	        <ul data-role="listview">
-	            <li data-icon="delete"><a href="#" data-rel="close">Close Menu</a></li>
-	            <li><a onclick="window.location.href ='login.html'">Logout</a></li>
+	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
+                <li><a onclick='logout("videolist.html")'>Logout</a></li>
 	            <hr />
-	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
 	            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
+	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
 				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
 				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
 				<li><a onclick="window.location.href ='Feedback.html'">Feedback</a></li>
 	        </ul>
-        </div><!-- /panel -->
+       </div><!-- /panel -->
         <!--HEADER END -->
     	<div>		
 			<div>				
 				<div data-position="inline">
+					<div id="userData" align="center">
+        			</div>
 					<div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
 					    <h4>Avatar Selection</h4>
 					    <table align="center">
@@ -156,19 +186,52 @@
 
 				</div>
 				<script>
+
+				  document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
 				
-				
-				
-				
-				//document.getElementById('displayAv').innerHTML = "<img src='image/Avatar/av9.png' height='92px' width='92px' />";
-				
-				  document.getElementById('lblFullName').innerHTML = 'John Derp';
-				  document.getElementById('lblEmail').innerHTML = 'abc@abc.com';
-	            
-				  //var pw = 
+				  document.getElementById('lblFullName').innerHTML = window.localStorage['fullName'];
+				  document.getElementById('lblEmail').innerHTML = window.localStorage['email'];
 				  
-	    	 	  var em = "abc@abc.com";
+	    	 	  var em = window.localStorage['email'];
+	    	 		    	 	  
+	    	 	  var mtaJSONAvatar;
 	    	 	  var selectedAv = "defaultavatar.jpg";
+	    	 	  $(document).ready(function(){
+		      
+				  	  var xmlhttpAvatar;
+					  if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+					     xmlhttpAvatar=new XMLHttpRequest();
+					  }
+					  else
+					  {// code for IE6, IE5
+					  	xmlhttpAvatar=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					  
+						xmlhttpAvatar.open("GET","http://remoteriver.eicp.net/trailercollection/userinfo.php",true);
+						xmlhttpAvatar.send();
+						xmlhttpAvatar.onreadystatechange=function()
+						{
+							if (xmlhttpAvatar.readyState==4 && xmlhttpAvatar.status==200)
+						    {
+								var getJSON=xmlhttpAvatar.responseText;
+								
+								mtaJSONAvatar=jQuery.parseJSON(getJSON);
+						  	}
+							for(var a = 0;a < mtaJSONAvatar.users.length-1;a++)
+							{
+								
+								if(em == mtaJSONAvatar.users[a].email)
+								{
+									selectedAv = mtaJSONAvatar.users[a].avatar;
+									break;
+								}
+							} 
+							document.getElementById('displayAv').innerHTML = "<img src='image/Avatar/"+selectedAv+"' height='92px' width='92px' />";
+						}
+		            });
+
+	    	 	  
 				  $(document).ready(function(){
 		           	  $("#btnSavePassword").click(function(){
 		           	  	var x=document.forms["formChangePassword"]["pwd"].value;
@@ -235,7 +298,6 @@
 					    xmlhttp.send("email="+em+"&avatar="+selectedAv);
 						xmlhttp.onreadystatechange=function()
 					    {
-					    	alert("test");
 					  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					    	{
 					    		 $( "#awcs" ).popup( "open" );

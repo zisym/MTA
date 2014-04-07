@@ -11,8 +11,9 @@
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="js/jqm.page.params.js"></script> 
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
-        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
+        <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script>
 	  	<script>
+	  		/*
             function getCookie(cname)
             {
                 var name = cname + "=";
@@ -32,12 +33,12 @@
                 if (userLoggedin=="OK")
                 {
                   alert("You are logged in");
-                    // TODO: function for registered users
+                    //function for registered users
                 }
                 else 
                 {
                     alert("Not logged in");
-                    // TODO: function for guest users
+                    //function for guest users
                 }
             }
             
@@ -67,11 +68,32 @@
                 document.cookie = name + '=';
                 alert(document.cookie);
             }
+            */
+     	
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
             
-            // Logout - erase a cookie
+            
             function logout(url){
-                eraseCookie('isUserLoggedin');
-                goTo(url);
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
             }
         </script>
         
@@ -137,7 +159,12 @@
 			{
 				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
 			}
-		
+		    #userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
 		
 		</style>
 	</head>
@@ -145,23 +172,22 @@
         <!--HEADER START -->
 		<div data-role="header" data-position="fixed" class="tc_header">
 			<a href="" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext" onclick="goBack()"/></a> 
-			<h1 class="lh1" id="videoTitle"></h1>
+			<h1 class="lh1">Search</h1>
 			<!-- <a href="" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear" onclick="window.location.href ='UserSetting.html'"></a> -->
 			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
       	</div>
         <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 	        <ul data-role="listview">
 	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-	            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
                 <script>
-                    if(isLoggedin() == "true"){
+                    if(isLoggedin() == true){
+                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
                         document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
                     }else{
                         document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
                     }
                 </script>
 	            <hr />
-	            <li><a onclick="window.location.href ='sortlist.html'">Search</a></li>
 	            <li><a onclick="window.location.href ='videolist.html'">Video List</a></li>
 				<li><a onclick="window.location.href ='AboutUs.html'">About Us</a></li>
 				<li><a onclick="window.location.href ='FAQ.html'">FAQ</a></li>
@@ -169,7 +195,8 @@
 	        </ul>
        </div><!-- /panel -->
         <!--HEADER END -->
-
+		<div id="userData" align="center">
+        </div>
 		<div data-role="content" data-theme="a">
 			<div>				
 				<label>Search</label>
@@ -187,8 +214,9 @@
 			</div>
 			
 			<div class="wrap captionfull" id="container" >
-				<script type="text/javascript">
-					function getvar()
+		    <script type="text/javascript">
+		    document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
+			function getvar()
 					{
 						var videolist = 'connect to db and then get list';
 					}
@@ -255,14 +283,14 @@
 					}//link to video player
 					
 					function trimByWord(sentence) {
-var result = sentence;
-var resultArray = result.split(" ");
-if(resultArray.length > 15){
-resultArray = resultArray.slice(0, 15);
-result = resultArray.join(" ") + "…";
-}
-return result;
-}
+					var result = sentence;
+					var resultArray = result.split(" ");
+					if(resultArray.length > 15){
+					resultArray = resultArray.slice(0, 15);
+					result = resultArray.join(" ") + "…";
+					}
+					return result;
+					}
 					
 				   	function searchFunction()
 					{

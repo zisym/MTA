@@ -54,14 +54,43 @@
         <!-- HEADER END -->
         
 
-	 	<div style="padding:10px;">
+	 	<div>
 			<form name="registration" align="center">
-				Full Name<hr /><input type="text" id="fName" name="fName" placeholder="Enter First Name" />
-				<input type="text" id="lName" name="lName" placeholder="Enter Last Name" /><br />
-				Email<hr /><input type="text" id="email" name="email" placeholder="Enter an Email" /><br />
-				Password<hr /><input type="password" id="password" name="password" placeholder="Enter Password"/>
-				<input type="password" id="retypePassword" name="retypePassword" placeholder="Re-type Password"/><hr />
-				<input type="button" id="btnRegister" name="btnRegister" value="Register"  />
+				<div data-role="tabs" id="tabs" style="margin-left: -4px;margin-top:-4px;">
+				  	<div data-role="navbar">
+					    <ul>
+					    	<li><a href="#one" data-ajax="false">Full Name</a></li>
+					    </ul>
+				    </div>
+				    <div id="one" class="ui-body-d ui-content" style="background-color: #333; margin-right:-4px; margin-left:1px;">
+				  		<input type="text" id="fName" name="fName" placeholder="Enter First Name" />
+						<input type="text" id="lName" name="lName" placeholder="Enter Last Name" />
+				    </div>
+		 		</div>
+				<div data-role="tabs" id="tabs" style="margin-left: -4px;margin-top:-10px;">
+				  	<div data-role="navbar">
+					    <ul>
+					    	<li><a href="#one" data-ajax="false">Email</a></li>
+					    </ul>
+				    </div>
+				    <div id="two" class="ui-body-d ui-content" style="background-color: #333; margin-right:-4px; margin-left:1px;">
+				  		<input type="text" id="email" name="email" placeholder="Enter an Email" />
+				    </div>
+		 		</div>
+				<div data-role="tabs" id="tabs" style="margin-left: -4px;margin-top:-10px;">
+				  	<div data-role="navbar">
+					    <ul>
+					    	<li><a href="#one" data-ajax="false">Password</a></li>
+					    </ul>
+				    </div>
+				    <div id="three" class="ui-body-d ui-content" style="background-color: #333; margin-right:-4px; margin-left:1px;">
+				  		<input type="password" id="password" name="password" placeholder="Enter Password"/>
+						<input type="password" id="retypePassword" name="retypePassword" placeholder="Re-type Password"/>
+						<input type="button" id="btnRegister" name="btnRegister" value="Register" />
+				    </div>
+		 		</div>
+
+				
                 
                 <!-- MESSAGE START -->
                 <div data-role="popup" id="popupBasic">
@@ -75,9 +104,8 @@
                 </div>
                  <!-- MESSAGE END -->
 			</form>
-
-			<!-- <input type="submit" name="btnBack" value="Back" onClick="redirectBackToLogin()" /> -->
-		</div>
+		</div>		
+		
         <script>
 
             

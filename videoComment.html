@@ -14,6 +14,7 @@
 		<script src="jquerymobile/jquery-1.11.0.min.js"></script>
         <script src="jquerymobile/jquery.mobile-1.4.2.min.js"></script> 
 		<script>
+			/*
             function getCookie(cname)
             {
                 var name = cname + "=";
@@ -49,11 +50,31 @@
                 document.cookie = name + '=';
                 alert(document.cookie);
             }
+            */
+            function isLoggedin()
+            {
+            	var c = window.localStorage['email'];
+            	if(c == undefined)
+            	{
+            		window.localStorage['email'] = 'Guest';
+            		window.localStorage['fullName'] = 'Guest';
+            	}
+            	
+            	if(window.localStorage['email'] == 'Guest')
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+            }
             
-            // Logout - erase a cookie
+            
             function logout(url){
-                eraseCookie('isUserLoggedin');
-                goTo(url);
+                 window.localStorage['email'] = "Guest";
+                 window.localStorage['fullName'] = "Guest";
+                 window.location ="videolist.html";
             }
         </script>
         
@@ -143,6 +164,13 @@
 			{
 				background: -webkit-gradient(linear,center top,center bottom,from(#999), to(#444));
 			}
+			
+			#userData
+			{
+				color: orange;
+				padding: 5px;
+				background: -webkit-gradient(linear,center top,center bottom,from(#333), to(#001));
+			}
         </style>
 	</head>
 	<body onload="isLoggedin()">
@@ -160,9 +188,9 @@
         <div data-role="panel" data-position-fixed="true"  data-display="overlay" data-position="right"  data-theme="a" id="nav-panel" style="margin-top:44px;">
 	        <ul data-role="listview">
 	            <li data-icon="delete"><a href="#" data-rel="close" >Close Menu</a></li>
-	            <li><a onclick="window.location.href ='UserSetting.html'">User Setting</a></li>
                 <script>
-                    if(isLoggedin() == "true"){
+                    if(isLoggedin() == true){
+                    	document.write("<li><a onclick=\"window.location.href ='UserSetting.html'\">User Setting</a></li>");
                         document.write("<li><a onclick='logout(\"videolist.html\")'>Logout</a></li>");
                     }else{
                         document.write("<li><a onclick='window.location.href =\"login.html\"'>Login</a></li>");
@@ -178,9 +206,10 @@
        </div><!-- /panel -->
         <!--HEADER END -->
 		
+		<div id="userData" align="center">
+        </div>
 		<div class="iv" id="imageClick">
 		</div>
-        
         <!--content start -->
 	<div data-role="content" data-theme="a" >
     
@@ -255,6 +284,7 @@
         </div><!-- page end -->
         
 		<script>
+		document.getElementById('userData').innerHTML = 'User: ' + window.localStorage['email'];
 		  // START GET JSON
 		  	var tUp = "<a id='rateUp' name='rateUp'><img src='image/thumbs-up.png' class='rateicon'  /></a>";
 		  	var tDown = "&nbsp;&nbsp;&nbsp;<a id='rateDown' name='rateDown'><img src='image/thumbs-down.png' class='rateicon'  /></a>";
@@ -268,9 +298,11 @@
 			var videoD = [];
 			var videoComments = [];
 			
+			
 			var mtaJSONVideos;
 			var mtaJSONComments;
 			var mtaJSONRatings;
+			var mtaJSONAvatar;
 			
 			var commentList = "";
 		   	var numLike = 0;
@@ -288,12 +320,14 @@
 					var xmlhttpVideos;
 					var xmlhttpComments;
 					var xmlhttpRatings;
+					var xmlhttpAvatar;
 					if (window.XMLHttpRequest)
 					{
 						// code for IE7+, Firefox, Chrome, Opera, Safari
 						xmlhttpVideos=new XMLHttpRequest();
 						xmlhttpComments=new XMLHttpRequest();
 						xmlhttpRatings=new XMLHttpRequest();
+						xmlhttpAvatar=new XMLHttpRequest();
 					}
 					else
 					{
@@ -301,6 +335,7 @@
 						xmlhttpVideos=new ActiveXObject("Microsoft.XMLHTTP");
 						xmlhttpComments=new ActiveXObject("Microsoft.XMLHTTP");
 						xmlhttpRatings=new ActiveXObject("Microsoft.XMLHTTP");
+						xmlhttpAvatar=new ActiveXObject("Microsoft.XMLHTTP");
 					}
 				
 					//Video Table
@@ -327,9 +362,9 @@
 						var finalUrl = "videoPlayer.html?id=" + baseUrl;
 				
 						//Passing data to form - form to comment database
-						document.getElementById("email").value="abc@abc.com";
+						document.getElementById("email").value=localStorage['email'];
 						document.getElementById("videoID").value=mtaJSONVideos.videos[videoID-1].video_id;
-						document.getElementById("emailR").value="abc@abc.com";
+						document.getElementById("emailR").value=localStorage['email'];
 						document.getElementById("videoIDR").value=mtaJSONVideos.videos[videoID-1].video_id;
 						
 						//Image Link for videos
@@ -340,7 +375,22 @@
 					  	document.getElementById("videoDescription").innerHTML=videoD[videoID];
 					}		    
 				
-				
+					
+					//Avatar Table
+					xmlhttpAvatar.open("GET","http://remoteriver.eicp.net/trailercollection/userinfo.php",true);
+					xmlhttpAvatar.send();
+					xmlhttpAvatar.onreadystatechange=function()
+					{
+						if (xmlhttpAvatar.readyState==4 && xmlhttpAvatar.status==200)
+					    {
+							var getJSON=xmlhttpAvatar.responseText;
+							
+							mtaJSONAvatar=jQuery.parseJSON(getJSON);
+							
+					  	}
+					  	
+					}
+					
 					//Comment Table
 					xmlhttpComments.open("GET","http://remoteriver.eicp.net/trailercollection/getComments.php",true);
 					xmlhttpComments.send();
@@ -364,9 +414,18 @@
 					  	{
 					  		if(mtaJSONComments.comments[i].video_id == videoID)
 					  		{
-					  		//commentList = commentList + "<div style='margin-top: 5px; border: groove; padding: 10px; background-color:grey; color:black; word-wrap:break-word;'><span style='color:purple;'>"
+
+								var avatar;
+								for(var a = 0;a < mtaJSONAvatar.users.length-1;a++)
+								{
+									if(mtaJSONComments.comments[i].email == mtaJSONAvatar.users[a].email)
+									{
+										avatar = mtaJSONAvatar.users[a].avatar;
+										break;
+									}
+								}
 					  		document.getElementById('fcn').style.display = "none";
-					  		commentList = commentList + "<div style='' class='commentlistelement'><table><tr valign='top'><td rowspan='2' width='60px'><img src='image/Avatar/av6.png' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
+					  		commentList = commentList + "<div style='' class='commentlistelement'><table><tr valign='top'><td rowspan='2' width='60px'><img src='image/Avatar/"+avatar+"' height='50px' width='50px' /></td><td><span style='color:orange; font-size:12px;'>"
 					  		+mtaJSONComments.comments[i].email+"</span></td></tr><tr><td>"
 					  		+videoComments[i+1]+"</td></tr></table></div><br />";
 		    				document.getElementById('returnValue').innerHTML = commentList;
@@ -392,7 +451,7 @@
 		   					document.getElementById("tDown").style.display = "block";
 							for(var i = 0;i < mtaJSONRatings.rate.length-1;i++)
 							{
-								if((mtaJSONRatings.rate[i].email == "abc@abc.com") && (mtaJSONRatings.rate[i].video_id == videoID))
+								if((mtaJSONRatings.rate[i].email == localStorage['email']) && (mtaJSONRatings.rate[i].video_id == videoID))
 								{
 									document.getElementById('tUp').innerHTML = tUpD;
 		    						document.getElementById('tDown').innerHTML = tDownD;
@@ -415,7 +474,6 @@
 					  	document.getElementById('dislike').innerHTML = numDislike;
 						
 					}
-					
 				}
 			);
 		//END GET JSON
@@ -426,8 +484,21 @@
 	    	//document.getElementById('like').style.color = "Green";
 			//document.getElementById('dislike').style.color = "Red";
 			
+			function pleaseLogin()
+			{
+				  if(window.localStorage['email'] == 'Guest')
+	           	  {
+	           	  	window.location ="login.html";
+	           	  	return false;
+	           	  }
+			}
+			
 		    $(document).ready(function(){
            	  $("#btnComment").click(function(){
+           	  
+			  pleaseLogin();
+           	  
+           	  
            	  document.getElementById('btnComment').disabled = true;
 	          var co = $('#comment').val();
 			  var vID = $('#videoID').val();
@@ -461,6 +532,7 @@
             
            	$(document).ready(function(){
            	  $("#rateUp").click(function(){
+           	  pleaseLogin();
            	  document.getElementById('tUp').innerHTML = tUpD;
 		      document.getElementById('tDown').innerHTML = tDownD;
 	          var vID = $('#videoIDR').val();
@@ -493,6 +565,7 @@
 			
 			$(document).ready(function(){
            	  $("#rateDown").click(function(){
+           	  pleaseLogin();
            	  document.getElementById('tUp').innerHTML = tUpD;
 		      document.getElementById('tDown').innerHTML = tDownD;
 	          var vID = $('#videoIDR').val();
